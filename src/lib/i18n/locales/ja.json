@@ -1,0 +1,14 @@
+{
+    "nav": {
+      "legal": "Legal",
+      "about": "About Us",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "commerceDisclosure": "Commerce Disclosure",
+      "register": "Register",
+      "account": "My Account",
+      "events": "Events",
+      "login": "Login",
+      "logout": "Logout"
+    }
+}
