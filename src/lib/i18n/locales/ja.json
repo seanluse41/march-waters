@@ -1,14 +1,15 @@
 {
-    "nav": {
-      "legal": "Legal",
-      "about": "About Us",
-      "terms": "Terms of Service",
-      "privacy": "Privacy Policy",
-      "commerceDisclosure": "Commerce Disclosure",
-      "register": "Register",
-      "account": "My Account",
-      "events": "Events",
-      "login": "Login",
-      "logout": "Logout"
-    }
+  "nav": {
+    "legal": "法務",
+    "blog": "ブログ",
+    "about": "About",
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー",
+    "commerceDisclosure": "商取引開示",
+    "register": "会員登録",
+    "account": "マイページ",
+    "events": "イベント",
+    "login": "ログイン",
+    "logout": "ログアウト"
+  }
 }

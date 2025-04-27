@@ -9,18 +9,17 @@ export const handle = async ({ event, resolve }) => {
         locale.set(lang);
     }
 
-    // // Check auth and get user data
-    // const userData = await checkUserAuth(event);
+    // Check auth and get user data
+    const userData = { isAuthenticated: true };
 
-    // // Set locals
-    // event.locals.user = userData;
+    // Set locals
+    event.locals.user = userData;
 
-    // // Protected routes check
-    // if (event.url.pathname.startsWith("/account") && !userData?.isAuthenticated) {
-    //     throw redirect(303, "/");
-    // }
+    // Protected routes check
+    if (event.url.pathname.startsWith("/account") && !userData?.isAuthenticated) {
+        throw redirect(303, "/");
+    }
 
-    // Resolve the event with all middleware applied
     const result = await resolve(event);
     return result;
 }
