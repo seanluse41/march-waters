@@ -10,27 +10,11 @@
     Button,
   } from "flowbite-svelte";
   import LogoAnimation from "$lib/components/LogoAnimation.svelte";
-  import { ChevronDownOutline, LanguageOutline } from "flowbite-svelte-icons";
-  import { _, locale } from "svelte-i18n";
+  import { ChevronDownOutline } from "flowbite-svelte-icons";
+  import { _ } from "svelte-i18n";
   import { page } from "$app/state";
-    import { onMount } from "svelte";
+    import LanguageButton from "./LanguageButton.svelte";
   let activeUrl = $derived(page.url.pathname);
-  let currentLocale = $state();
-  onMount(() => {
-    currentLocale = window.navigator.language
-  })
-
-  const changeLocale = () => {
-    console.log("clicked")
-    console.log(currentLocale)
-    if (currentLocale == "en-US") {
-      locale.set("ja");
-      currentLocale = "ja-JP";
-    } else if (currentLocale == "ja-JP") {
-      locale.set("en");
-      currentLocale = "en-US";
-    }
-  };
 
   let loggedIn = $state(true);
 </script>
@@ -42,10 +26,8 @@
       <span class="font-sofia text-2xl md:text-3xl">March Waters</span>
     </NavBrand>
     <div class="flex md:order-2">
-      <Button class="focus:ring-0 focus:bg-blue-400 bg-blue-400 border hover:bg-blue-500" onclick={changeLocale} size="sm">
-        <LanguageOutline class="w-6 h-6 text-white" />
-      </Button>
-      <NavHamburger />
+      <NavHamburger class="m-0" />
+      <LanguageButton />
     </div>
     <NavUl>
       <NavLi class="text-lg md:text-xl" href="/about">{$_("nav.about")}</NavLi>
