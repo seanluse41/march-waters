@@ -20,7 +20,7 @@
 </script>
 
 <Button
-    class="focus:ring-0 focus:bg-blue-400 bg-blue-400 border hover:bg-blue-500"
+    class="focus:ring-0 focus:bg-blue-600 bg-blue-500 border hover:bg-blue-600"
     onclick={changeLocale}
     size="sm"
 >
