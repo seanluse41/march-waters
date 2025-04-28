@@ -52,7 +52,7 @@
     });
 </script>
 
-<div class="h-16">
+<div class="h-64">
     <DotLottieSvelte
         src="https://lottie.host/c2d533bb-5cbc-4429-86b1-6ad65c92308d/b5XL3vWKfF.lottie"
         loop={true}

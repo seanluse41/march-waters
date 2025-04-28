@@ -20,7 +20,7 @@
 </script>
 
 <Button
-    class="focus:ring-0 focus:bg-blue-600 bg-blue-500 border hover:bg-blue-600"
+    class="focus:ring-0 focus:bg-blue-600 bg-blue-500 border hover:bg-blue-600 self-end mr-12 md:mr-24 mt-2"
     onclick={changeLocale}
     size="sm"
 >
