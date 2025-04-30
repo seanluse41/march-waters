@@ -11,10 +11,10 @@
         '/PacificoSLO.json',
         [{
           text: "March Waters",
-          fontSize: 32,
+          fontSize: 64,
           strokeWidth: 1,
           color: "#1a1a1a",
-          duration: 2500,
+          duration: 2000,
           textAlign: "center"
         }]
       );

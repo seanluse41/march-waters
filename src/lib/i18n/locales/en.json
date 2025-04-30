@@ -1,16 +1,60 @@
 {
-    "nav": {
-      "home": "Home",
-      "legal": "Legal",
-      "about": "About Us",
-      "terms": "Terms of Service",
-      "privacy": "Privacy Policy",
-      "commerceDisclosure": "Commerce Disclosure",
-      "register": "Register",
-      "account": "My Account",
-      "events": "Events",
-      "login": "Login",
-      "logout": "Logout"
+  "nav": {
+    "home": "Home",
+    "legal": "Legal",
+    "about": "About Us",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "commerceDisclosure": "Commerce Disclosure",
+    "register": "Register",
+    "account": "My Account",
+    "events": "Events",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "top": {
+    "cards": {
+      "heading": "Our Services",
+      "card1": {
+        "title": "Childcare Service",
+        "text": "We provide evening childcare for children ages 0-6 from 5:00PM to 9:30PM, including dinner, bath, play, and bedtime routines. This service allows parents to enjoy some personal time. Cost: ¥8,000 (includes dinner, ¥7,500 for allergies), capacity: 3 children."
+      },
+      "card2": {
+        "title": "My Body My Choice Project",
+        "text": "Providing comprehensive sex education with the motto 'My body is my own.' We offer education for children, youth, and parents, empowering individuals to make informed choices about their bodies and lives. Pricing varies based on content and budget."
+      },
+      "card3": {
+        "title": "Talk with a Midwife",
+        "text": "Online consultation service with midwives. We address pregnancy and childcare concerns, support for international residents (English available), pregnancy loss, fertility treatment, physical health issues, family planning, and more. Options: Quick consultation (30min/¥3,000), In-depth consultation (60min/¥5,500), Email consultation (¥2,500)."
+      },
+      "card4": {
+        "title": "Journal 'In My Case'",
+        "text": "A journal documenting diverse experiences related to sexuality and reproduction. Rather than showcasing success stories, we provide thoughtful records of everyday lives, allowing readers to engage deeply with others' experiences."
+      },
+      "card5": {
+        "title": "English Support Available",
+        "text": "We offer pregnancy and childcare consultation services in English for foreign residents in Japan. We also support Japanese residents living abroad with their concerns."
+      }
     },
-    "lorum": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    "socials": {
+      "heading": "Follow Us",
+      "instagram": {
+        "title": "Instagram",
+        "handle": "@marchwatersss"
+      },
+      "note": {
+        "title": "Note",
+        "handle": "Croissant"
+      },
+      "twitter": {
+        "title": "Twitter",
+        "handle": "@placeholder"
+      },
+      "line": {
+        "title": "LINE",
+        "handle": "Add us on LINE"
+      }
+    }
+  },
+  "lorum": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 }

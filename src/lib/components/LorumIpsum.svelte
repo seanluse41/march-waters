@@ -3,24 +3,3 @@
 </script>
 
 <p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>
-<p>{$_("lorum")}</p>

@@ -1,6 +1,7 @@
 <script>
   import { onMount, onDestroy } from "svelte";
   import { _ } from "svelte-i18n";
+  import { DotsVerticalOutline } from "flowbite-svelte-icons";
 
   let isOpen = $state(false);
   let highlight;
@@ -14,7 +15,7 @@
   function toggleMenu(e) {
     // Prevent event propagation
     e && e.stopPropagation();
-    
+
     isOpen = !isOpen;
 
     if (!isOpen) {
@@ -71,7 +72,7 @@
 <nav>
   <ul
     bind:this={menu}
-    class="fixed inset-0 p-0 m-0 list-none flex flex-col justify-center items-center gap-5 bg-blue-500 hover:bg-blue-600 transition-[clip-path] duration-500"
+    class="fixed inset-0 p-0 m-0 list-none bg-blue-500 hover:bg-blue-600 transition-[clip-path] duration-500"
     style:clip-path={isOpen
       ? "circle(100% at 50% 50%)"
       : "circle(20px at calc(100vw - 5vw) 31px)"}
@@ -122,54 +123,73 @@
         onclick={handleLinkClick}>{$_("nav.about")}</a
       >
     </li>
-    
+
     <!-- Custom dropdown implementation -->
     <li class="relative z-10 nav-link">
-      <div 
+      <div
         class="cursor-pointer no-underline text-gray-800 text-lg uppercase font-bold inline-block w-32 p-1 items-center justify-center"
         onclick={toggleDropdown}
       >
         {$_("nav.legal")}
-        <svg class="w-6 h-6 ms-2 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          class="w-6 h-6 ms-2 inline"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <polyline points="6 9 12 15 18 9"></polyline>
         </svg>
       </div>
-      
+
       {#if dropdownOpen}
         <div class="absolute bg-white shadow-md rounded w-44 z-20">
-          <a 
-            href="/terms" 
+          <a
+            href="/terms"
             class="block px-4 py-2 text-lg hover:bg-blue-200 text-gray-800"
-            onclick={(e) => { e.stopPropagation(); handleLinkClick(); }}>
+            onclick={(e) => {
+              e.stopPropagation();
+              handleLinkClick();
+            }}
+          >
             {$_("nav.terms")}
           </a>
-          <a 
-            href="/privacy" 
+          <a
+            href="/privacy"
             class="block px-4 py-2 text-lg hover:bg-blue-200 text-gray-800"
-            onclick={(e) => { e.stopPropagation(); handleLinkClick(); }}>
+            onclick={(e) => {
+              e.stopPropagation();
+              handleLinkClick();
+            }}
+          >
             {$_("nav.privacy")}
           </a>
-          <a 
-            href="/commerce-disclosure" 
+          <a
+            href="/commerce-disclosure"
             class="block px-4 py-2 text-lg hover:bg-blue-200 text-gray-800"
-            onclick={(e) => { e.stopPropagation(); handleLinkClick(); }}>
+            onclick={(e) => {
+              e.stopPropagation();
+              handleLinkClick();
+            }}
+          >
             {$_("nav.commerceDisclosure")}
           </a>
         </div>
       {/if}
     </li>
-    
+
     <div
-      class="absolute top-5 left-[calc(100vw-5vw)] transform -translate-x-1/2 cursor-pointer z-30"
-      onclick={(e) => { e.stopPropagation(); toggleMenu(e); }}
-    >
-      <span class="w-3 h-3 block border-2 border-white rounded-full mb-px"
-      ></span>
-      <span class="w-3 h-3 block border-2 border-white rounded-full mb-px"
-      ></span>
-      <span class="w-3 h-3 block border-2 border-white rounded-full mb-px"
-      ></span>
-    </div>
+    class="absolute top-4 left-[calc(100vw-5vw)] transform -translate-x-1/2 cursor-pointer z-30"
+    onclick={(e) => {
+      e.stopPropagation();
+      toggleMenu(e);
+    }}
+  >
+    <DotsVerticalOutline class="text-white w-8 h-8" />
+  </div>
     <div
       bind:this={highlight}
       class="absolute top-0 w-0 h-0 bg-white transition-transform duration-300"
