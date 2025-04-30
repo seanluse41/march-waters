@@ -14,11 +14,9 @@
     }
 
     function onPlay() {
-        console.log("Animation started");
     }
 
     function onPause() {
-        console.log("Animation paused");
     }
 
     function onLoop() {
@@ -30,7 +28,6 @@
     }
 
     function onComplete() {
-        console.log("Animation completed");
     }
 
     function handleMouseEnter() {

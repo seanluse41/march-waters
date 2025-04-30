@@ -69,7 +69,7 @@
 
 <section class="mt-8 mb-8">
   <div class="container mx-auto">
-    <h2 class="text-2xl font-bold text-slate-700 my-8">{heading}</h2>
+    <h2 class="text-3xl font-bold text-slate-700 my-8">{heading}</h2>
     
     <div class="grid md:grid-cols-3 gap-8">
       {#each cardsData as card, i}

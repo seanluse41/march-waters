@@ -20,7 +20,7 @@
 </script>
 
 <Button
-    class="border-0 focus:bg-blue-600 bg-blue-500 hover:bg-blue-600 self-end mr-12 md:mr-24 mt-3"
+    class="absolute left-[calc(100vw-9vw)] transform -translate-x-1/2 z-20 top-16 md:top-3 focus:ring-0 border focus:bg-blue-600 bg-blue-500 hover:bg-blue-600"
     onclick={changeLocale}
     size="sm"
 >

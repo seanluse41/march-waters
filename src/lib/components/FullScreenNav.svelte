@@ -69,10 +69,10 @@
   });
 </script>
 
-<nav>
+<nav class="absolute z-20">
   <ul
     bind:this={menu}
-    class="fixed inset-0 p-0 m-0 list-none bg-blue-500 hover:bg-blue-600 transition-[clip-path] duration-500"
+    class="fixed inset-0 p-0 m-0 list-none flex flex-col justify-center items-center gap-5 bg-blue-500 hover:bg-blue-600 transition-[clip-path] duration-500"
     style:clip-path={isOpen
       ? "circle(100% at 50% 50%)"
       : "circle(20px at calc(100vw - 5vw) 31px)"}

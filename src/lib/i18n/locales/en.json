@@ -37,7 +37,20 @@
       }
     },
     "socials": {
-      "heading": "Follow Us",
+      "heading": "March Waters is:",
+      "text": "Aiming for a barrier-free society in matters of sexuality and reproduction.",
+      "goals": {
+        "heading": "Our Goals:",
+        "1": "Improving wellness related to sexuality and reproduction",
+        "2": "Enhancing health literacy related to sexuality and reproduction",
+        "3": "Creating barrier-free language related to sexuality and reproduction"
+      },
+      "ideals": {
+        "heading": "Our Values:",
+        "1": "We value your individual feelings and experiences",
+        "2": "We respect human rights, diverse lives, and diverse feelings",
+        "3": "We support your authentic self, even when it extends beyond conventional happiness"
+      },
       "instagram": {
         "title": "Instagram",
         "handle": "@marchwatersss"
@@ -53,6 +66,28 @@
       "line": {
         "title": "LINE",
         "handle": "Add us on LINE"
+      },
+      "mail": {
+        "title": "Email",
+        "handle": "talk@march-waters.jp"
+      }
+    },
+    "actions": {
+      "title": "What You Can Do Now",
+      "1": {
+        "heading": "Create an Account",
+        "text": "Create an Account to schedule a consultation, or book a time for babysitting.",
+        "button": "Create Account"
+      },
+      "2": {
+        "heading": "Check our Event Calendar",
+        "text": "Come attend speaking events on topics from sexuality, wellness, pregnancy, post-pregnancy, etc.",
+        "button": "Check Calendar"
+      },
+      "3": {
+        "heading": "Read our Blog",
+        "text": "Read our blog for articles on a bunch of topics for all ages and interests.",
+        "button": "Read More"
       }
     }
   },
