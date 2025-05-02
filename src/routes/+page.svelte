@@ -1,11 +1,9 @@
 <script>
-    import { Heading, P, Card } from "flowbite-svelte";
     import TitleAnimation from "../lib/components/TitleAnimation.svelte";
     import WomanBaby from "$lib/assets/animations/WomanBaby.svelte";
-    import LorumIpsum from "../lib/components/LorumIpsum.svelte";
     import CardsDisplay from "../lib/components/CardsDisplay.svelte";
     import SocialsCard from "../lib/components/SocialsCard.svelte";
-    import ActionsCard from "../lib/components/ActionsCard.svelte";
+    import NewsBox from "../lib/components/NewsBox.svelte";
 </script>
 
 <main class="">
@@ -21,9 +19,7 @@
                 <SocialsCard />
             </div>
         </div>
-        <div class="">
-            <ActionsCard />
-        </div>
+        <NewsBox />
         <CardsDisplay />
     </div>
 </main>

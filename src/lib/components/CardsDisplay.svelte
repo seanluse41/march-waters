@@ -10,7 +10,7 @@
     BookOpenOutline, 
     GlobeOutline 
   } from 'flowbite-svelte-icons';
-  import { _, locale } from "svelte-i18n";
+  import { _ } from "svelte-i18n";
 
   const cardDelay = 100;
   $: heading = $_('top.cards.heading');
@@ -23,32 +23,36 @@
   // Track which cards are in view
   let cardVisibility = [];
 
-  // Get cards data based on current locale
   $: cardsData = [
     {
       title: $_('top.cards.card1.title'),
       text: $_('top.cards.card1.text'),
-      icon: MoonPlusOutline
+      iconName: "MoonPlusOutline",
+      link: "/child-care"
     },
     {
       title: $_('top.cards.card2.title'),
       text: $_('top.cards.card2.text'),
-      icon: UserGraduateOutline
+      iconName: "UserGraduateOutline",
+      link: "/speak"
     },
     {
       title: $_('top.cards.card3.title'),
       text: $_('top.cards.card3.text'),
-      icon: HeadphonesOutline
+      iconName: "HeadphonesOutline",
+      link: "/consult"
     },
     {
       title: $_('top.cards.card4.title'),
       text: $_('top.cards.card4.text'),
-      icon: BookOpenOutline
+      iconName: "BookOpenOutline",
+      link: "/stories"
     },
     {
       title: $_('top.cards.card5.title'),
       text: $_('top.cards.card5.text'),
-      icon: GlobeOutline
+      iconName: "GlobeOutline",
+      link: "/contact"
     }
   ];
 
@@ -90,14 +94,16 @@
               <TopCard 
                 title={card.title} 
                 text={card.text} 
-                icon={card.icon} 
+                iconName={card.iconName}
+                link={card.link}
               />
             </div>
           {:else}
             <TopCard 
               title={card.title} 
               text={card.text} 
-              icon={card.icon} 
+              iconName={card.iconName}
+              link={card.link}
             />
           {/if}
         </div>

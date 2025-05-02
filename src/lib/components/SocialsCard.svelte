@@ -3,8 +3,6 @@
 
   import {
     NewspaperOutline,
-    TwitterSolid,
-    MessagesOutline,
     EnvelopeOutline,
     InstagramSolid
   } from "flowbite-svelte-icons";
@@ -22,18 +20,6 @@
       icon: NewspaperOutline,
       url: "https://note.com/kind_phlox908",
       handle: $_("top.socials.note.handle"),
-    },
-    {
-      name: "twitter",
-      icon: TwitterSolid,
-      url: "#",
-      handle: "@placeholder",
-    },
-    {
-      name: "line",
-      icon: MessagesOutline,
-      url: "#",
-      handle: $_("top.socials.line.handle"),
     },
     {
       name: "mail",

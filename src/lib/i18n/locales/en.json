@@ -59,18 +59,17 @@
         "title": "Note",
         "handle": "Croissant"
       },
-      "twitter": {
-        "title": "Twitter",
-        "handle": "@placeholder"
-      },
-      "line": {
-        "title": "LINE",
-        "handle": "Add us on LINE"
-      },
       "mail": {
         "title": "Email",
         "handle": "talk@march-waters.jp"
       }
+    },
+    "news": {
+      "heading": "News",
+      "all": "View on Note",
+      "loading": "Loading...",
+      "error": "Error: ",
+      "none": "There are currently no articles to display."
     },
     "actions": {
       "title": "What You Can Do Now",
