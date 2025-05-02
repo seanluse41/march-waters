@@ -3,9 +3,11 @@
   export let title = "";
   export let text = "";
   export let icon = null;
+
+  import { Card } from "flowbite-svelte";
 </script>
 
-<div class="card cursor-pointer bg-white rounded-lg shadow-md p-6 lg:h-56 sm:pt-3 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+<Card color="primary" class="cursor-pointer border-0 bg-white max-w-none shadow-xl p-6 lg:h-56 sm:pt-3 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
   <div class="flex items-center justify-between mb-4">
     <h3 class="text-xl font-bold text-slate-700">{title}</h3>
     {#if icon}
@@ -13,4 +15,4 @@
     {/if}
   </div>
   <p class="text-slate-700">{text}</p>
-</div>
+</Card>

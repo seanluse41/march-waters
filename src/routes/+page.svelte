@@ -11,17 +11,17 @@
 <main class="">
     <div class="container mx-auto flex flex-col gap-8">
         <TitleAnimation />
-    <div class="flex flex-col lg:flex-row mt-16 gap-4 lg:gap-0 items-center">
+        <div
+            class="flex flex-col lg:flex-row mt-16 gap-4 lg:gap-0 items-center"
+        >
             <div class="w-full md:w-1/2">
                 <WomanBaby />
             </div>
             <div class="w-full md:w-2/3">
-                <div class="card bg-white rounded-lg shadow-md md:p-6 p-3">
-                    <SocialsCard />
-                </div>
+                <SocialsCard />
             </div>
         </div>
-        <div class="card bg-white rounded-lg shadow-2xl md:p-6 p-3">
+        <div class="">
             <ActionsCard />
         </div>
         <CardsDisplay />

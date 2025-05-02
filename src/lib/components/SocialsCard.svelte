@@ -2,17 +2,18 @@
   import { _ } from "svelte-i18n";
 
   import {
-    ImageOutline,
     NewspaperOutline,
     TwitterSolid,
     MessagesOutline,
     EnvelopeOutline,
+    InstagramSolid
   } from "flowbite-svelte-icons";
+    import { Card } from "flowbite-svelte";
 
   $: socials = [
     {
       name: "instagram",
-      icon: ImageOutline,
+      icon: InstagramSolid,
       url: "https://www.instagram.com/marchwatersss/",
       handle: "@marchwatersss",
     },
@@ -43,7 +44,7 @@
   ];
 </script>
 
-<div class="mx-auto">
+<Card color="primary" class="p-8 border-0 bg-white max-w-none">
   <h2 class="text-2xl font-bold mb-4">{$_("top.socials.heading")}</h2>
   <div class="flex flex-col md:flex-row gap-8">
     <div class="w-full md:w-2/3">
@@ -118,4 +119,4 @@
       {/each}
     </div>
   </div>
-</div>
+</Card>

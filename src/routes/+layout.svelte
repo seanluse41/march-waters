@@ -3,6 +3,7 @@
 	import Fab from '$lib/components/FAB.svelte';
     import FullScreenNav from '$lib/components/FullScreenNav.svelte';
     import LanguageButton from '$lib/components/LanguageButton.svelte';
+    import Footer from '../lib/components/Footer.svelte';
 	let { children } = $props();
     
     // Gradient colors (you can adjust these to match your preference)
@@ -28,6 +29,7 @@
             {@render children()}
         </div>
     </div>
+    <Footer />
 </div>
 
 <style>

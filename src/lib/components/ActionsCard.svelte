@@ -1,6 +1,6 @@
 <script>
   import { _ } from "svelte-i18n";
-  import { Timeline, TimelineItem, Button } from "flowbite-svelte";
+  import { Timeline, TimelineItem, Button, Card } from "flowbite-svelte";
   import {
     UserAddSolid,
     CalendarEditOutline,
@@ -10,6 +10,7 @@
   } from "flowbite-svelte-icons";
 </script>
 
+<Card color="primary" class="bg-white max-w-none border-0 p-8">
 <h1 class="text-3xl text-slate-700 mb-8">{$_("top.actions.title")}</h1>
 <Timeline order="horizontal" class="gap-8">
   <TimelineItem>
@@ -64,3 +65,4 @@
     <Button href="/blog" color="blue">{$_("top.actions.3.button")}<ArrowRightOutline class="ms-2 h-5 w-5" /></Button>
   </TimelineItem>
 </Timeline>
+</Card>
