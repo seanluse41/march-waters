@@ -9,9 +9,6 @@
   let menu;
   let dropdownOpen = $state(false);
 
-  // logged in
-  let loggedIn = $state(true);
-
   function toggleMenu(e) {
     // Prevent event propagation
     e && e.stopPropagation();
@@ -80,54 +77,53 @@
   >
     <li class="relative z-10 nav-link">
       <a
-        class="no-underline text-gray-800 text-lg uppercase font-bold inline-block w-32 p-1"
+        class="no-underline text-slate-200  text-lg uppercase font-bold inline-block w-64 p-4"
         href="/"
         onclick={handleLinkClick}>{$_("nav.home")}</a
       >
     </li>
-    {#if loggedIn}
-      <li class="relative z-10 nav-link">
-        <a
-          class="no-underline text-gray-800 text-lg uppercase font-bold inline-block w-32 p-1"
-          href="/account"
-          onclick={handleLinkClick}>{$_("nav.account")}</a
-        >
-      </li>
-      <li class="relative z-10 nav-link">
-        <a
-          class="no-underline text-gray-800 text-lg uppercase font-bold inline-block w-32 p-1"
-          href="/logout"
-          onclick={handleLinkClick}>{$_("nav.logout")}</a
-        >
-      </li>
-    {:else}
-      <li class="relative z-10 nav-link">
-        <a
-          class="no-underline text-gray-800 text-lg uppercase font-bold inline-block w-32 p-1"
-          href="/login"
-          onclick={handleLinkClick}>{$_("nav.login")}</a
-        >
-      </li>
-      <li class="relative z-10 nav-link">
-        <a
-          class="no-underline text-gray-800 text-lg uppercase font-bold inline-block w-32 p-1"
-          href="/register"
-          onclick={handleLinkClick}>{$_("nav.register")}</a
-        >
-      </li>
-    {/if}
     <li class="relative z-10 nav-link">
       <a
-        class="no-underline text-gray-800 text-lg uppercase font-bold inline-block w-32 p-1"
+        class="no-underline text-slate-200 text-lg uppercase font-bold inline-block w-64 p-4"
         href="/about"
         onclick={handleLinkClick}>{$_("nav.about")}</a
+      >
+    </li>
+    <li class="relative z-10 nav-link">
+      <a
+        class="no-underline text-slate-200 text-lg uppercase font-bold inline-block w-64 p-4"
+        href="/child-care"
+        onclick={handleLinkClick}>{$_("nav.childcare")}</a
+      >
+    </li>
+    <li class="relative z-10 nav-link">
+      <a
+        class="no-underline text-slate-200 text-lg uppercase font-bold inline-block w-64 p-4"
+        href="/speak"
+        onclick={handleLinkClick}>{$_("nav.speak")}</a
+      >
+    </li>
+    <li class="relative z-10 nav-link">
+      <a
+        class="no-underline text-slate-200 text-lg uppercase font-bold inline-block w-64 p-4"
+        href="/consult"
+        onclick={handleLinkClick}>{$_("nav.consult")}</a
+      >
+    </li>
+    <li class="relative z-10 nav-link">
+      <a
+        class="no-underline text-slate-200 text-lg uppercase font-bold inline-block w-64 p-4"
+        href="/stories"
+        onclick={handleLinkClick}>{$_("nav.stories")}</a
       >
     </li>
 
     <!-- Custom dropdown implementation -->
     <li class="relative z-10 nav-link">
       <div
-        class="cursor-pointer no-underline text-gray-800 text-lg uppercase font-bold inline-block w-32 p-1 items-center justify-center"
+        class:text-slate-700={dropdownOpen}
+        class:text-slate-200={!dropdownOpen}
+        class="cursor-pointer no-underline text-lg uppercase font-bold inline-block w-64 p-4 items-center justify-center"
         onclick={toggleDropdown}
       >
         {$_("nav.legal")}
@@ -149,7 +145,7 @@
         <div class="absolute bg-white shadow-md rounded w-44 z-20">
           <a
             href="/terms"
-            class="block px-4 py-2 text-lg hover:bg-blue-200 text-gray-800"
+            class="block px-4 py-2 text-lg hover:bg-blue-200 md:text-slate-700"
             onclick={(e) => {
               e.stopPropagation();
               handleLinkClick();
@@ -159,7 +155,7 @@
           </a>
           <a
             href="/privacy"
-            class="block px-4 py-2 text-lg hover:bg-blue-200 text-gray-800"
+            class="block px-4 py-2 text-lg hover:bg-blue-200 md:text-slate-700"
             onclick={(e) => {
               e.stopPropagation();
               handleLinkClick();
@@ -169,7 +165,7 @@
           </a>
           <a
             href="/commerce-disclosure"
-            class="block px-4 py-2 text-lg hover:bg-blue-200 text-gray-800"
+            class="block px-4 py-2 text-lg hover:bg-blue-200 md:text-slate-700"
             onclick={(e) => {
               e.stopPropagation();
               handleLinkClick();
@@ -182,17 +178,17 @@
     </li>
 
     <div
-    class="absolute top-4 left-[calc(100vw-5vw)] transform -translate-x-1/2 cursor-pointer z-30"
-    onclick={(e) => {
-      e.stopPropagation();
-      toggleMenu(e);
-    }}
-  >
-    <DotsVerticalOutline class="text-white w-8 h-8" />
-  </div>
+      class="absolute top-4 left-[calc(100vw-5vw)] transform -translate-x-1/2 cursor-pointer z-30"
+      onclick={(e) => {
+        e.stopPropagation();
+        toggleMenu(e);
+      }}
+    >
+      <DotsVerticalOutline class="text-slate-200 w-8 h-8" />
+    </div>
     <div
       bind:this={highlight}
-      class="absolute top-0 w-0 h-0 bg-white transition-transform duration-300"
+      class="absolute top-0 w-0 h-0 bg-blue-500 transition-transform duration-300"
     ></div>
   </ul>
 </nav>
