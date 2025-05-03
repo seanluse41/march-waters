@@ -24,7 +24,7 @@
       },
       "card3": {
         "title": "Talk with a Midwife",
-        "text": "Online consultation service a professional registered midwife. We address pregnancy and childcare concerns, support for international residents (English available), pregnancy loss, fertility treatment, physical health issues, family planning, and more."
+        "text": "Online consultation service a professional registered midwife. We address pregnancy and childcare concerns, support for international residents (English available), pregnancy loss, fertility treatment, physical health issues, family planning, and more. Options: Quick consultation (30min/¥3,000), In-depth consultation (60min/¥5,500), Email consultation (¥2,500)."
       },
       "card4": {
         "title": "Journal 'In My Case'",
@@ -64,7 +64,7 @@
       }
     },
     "news": {
-      "heading": "News",
+      "heading": "Updates",
       "all": "View on Note",
       "loading": "Loading...",
       "error": "Error: ",
