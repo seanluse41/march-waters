@@ -24,6 +24,7 @@
 	},
 	"dependencies": {
 		"@lottiefiles/dotlottie-svelte": "^0.5.3",
+		"googleapis": "^148.0.0",
 		"svelte-i18n": "^4.0.1",
 		"svelte-inview": "^4.0.4",
 		"vara": "^1.4.1"
