@@ -34,14 +34,19 @@
     }
 </script>
 
-<Card color="primary" class="p-4 md:p-10 bg-white border-0 max-w-none shadow-2xl">
+<Card
+    color="primary"
+    class="p-4 md:p-10 bg-white border-0 max-w-none shadow-2xl"
+>
     <div class="mb-4 flex items-center justify-between">
-        <h5 class="text-xl leading-none font-bold text-slate-700">{$_("top.news.heading")}</h5>
-        <a
+        <h5 class="text-xl leading-none font-bold text-slate-700">
+            {$_("top.news.heading")}
+        </h5>
+        <A
             href="https://note.com/kind_phlox908"
             target="_blank"
-            class="text-primary-600 text-sm font-medium hover:underline"
-            >{$_("top.news.all")}</a
+            class="text-blue-500 text-sm font-medium hover:underline"
+            >{$_("top.news.all")}</A
         >
     </div>
 

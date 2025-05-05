@@ -9,7 +9,13 @@
     "speak": "My Body My Choice Project",
     "consult": "Midwife Consultation",
     "childcare": "Childcare Service",
-    "stories": "Real Life Stories"
+    "stories": "Real Life Stories",
+    "contact": "Contact Us"
+  },
+  "footer": {
+    "copyright": "March Waters",
+    "instagram": "Instagram",
+    "note": "Note"
   },
   "top": {
     "cards": {
@@ -87,6 +93,44 @@
         "text": "Read our blog for articles on a bunch of topics for all ages and interests.",
         "button": "Read More"
       }
+    }
+  },
+  "timeline": {
+    "step1": {
+      "label": "Step 1",
+      "title": "Pick a Date",
+      "description": "Select your preferred date and time for your appointment."
+    },
+    "step2": {
+      "label": "Step 2",
+      "title": "Enter User Details",
+      "description": "Provide your personal information and contact details."
+    },
+    "step3": {
+      "label": "Step 3",
+      "title": "Choose Payment",
+      "description": "Cash or Credit Card is available."
+    }
+  },
+  "contact": {
+    "heading": "Contact Us",
+    "success": {
+      "title": "Success!",
+      "message": "Your message has been sent."
+    },
+    "form": {
+      "name": "Your Name",
+      "email": "Your Email",
+      "emailPlaceholder": "name@example.com",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+81 90-1234-5678",
+      "reasonHeading": "Reason for Contact",
+      "event": "Book for Event",
+      "other": "Other",
+      "otherPlaceholder": "Please specify",
+      "message": "Your Message",
+      "messagePlaceholder": "Your message or additional notes",
+      "submit": "Submit"
     }
   },
   "lorum": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."

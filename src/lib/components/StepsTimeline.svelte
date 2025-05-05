@@ -6,64 +6,60 @@
         CreditCardSolid,
         BadgeCheckSolid
     } from "flowbite-svelte-icons";
+    import { _ } from "svelte-i18n";
+    
+    let { currentStep = 1 } = $props();
 </script>
 
 <Timeline order="horizontal">
-    <TimelineItem title="Pick a Date" date="Step 1">
+    <TimelineItem title={$_("timeline.step1.title")}>
         {#snippet orientationSlot()}
             <div class="flex items-center">
                 <div
-                    class="bg-primary-200 dark:bg-primary-900 z-10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full ring-0 ring-white sm:ring-8 dark:ring-gray-900"
+                    class="bg-blue-500 flex h-10 w-10 items-center justify-center rounded-full my-2"
                 >
-                    <CalendarEditSolid
-                        class="text-primary-600 dark:text-primary-400 h-4 w-4"
-                    />
+                    {#if currentStep === 1}
+                        <CalendarEditSolid class="text-white h-6 w-6" />
+                    {:else}
+                        <BadgeCheckSolid class="text-white h-6 w-6" />
+                    {/if}
                 </div>
-                <div
-                    class="hidden h-0.5 w-full bg-gray-200 sm:flex dark:bg-gray-700"
-                ></div>
             </div>
         {/snippet}
-        <p class="text-base font-normal text-gray-500 dark:text-gray-400">
-            Select your preferred date and time for your appointment.
+        <p class="text-slate-700">
+            {$_("timeline.step1.description")}
         </p>
     </TimelineItem>
-    <TimelineItem title="Enter User Details" date="Step 2">
+    <TimelineItem title={$_("timeline.step2.title")}>
         {#snippet orientationSlot()}
             <div class="flex items-center">
                 <div
-                    class="bg-primary-200 dark:bg-primary-900 z-10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full ring-0 ring-white sm:ring-8 dark:ring-gray-900"
+                    class="bg-blue-500 flex h-10 w-10 items-center justify-center rounded-full my-2"
                 >
-                    <UserEditSolid
-                        class="text-primary-600 dark:text-primary-400 h-4 w-4"
-                    />
+                    {#if currentStep < 3}
+                        <UserEditSolid class="text-white h-6 w-6" />
+                    {:else}
+                        <BadgeCheckSolid class="text-white h-6 w-6" />
+                    {/if}
                 </div>
-                <div
-                    class="hidden h-0.5 w-full bg-gray-200 sm:flex dark:bg-gray-700"
-                ></div>
             </div>
         {/snippet}
-        <p class="text-base font-normal text-gray-500 dark:text-gray-400">
-            Provide your personal information and contact details.
+        <p class="text-slate-700">
+            {$_("timeline.step2.description")}
         </p>
     </TimelineItem>
-    <TimelineItem title="Complete Payment" date="Step 3">
+    <TimelineItem title={$_("timeline.step3.title")}>
         {#snippet orientationSlot()}
             <div class="flex items-center">
                 <div
-                    class="bg-primary-200 dark:bg-primary-900 z-10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full ring-0 ring-white sm:ring-8 dark:ring-gray-900"
+                    class="bg-blue-500 flex h-10 w-10 items-center justify-center rounded-full my-2"
                 >
-                    <CreditCardSolid
-                        class="text-primary-600 dark:text-primary-400 h-4 w-4"
-                    />
+                    <CreditCardSolid class="text-white h-6 w-6" />
                 </div>
-                <div
-                    class="hidden h-0.5 w-full bg-gray-200 sm:flex dark:bg-gray-700"
-                ></div>
             </div>
         {/snippet}
-        <p class="text-base font-normal text-gray-500 dark:text-gray-400">
-            Process your payment securely to confirm your booking.
+        <p class="text-slate-700">
+            {$_("timeline.step3.description")}
         </p>
     </TimelineItem>
 </Timeline>

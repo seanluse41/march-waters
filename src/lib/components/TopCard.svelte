@@ -6,14 +6,13 @@
     UserGraduateOutline,
     HeadphonesOutline,
     BookOpenOutline,
-    GlobeOutline,
-    ArrowUpRightFromSquareOutline,
+    GlobeOutline
   } from "flowbite-svelte-icons";
 
   import { Card } from "flowbite-svelte";
 </script>
 
-<Card href={link} color="primary" class="p-4 sm:p-6 md:p-8 bg-white max-w-none min-h-72">
+<Card href={link} class="p-4 sm:p-6 md:p-8 bg-white max-w-none min-h-72">
   <div class="flex items-center justify-between mb-4">
     <h3 class="text-xl font-bold text-slate-700">{title}</h3>
     {#if iconName === "MoonPlusOutline"}
