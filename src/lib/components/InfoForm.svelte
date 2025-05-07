@@ -7,31 +7,30 @@
     } from "flowbite-svelte-icons";
     import { _ } from "svelte-i18n";
 
-    // Props
-    let { onNext = () => {}, onBack = () => {} } = $props();
+    // Props with two-way binding for form validation
+    let { 
+        name = $bindable(""),
+        email = $bindable(""),
+        phone = $bindable(""),
+        paymentMethod = $bindable("cash")
+    } = $props();
 
-    // Form data binding
-    let name = $state("");
-    let email = $state("");
-    let phone = $state("");
-    let message = $state("");
-    let paymentMethod = $state("cash");
-
-    function handleSubmit() {
-        // Here you would typically validate the form data
-        // For now, we'll just call the onNext function
-        onNext();
+    function handleSubmit(event) {
+        event.preventDefault();
     }
 </script>
 
 <form onsubmit={handleSubmit} class="w-full">
-    
     <!-- Name Field -->
     <div class="mb-6">
-        <Label for="name" class="mb-2 block text-slate-700"
-            >{$_("contact.form.name")}</Label
+        <Label for="name" class="mb-2 block text-slate-700">{$_("contact.form.name")}</Label>
+        <Input 
+            id="name" 
+            bind:value={name} 
+            type="text" 
+            required 
+            class="pl-10"
         >
-        <Input id="name" bind:value={name} type="text" required class="pl-10">
             {#snippet left()}
                 <UserSolid class="h-5 w-5 text-slate-700" />
             {/snippet}
@@ -40,9 +39,7 @@
 
     <!-- Email Field -->
     <div class="mb-6">
-        <Label for="email" class="mb-2 block text-slate-700"
-            >{$_("contact.form.email")}</Label
-        >
+        <Label for="email" class="mb-2 block text-slate-700">{$_("contact.form.email")}</Label>
         <Input
             id="email"
             bind:value={email}
@@ -59,9 +56,7 @@
 
     <!-- Phone Field -->
     <div class="mb-6">
-        <Label for="phone" class="mb-2 block text-slate-700"
-            >{$_("contact.form.phone")}</Label
-        >
+        <Label for="phone" class="mb-2 block text-slate-700">{$_("contact.form.phone")}</Label>
         <Input
             id="phone"
             bind:value={phone}
@@ -76,29 +71,16 @@
         </Input>
     </div>
 
-    <!-- Message Field -->
-    <div class="mb-6">
-        <Label for="message" class="mb-2 block text-slate-700"
-            >{$_("contact.form.message")}</Label
-        >
-        <Textarea
-            id="message"
-            bind:value={message}
-            placeholder={$_("contact.form.messagePlaceholder")}
-            rows={3}
-        />
-    </div>
-
     <!-- Payment Method -->
     <div class="mb-6">
-        <Label class="mb-2 block text-slate-700">Payment Method</Label>
+        <Label class="mb-2 block text-slate-700">{$_("childcare.confirmation.paymentMethod")}</Label>
         <div class="flex items-center gap-4">
-            <Radio name="payment" value="cash" bind:group={paymentMethod}
-                >Cash</Radio
-            >
-            <Radio name="payment" value="credit" bind:group={paymentMethod}
-                >Credit Card</Radio
-            >
+            <Radio id="cash" name="payment" value="cash" bind:group={paymentMethod}>
+                {$_("payment.cash", { default: "Cash" })}
+            </Radio>
+            <Radio id="credit" name="payment" value="credit" bind:group={paymentMethod}>
+                {$_("payment.credit", { default: "Credit Card" })}
+            </Radio>
         </div>
     </div>
 </form>

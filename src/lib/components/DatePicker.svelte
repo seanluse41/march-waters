@@ -1,12 +1,15 @@
 <script>
   import { Datepicker, Select, P } from "flowbite-svelte";
   import { onMount } from "svelte";
+  import { _ } from "svelte-i18n";
 
-  let { selectedDate = $bindable(null), selectedTimeSlot = $bindable("") } =
-    $props();
+  let { 
+    selectedDate = $bindable(null), 
+    selectedTimeSlot = $bindable(""),
+    dateSelected = $bindable(false)
+  } = $props();
 
   let availableTimeSlots = $state([]);
-  let dateSelected = $state(false);
   let dateError = $state("");
 
   const mockAvailability = {
@@ -16,6 +19,13 @@
   };
 
   const fullyBookedDays = ["2025-05-08", "2025-05-15", "2025-05-22"];
+
+  // Set dateSelected based on initial selectedDate
+  $effect(() => {
+    if (selectedDate !== null) {
+      dateSelected = true;
+    }
+  });
 
   function generateTimeSlots() {
     const slots = [];
@@ -38,13 +48,15 @@
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    // Reset values
-    selectedTimeSlot = "";
+    // Only reset time slot if selecting a different date
+    if (selectedDate === null || date.getTime() !== selectedDate.getTime()) {
+      selectedTimeSlot = "";
+    }
+    
     dateError = "";
 
     if (date <= today) {
-      dateError =
-        "Please select a future date. Today and past dates are not available.";
+      dateError = $_("childcare.datePicker.pastDateError");
       dateSelected = false;
       selectedDate = null;
       return;
@@ -86,6 +98,17 @@
 
     return fullyBookedDays.includes(dateString);
   }
+  
+  // Initialize time slots if a date is already selected (when navigating back)
+  onMount(() => {
+    if (selectedDate) {
+      if (isDateFullyBooked(selectedDate)) {
+        availableTimeSlots = [];
+      } else {
+        updateAvailableTimeSlots(selectedDate);
+      }
+    }
+  });
 </script>
 
 <div class="space-y-4 flex flex-col items-center">
@@ -96,7 +119,7 @@
   {#if dateSelected}
     <div>
       <p class="mb-2 font-medium">
-        Selected date: {selectedDate?.toLocaleDateString()}
+        {$_("childcare.datePicker.selectedDate")}: {selectedDate?.toLocaleDateString()}
       </p>
 
       {#if availableTimeSlots.length > 0}
@@ -105,7 +128,7 @@
             for="time-slot"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            Select a time slot
+            {$_("childcare.datePicker.selectTimeSlot")}
           </label>
           <Select
             size="lg"
@@ -113,11 +136,11 @@
             id="time-slot"
             items={availableTimeSlots}
             bind:value={selectedTimeSlot}
-            placeholder="Choose a time slot"
+            placeholder={$_("childcare.datePicker.chooseTimeSlot")}
           />
         </div>
       {:else}
-        <p class="text-red-500">No available time slots for this date</p>
+        <p class="text-red-500">{$_("childcare.datePicker.noTimeSlots")}</p>
       {/if}
     </div>
   {/if}

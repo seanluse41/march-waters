@@ -133,5 +133,40 @@
       "submit": "Submit"
     }
   },
+  "datePicker": {
+    "selectedDate": "Selected date",
+    "selectTimeSlot": "Select a time slot",
+    "chooseTimeSlot": "Choose a time slot",
+    "noTimeSlots": "No available time slots for this date",
+    "pastDateError": "Please select a future date. Today and past dates are not available."
+  },
+  "childcare": {
+    "pageTitle": "Child care Services",
+    "steps": {
+      "chooseDate": "Choose an Open Date",
+      "enterInfo": "Enter Your Information",
+      "confirm": "Confirm"
+    },
+    "buttons": {
+      "previous": "Previous",
+      "next": "Next",
+      "complete": "Complete Booking"
+    },
+    "confirmation": {
+      "title": "Confirm Your Booking",
+      "details": "Please confirm your booking details:",
+      "date": "Date",
+      "time": "Time",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "paymentMethod": "Payment Method",
+      "paymentInstructions": "Payment Instructions:",
+      "cashInstructions": "Please bring exact cash payment to your appointment.",
+      "creditInstructions": "You will be redirected to our secure payment portal after confirming.",
+      "amountDue": "Amount due:",
+      "amountCharged": "Amount to be charged:"
+    }
+  },
   "lorum": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 }

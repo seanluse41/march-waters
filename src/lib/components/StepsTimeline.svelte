@@ -4,10 +4,10 @@
         CalendarEditSolid,
         UserEditSolid,
         CreditCardSolid,
-        BadgeCheckSolid
+        BadgeCheckSolid,
     } from "flowbite-svelte-icons";
     import { _ } from "svelte-i18n";
-    
+
     let { currentStep = 1 } = $props();
 </script>
 
@@ -15,15 +15,19 @@
     <TimelineItem title={$_("timeline.step1.title")}>
         {#snippet orientationSlot()}
             <div class="flex items-center">
-                <div
-                    class="bg-blue-500 flex h-10 w-10 items-center justify-center rounded-full my-2"
-                >
-                    {#if currentStep === 1}
+                {#if currentStep === 1}
+                    <div
+                        class="bg-blue-500 flex h-10 w-10 items-center justify-center rounded-full my-2"
+                    >
                         <CalendarEditSolid class="text-white h-6 w-6" />
-                    {:else}
+                    </div>
+                {:else}
+                    <div
+                        class="bg-green-500 flex h-10 w-10 items-center justify-center rounded-full my-2"
+                    >
                         <BadgeCheckSolid class="text-white h-6 w-6" />
-                    {/if}
-                </div>
+                    </div>
+                {/if}
             </div>
         {/snippet}
         <p class="text-slate-700">
@@ -33,15 +37,19 @@
     <TimelineItem title={$_("timeline.step2.title")}>
         {#snippet orientationSlot()}
             <div class="flex items-center">
-                <div
-                    class="bg-blue-500 flex h-10 w-10 items-center justify-center rounded-full my-2"
-                >
-                    {#if currentStep < 3}
+                {#if currentStep < 3}
+                    <div
+                        class="bg-blue-500 flex h-10 w-10 items-center justify-center rounded-full my-2"
+                    >
                         <UserEditSolid class="text-white h-6 w-6" />
-                    {:else}
+                    </div>
+                {:else}
+                    <div
+                        class="bg-green-500 flex h-10 w-10 items-center justify-center rounded-full my-2"
+                    >
                         <BadgeCheckSolid class="text-white h-6 w-6" />
-                    {/if}
-                </div>
+                    </div>
+                {/if}
             </div>
         {/snippet}
         <p class="text-slate-700">
