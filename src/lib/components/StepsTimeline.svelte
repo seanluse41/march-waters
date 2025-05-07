@@ -17,17 +17,18 @@
             <div class="flex items-center">
                 {#if currentStep === 1}
                     <div
-                        class="bg-blue-500 flex h-10 w-10 items-center justify-center rounded-full my-2"
+                        class="z-10 bg-blue-500 flex h-10 w-12 items-center justify-center rounded-full my-2"
                     >
                         <CalendarEditSolid class="text-white h-6 w-6" />
                     </div>
                 {:else}
                     <div
-                        class="bg-green-500 flex h-10 w-10 items-center justify-center rounded-full my-2"
+                        class="z-10 bg-green-500 flex h-10 w-12 items-center justify-center rounded-full my-2"
                     >
                         <BadgeCheckSolid class="text-white h-6 w-6" />
                     </div>
                 {/if}
+                <div class="hidden h-0.5 w-full bg-gray-200 sm:flex"></div>
             </div>
         {/snippet}
         <p class="text-slate-700">
@@ -39,17 +40,18 @@
             <div class="flex items-center">
                 {#if currentStep < 3}
                     <div
-                        class="bg-blue-500 flex h-10 w-10 items-center justify-center rounded-full my-2"
+                        class="z-10 bg-blue-500 flex h-10 w-12 items-center justify-center rounded-full my-2"
                     >
                         <UserEditSolid class="text-white h-6 w-6" />
                     </div>
                 {:else}
                     <div
-                        class="bg-green-500 flex h-10 w-10 items-center justify-center rounded-full my-2"
+                        class="z-10 bg-green-500 flex h-10 w-12 items-center justify-center rounded-full my-2"
                     >
                         <BadgeCheckSolid class="text-white h-6 w-6" />
                     </div>
                 {/if}
+                <div class="hidden h-0.5 ml-0 w-full bg-gray-200 sm:flex"></div>
             </div>
         {/snippet}
         <p class="text-slate-700">
@@ -60,7 +62,7 @@
         {#snippet orientationSlot()}
             <div class="flex items-center">
                 <div
-                    class="bg-blue-500 flex h-10 w-10 items-center justify-center rounded-full my-2"
+                    class="z-10 bg-blue-500 flex h-10 w-10 items-center justify-center rounded-full my-2"
                 >
                     <CreditCardSolid class="text-white h-6 w-6" />
                 </div>

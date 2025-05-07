@@ -56,7 +56,7 @@
     dateError = "";
 
     if (date <= today) {
-      dateError = $_("childcare.datePicker.pastDateError");
+      dateError = $_("datePicker.pastDateError");
       dateSelected = false;
       selectedDate = null;
       return;
@@ -119,7 +119,7 @@
   {#if dateSelected}
     <div>
       <p class="mb-2 font-medium">
-        {$_("childcare.datePicker.selectedDate")}: {selectedDate?.toLocaleDateString()}
+        {$_("datePicker.selectedDate")}: {selectedDate?.toLocaleDateString()}
       </p>
 
       {#if availableTimeSlots.length > 0}
@@ -128,7 +128,7 @@
             for="time-slot"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            {$_("childcare.datePicker.selectTimeSlot")}
+            {$_("datePicker.selectTimeSlot")}
           </label>
           <Select
             size="lg"
@@ -136,11 +136,11 @@
             id="time-slot"
             items={availableTimeSlots}
             bind:value={selectedTimeSlot}
-            placeholder={$_("childcare.datePicker.chooseTimeSlot")}
+            placeholder={$_("datePicker.chooseTimeSlot")}
           />
         </div>
       {:else}
-        <p class="text-red-500">{$_("childcare.datePicker.noTimeSlots")}</p>
+        <p class="text-red-500">{$_("datePicker.noTimeSlots")}</p>
       {/if}
     </div>
   {/if}

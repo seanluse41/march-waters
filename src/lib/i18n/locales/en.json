@@ -150,7 +150,7 @@
     "buttons": {
       "previous": "Previous",
       "next": "Next",
-      "complete": "Complete Booking"
+      "complete": "Request Booking"
     },
     "confirmation": {
       "title": "Confirm Your Booking",
