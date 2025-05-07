@@ -1,6 +1,6 @@
 <script>
     import LorumIspum from "$lib/components/LorumIpsum.svelte";
-    import { Button, Heading } from "flowbite-svelte";
+    import { Button, Heading, Hr } from "flowbite-svelte";
     import PhotoCarousel from "$lib/components/PhotoCarousel.svelte";
     import DatePicker from "$lib/components/DatePicker.svelte";
     import StepsTimeline from "$lib/components/StepsTimeline.svelte";
@@ -28,9 +28,10 @@
         <LorumIspum />
     </div>
     <div
-        class="w-full md:w-1/2 p-4 md:px-10 md:sticky md:top-0 overflow-y-auto flex flex-col justify-center"
+        class="w-full md:w-1/2 p-4 md:px-10 md:sticky md:top-0 overflow-y-auto flex flex-col items-center"
     >
         <StepsTimeline {currentStep} />
+        <Hr class="mx-auto my-4 h-1 w-48 rounded-sm md:my-10" />
         <Heading class="text-4xl font-bold my-8 text-slate-700">
             Choose an Open Date
         </Heading>

@@ -110,12 +110,4 @@
     {/if}
   </div>
 {/if}
-
-{#if selectedDate && selectedTimeSlot}
-  <div class="mt-4 p-4 bg-blue-50 text-blue-800 rounded-lg">
-    <p class="font-medium">Appointment Summary</p>
-    <p>Date: {selectedDate.toLocaleDateString()}</p>
-    <p>Time: {selectedTimeSlot}</p>
-  </div>
-{/if}
 </div>
