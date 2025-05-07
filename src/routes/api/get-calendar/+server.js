@@ -2,14 +2,17 @@ import { google } from 'googleapis';
 import { json } from '@sveltejs/kit';
 
 // Get environment variables using Vite syntax
-const CREDENTIALS = JSON.parse(import.meta.env.VITE_GOOGLE_SERVICE_ACCOUNT_CREDENTIALS);
+const CREDENTIALS = import.meta.env.VITE_GOOGLE_SERVICE_ACCOUNT_CREDENTIALS;
 const CALENDAR_ID = import.meta.env.VITE_GOOGLE_CALENDAR_ID;
 
+
 async function getCalendarClient() {
+  const jsonCredentials = await JSON.parse(CREDENTIALS)
+
   const auth = new google.auth.JWT(
-    CREDENTIALS.client_email,
+    jsonCredentials.client_email,
     null,
-    CREDENTIALS.private_key,
+    jsonCredentials.private_key,
     ['https://www.googleapis.com/auth/calendar'],
     null
   );
