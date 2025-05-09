@@ -141,7 +141,7 @@
     "pastDateError": "Please select a future date. Today and past dates are not available."
   },
   "childcare": {
-    "pageTitle": "Child care Services",
+    "pageTitle": "Childcare Service",
     "steps": {
       "chooseDate": "Choose an Open Date",
       "enterInfo": "Enter Your Information",
@@ -166,6 +166,108 @@
       "creditInstructions": "You will be redirected to our secure payment portal after confirming.",
       "amountDue": "Amount due:",
       "amountCharged": "Amount to be charged:"
+    },
+    "project": {
+      "title": "About Our Childcare Service",
+      "description": "We provide evening childcare for children aged 0 to preschool from 5:00PM to 9:30PM. In Japan, it can be difficult for parents to find time for themselves, to have uninterrupted conversations with partners or friends, or simply to relax without careful planning. While children are important, adults also deserve time for self-care. Let us help you incorporate self-care into your daily routine.",
+      "services": {
+        "title": "Our Services Include:",
+        "item1": "Childcare from 5:00PM to 9:30PM",
+        "item2": "Dinner (please bring your own food if your child has allergies)",
+        "item3": "Bathing, play activities, and bedtime routine"
+      },
+      "details": {
+        "title": "Service Details",
+        "cost": "Cost",
+        "costValue": "¥8,000 (includes dinner; ¥7,500 for children with allergies)",
+        "capacity": "Capacity",
+        "capacityValue": "3 children"
+      }
+    }
+  },
+  "bodychoice": {
+    "pageTitle": "My Body My Choice Project",
+    "steps": {
+      "chooseDate": "Choose a Date",
+      "enterInfo": "Enter Your Information",
+      "confirm": "Confirm"
+    },
+    "buttons": {
+      "previous": "Previous",
+      "next": "Next",
+      "complete": "Request Booking"
+    },
+    "confirmation": {
+      "title": "Confirm Your Booking",
+      "details": "Please confirm your booking details:",
+      "date": "Date",
+      "time": "Time",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "paymentMethod": "Payment Method",
+      "paymentInstructions": "Payment Instructions:",
+      "cashInstructions": "Please bring exact cash payment to your appointment.",
+      "creditInstructions": "You will be redirected to our secure payment portal after confirming."
+    },
+    "project": {
+      "title": "About My Body My Choice Project",
+      "description": "\"My body is my own.\" We want to create a society where this fundamental principle is understood by everyone. With knowledge, people can make choices that align with their authentic selves. Knowledge is an ally that can protect you and those around you in critical moments. With this mission in mind, we provide education about bodies and sexuality based on internationally standardized comprehensive sex education curriculum.",
+      "services": {
+        "title": "Our Services Include:",
+        "item1": "Sex education for preschoolers to young adults",
+        "item2": "Sex education for parents and guardians",
+        "item3": "Custom programs available upon consultation"
+      },
+      "details": {
+        "title": "Service Details",
+        "cost": "Cost",
+        "costValue": "Varies based on content and budget (please inquire for details)"
+      }
+    }
+  },
+  "midwife": {
+    "pageTitle": "Talk with a Midwife",
+    "steps": {
+      "chooseDate": "Choose a Date",
+      "enterInfo": "Enter Your Information",
+      "confirm": "Confirm"
+    },
+    "buttons": {
+      "previous": "Previous",
+      "next": "Next",
+      "complete": "Request Booking"
+    },
+    "confirmation": {
+      "title": "Confirm Your Booking",
+      "details": "Please confirm your booking details:",
+      "date": "Date",
+      "time": "Time",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "paymentMethod": "Payment Method",
+      "paymentInstructions": "Payment Instructions:",
+      "cashInstructions": "Please bring exact cash payment to your appointment.",
+      "creditInstructions": "You will be redirected to our secure payment portal after confirming."
+    },
+    "project": {
+      "title": "Talk with a Midwife",
+      "description": "\"Is it okay to ask my doctor about this? Should I go to the hospital for this concern?\" Working in hospitals, I've heard these questions many times. Whether you're concerned about your body or sexuality, carrying uncertainties, or simply need someone to talk to—regardless of your age, nationality, or pregnancy status—please feel free to reach out. English service is available.",
+      "services": {
+        "title": "Our Services Include:",
+        "item1": "Pregnancy and childcare consultations (including for those living overseas)",
+        "item2": "Pregnancy and childcare support for foreign residents in Japan (English available)",
+        "item3": "Support for those experiencing difficulties after miscarriage, stillbirth, during fertility treatment, or with childbirth concerns",
+        "item4": "Assistance with physical health issues during postpartum or child-rearing, body concerns, menstrual problems, marital relationships, family dynamics, and family planning",
+        "item5": "Consultations for single mothers and working parents, drawing from personal experience with career development alongside parenting and entrepreneurship"
+      },
+      "pricing": {
+        "title": "Pricing Options",
+        "option1": "Quick Consultation (Zoom) - 30 minutes for ¥3,000",
+        "option2": "In-depth Consultation (Zoom) - 60 minutes for ¥5,500",
+        "option3": "Email Consultation - ¥2,500 per inquiry"
+      }
     }
   },
   "lorum": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."

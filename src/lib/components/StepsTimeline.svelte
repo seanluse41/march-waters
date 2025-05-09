@@ -3,7 +3,7 @@
     import {
         CalendarEditSolid,
         UserEditSolid,
-        CreditCardSolid,
+        ClipboardCheckSolid,
         BadgeCheckSolid,
     } from "flowbite-svelte-icons";
     import { _ } from "svelte-i18n";
@@ -12,7 +12,7 @@
 </script>
 
 <Timeline order="horizontal">
-    <TimelineItem title={$_("timeline.step1.title")}>
+    <TimelineItem title={$_("timeline.step1.title")} liClass="w-full">
         {#snippet orientationSlot()}
             <div class="flex items-center">
                 {#if currentStep === 1}
@@ -35,7 +35,7 @@
             {$_("timeline.step1.description")}
         </p>
     </TimelineItem>
-    <TimelineItem title={$_("timeline.step2.title")}>
+    <TimelineItem title={$_("timeline.step2.title")} liClass="w-full">
         {#snippet orientationSlot()}
             <div class="flex items-center">
                 {#if currentStep < 3}
@@ -58,13 +58,13 @@
             {$_("timeline.step2.description")}
         </p>
     </TimelineItem>
-    <TimelineItem title={$_("timeline.step3.title")}>
+    <TimelineItem title={$_("timeline.step3.title")} liClass="w-full">
         {#snippet orientationSlot()}
             <div class="flex items-center">
                 <div
                     class="z-10 bg-blue-500 flex h-10 w-10 items-center justify-center rounded-full my-2"
                 >
-                    <CreditCardSolid class="text-white h-6 w-6" />
+                    <ClipboardCheckSolid class="text-white h-6 w-6" />
                 </div>
             </div>
         {/snippet}
