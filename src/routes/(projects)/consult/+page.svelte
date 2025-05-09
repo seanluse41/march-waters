@@ -8,11 +8,13 @@
     import StepsTimeline from "$lib/components/StepsTimeline.svelte";
     import InfoForm from "$lib/components/InfoForm.svelte";
     import ConfirmationScreen from "$lib/components/ConfirmationScreen.svelte";
+    import ConsultCourses from "$lib/components/ConsultCourses.svelte";
 
     // Persistent state
     let selectedDate = $state(null);
     let selectedTimeSlot = $state("");
     let dateSelected = $state(false);
+    let selectedCourse = $state("");
     
     // Form validation states
     let name = $state("");
@@ -22,17 +24,24 @@
 
     let currentStep = $state(1);
 
+    let isCourseSelected = $derived(selectedCourse !== "");
     let isFormValid = $derived(name.trim() !== "" && email.trim() !== "" && phone.trim() !== "");
-    let canProceedFromStep1 = $derived(dateSelected && selectedTimeSlot !== "");
+    let canProceedFromStep1 = $derived(isCourseSelected);
+    let canProceedFromStep2 = $derived(
+        selectedCourse === "email" || (dateSelected && selectedTimeSlot !== "")
+    );
 
     function nextStep() {
         if (currentStep === 1 && canProceedFromStep1) {
             currentStep = 2;
-        } else if (currentStep === 2 && isFormValid) {
+        } else if (currentStep === 2 && canProceedFromStep2) {
             currentStep = 3;
-        } else if (currentStep === 3) {
+        } else if (currentStep === 3 && isFormValid) {
             currentStep = 4;
+        } else if (currentStep === 4) {
+            // Submit booking
             console.log("Booking complete!", {
+                course: selectedCourse,
                 date: selectedDate,
                 time: selectedTimeSlot,
                 name,
@@ -48,6 +57,11 @@
             currentStep = currentStep - 1;
         }
     }
+
+    // Get course price for confirmation
+    $: coursePrice = selectedCourse === "quick" ? "¥3,000" : 
+                     selectedCourse === "in-depth" ? "¥5,500" : 
+                     selectedCourse === "email" ? "¥2,500" : "";
 </script>
 
 <div class="flex flex-col md:flex-row w-full md:overflow-hidden">
@@ -91,21 +105,34 @@
     <div
         class="w-full md:w-1/2 p-4 md:px-10 md:sticky md:top-0 overflow-y-auto flex flex-col items-center"
     >
-        <StepsTimeline {currentStep} />
+        <StepsTimeline currentStep={currentStep} totalSteps={4} />
         <Hr class="mx-auto my-4 h-1 w-48 rounded-sm md:my-10" />
 
         {#if currentStep === 1}
             <div in:fly={{ y: 50, duration: 300 }}>
                 <Heading class="text-4xl font-bold my-8 text-slate-700">
-                    {$_("midwife.steps.chooseDate")}
+                    {$_("midwife.steps.chooseCourse")}
                 </Heading>
-                <DatePicker 
-                    bind:selectedDate 
-                    bind:selectedTimeSlot 
-                    bind:dateSelected
-                />
+                <ConsultCourses bind:selectedCourse />
             </div>
         {:else if currentStep === 2}
+            <div in:fly={{ y: 50, duration: 300 }}>
+                <Heading class="text-4xl font-bold my-8 text-slate-700">
+                    {$_("midwife.steps.chooseDate")}
+                </Heading>
+                {#if selectedCourse === "email"}
+                    <div class="p-6 bg-blue-50 rounded-lg">
+                        <p class="text-slate-700">{$_("midwife.emailConsultNote")}</p>
+                    </div>
+                {:else}
+                    <DatePicker 
+                        bind:selectedDate 
+                        bind:selectedTimeSlot 
+                        bind:dateSelected
+                    />
+                {/if}
+            </div>
+        {:else if currentStep === 3}
             <div in:fly={{ y: 50, duration: 300 }}>
                 <Heading class="text-4xl font-bold my-8 text-slate-700">
                     {$_("midwife.steps.enterInfo")}
@@ -117,10 +144,12 @@
                     bind:paymentMethod
                 />
             </div>
-        {:else if currentStep === 3}
+        {:else if currentStep === 4}
             <ConfirmationScreen 
-                {selectedDate} 
-                {selectedTimeSlot} 
+                selectedDate={selectedCourse === "email" ? null : selectedDate}
+                selectedTimeSlot={selectedCourse === "email" ? $_("midwife.emailConsult") : selectedTimeSlot}
+                course={selectedCourse}
+                coursePrice={coursePrice}
                 {name} 
                 {email} 
                 {phone} 
@@ -128,7 +157,7 @@
             />
         {/if}
 
-        {#if currentStep <= 3}
+        {#if currentStep <= 4}
             <div class="flex gap-8 w-full items-center justify-center px-2 md:px-32">
                 <Button
                     color="primary"
@@ -141,10 +170,14 @@
                 <Button
                     color="primary"
                     onclick={nextStep}
-                    disabled={currentStep === 1 ? !canProceedFromStep1 : (currentStep === 2 ? !isFormValid : false)}
+                    disabled={
+                        (currentStep === 1 && !canProceedFromStep1) || 
+                        (currentStep === 2 && !canProceedFromStep2) || 
+                        (currentStep === 3 && !isFormValid)
+                    }
                     class="mt-8 w-1/2 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white"
                 >
-                    {currentStep === 3 ? $_("midwife.buttons.complete") : $_("midwife.buttons.next")} <ArrowRightOutline class="ms-2 h-5 w-5" />
+                    {currentStep === 4 ? $_("midwife.buttons.complete") : $_("midwife.buttons.next")} <ArrowRightOutline class="ms-2 h-5 w-5" />
                 </Button>
             </div>
         {/if}
