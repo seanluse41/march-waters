@@ -239,7 +239,46 @@
     "steps": {
       "chooseDate": "日時を選択",
       "enterInfo": "お客様情報の入力",
-      "confirm": "予約内容の確認"
+      "confirm": "予約内容の確認",
+      "chooseCourse": "コースを選択",
+      "chooseCourseDescription": "相談タイプを選んでください"
+    },
+    "coursePicker": {
+      "title": "相談タイプを選択",
+      "quick": {
+        "title": "さくっと相談",
+        "description": "簡単な質問や短時間のアドバイスに"
+      },
+      "inDepth": {
+        "title": "じっくり相談",
+        "description": "複雑な質問や詳しい相談に"
+      },
+      "email": {
+        "title": "メール相談",
+        "description": "文章でのやりとりを希望の方に"
+      }
+    },
+    "selectedCourse": "選択したコース",
+    "appointment": "予約内容",
+    "courses": {
+      "quick": {
+        "name": "さくっと相談",
+        "duration": "30分",
+        "price": "¥3,000",
+        "description": "単一の質問や簡単なアドバイスに"
+      },
+      "indepth": {
+        "name": "じっくり相談",
+        "duration": "60分",
+        "price": "¥5,500",
+        "description": "複雑な質問や詳細な相談に"
+      },
+      "email": {
+        "name": "メール相談",
+        "duration": "1件につき",
+        "price": "¥2,500",
+        "description": "文字でのやり取りを希望される方に"
+      }
     },
     "buttons": {
       "previous": "戻る",

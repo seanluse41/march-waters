@@ -8,6 +8,7 @@
     import StepsTimeline from "$lib/components/StepsTimeline.svelte";
     import InfoForm from "$lib/components/InfoForm.svelte";
     import ConfirmationScreen from "$lib/components/ConfirmationScreen.svelte";
+    import StepProgress from "$lib/components/StepProgress.svelte";
 
     // Persistent state
     let selectedDate = $state(null);
@@ -61,6 +62,19 @@
             currentStep = currentStep - 1;
         }
     }
+
+    // Define steps and descriptions
+    let steps = [
+        $_("childcare.steps.chooseDate"),
+        $_("childcare.steps.enterInfo"),
+        $_("childcare.steps.confirm"),
+    ];
+
+    let descriptions = [
+        $_("timeline.step1.description"),
+        $_("timeline.step2.description"),
+        $_("timeline.step3.description"),
+    ];
 </script>
 
 <div class="flex flex-col md:flex-row w-full md:overflow-hidden">
@@ -115,12 +129,11 @@
     <div
         class="w-full md:w-1/2 p-4 md:px-10 md:sticky md:top-0 overflow-y-auto flex flex-col items-center"
     >
-        <StepsTimeline {currentStep} />
-
+        <StepProgress {currentStep} {steps} {descriptions} color="blue" />
         <Hr class="mx-auto my-4 h-1 w-48 rounded-sm md:my-10" />
 
         {#if currentStep === 1}
-            <div in:fly={{ y: 50, duration: 300 }}>
+            <div in:fly={{ y: 50, duration: 300 }} class="w-full">
                 <Heading class="text-4xl font-bold my-8 text-slate-700">
                     {$_("childcare.steps.chooseDate")}
                 </Heading>
@@ -131,7 +144,7 @@
                 />
             </div>
         {:else if currentStep === 2}
-            <div in:fly={{ y: 50, duration: 300 }}>
+            <div in:fly={{ y: 50, duration: 300 }} class="w-full">
                 <Heading class="text-4xl font-bold my-8 text-slate-700">
                     {$_("childcare.steps.enterInfo")}
                 </Heading>

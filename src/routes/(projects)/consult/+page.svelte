@@ -1,35 +1,84 @@
 <script>
     import { _ } from "svelte-i18n";
     import { Button, Heading, Hr, List, Li } from "flowbite-svelte";
-    import { ArrowRightOutline, ArrowLeftOutline } from "flowbite-svelte-icons";
+    import { 
+        ArrowRightOutline, 
+        ArrowLeftOutline,
+        ClockSolid,
+        EnvelopeSolid
+    } from "flowbite-svelte-icons";
     import { fly } from "svelte/transition";
     import PhotoCarousel from "$lib/components/PhotoCarousel.svelte";
     import DatePicker from "$lib/components/DatePicker.svelte";
-    import StepsTimeline from "$lib/components/StepsTimeline.svelte";
+    import StepProgress from "$lib/components/StepProgress.svelte";
     import InfoForm from "$lib/components/InfoForm.svelte";
     import ConfirmationScreen from "$lib/components/ConfirmationScreen.svelte";
-    import ConsultCourses from "$lib/components/ConsultCourses.svelte";
+    import CoursePicker from "$lib/components/CoursePicker.svelte";
 
     // Persistent state
     let selectedDate = $state(null);
     let selectedTimeSlot = $state("");
     let dateSelected = $state(false);
-    let selectedCourse = $state("");
     
     // Form validation states
     let name = $state("");
     let email = $state("");
     let phone = $state("");
     let paymentMethod = $state("cash");
+    let selectedCourse = $state("");
 
     let currentStep = $state(1);
 
-    let isCourseSelected = $derived(selectedCourse !== "");
+    // Define steps and descriptions
+    let steps = [
+        $_("midwife.steps.chooseCourse", { default: "Choose Course" }),
+        $_("midwife.steps.chooseDate"),
+        $_("midwife.steps.enterInfo"),
+        $_("midwife.steps.confirm")
+    ];
+    
+    let descriptions = [
+        $_("midwife.steps.chooseCourseDescription", { default: "Select your consultation type" }),
+        $_("timeline.step1.description"),
+        $_("timeline.step2.description"),
+        $_("timeline.step3.description")
+    ];
+
+    // Course options
+    const midwifeCourses = [
+        {
+            id: "quick",
+            title: $_("midwife.coursePicker.quick.title"),
+            description: $_("midwife.coursePicker.quick.description"),
+            price: "¥3,000",
+            duration: "30 min",
+            icon: ClockSolid
+        },
+        {
+            id: "indepth", 
+            title: $_("midwife.coursePicker.inDepth.title"),
+            description: $_("midwife.coursePicker.inDepth.description"),
+            price: "¥5,500",
+            duration: "60 min",
+            icon: ClockSolid
+        },
+        {
+            id: "email",
+            title: $_("midwife.coursePicker.email.title"),
+            description: $_("midwife.coursePicker.email.description"),
+            price: "¥2,500",
+            icon: EnvelopeSolid
+        }
+    ];
+
     let isFormValid = $derived(name.trim() !== "" && email.trim() !== "" && phone.trim() !== "");
-    let canProceedFromStep1 = $derived(isCourseSelected);
-    let canProceedFromStep2 = $derived(
-        selectedCourse === "email" || (dateSelected && selectedTimeSlot !== "")
-    );
+    let canProceedFromStep1 = $derived(selectedCourse !== "");
+    let canProceedFromStep2 = $derived(dateSelected && selectedTimeSlot !== "");
+    
+    // Simple lookup function to get active course
+    function getActiveCourse() {
+      return midwifeCourses.find(c => c.id === selectedCourse);
+    }
 
     function nextStep() {
         if (currentStep === 1 && canProceedFromStep1) {
@@ -39,9 +88,10 @@
         } else if (currentStep === 3 && isFormValid) {
             currentStep = 4;
         } else if (currentStep === 4) {
-            // Submit booking
+            // Handle submission and confirmation logic
             console.log("Booking complete!", {
                 course: selectedCourse,
+                courseName: getActiveCourse()?.title,
                 date: selectedDate,
                 time: selectedTimeSlot,
                 name,
@@ -57,11 +107,6 @@
             currentStep = currentStep - 1;
         }
     }
-
-    // Get course price for confirmation
-    $: coursePrice = selectedCourse === "quick" ? "¥3,000" : 
-                     selectedCourse === "in-depth" ? "¥5,500" : 
-                     selectedCourse === "email" ? "¥2,500" : "";
 </script>
 
 <div class="flex flex-col md:flex-row w-full md:overflow-hidden">
@@ -105,38 +150,58 @@
     <div
         class="w-full md:w-1/2 p-4 md:px-10 md:sticky md:top-0 overflow-y-auto flex flex-col items-center"
     >
-        <StepsTimeline currentStep={currentStep} totalSteps={4} />
+        <StepProgress 
+            {currentStep}
+            {steps}
+            {descriptions}
+            color="blue"
+        />
         <Hr class="mx-auto my-4 h-1 w-48 rounded-sm md:my-10" />
 
         {#if currentStep === 1}
-            <div in:fly={{ y: 50, duration: 300 }}>
-                <Heading class="text-4xl font-bold my-8 text-slate-700">
-                    {$_("midwife.steps.chooseCourse")}
+            <div in:fly={{ y: 50, duration: 300 }} class="w-full">
+                <Heading class="text-4xl font-bold my-8 text-center text-slate-700">
+                    {$_("midwife.coursePicker.title")}
                 </Heading>
-                <ConsultCourses bind:selectedCourse />
+                <CoursePicker 
+                    bind:selectedCourse
+                    title={$_("midwife.coursePicker.title")}
+                    courses={midwifeCourses}
+                />
             </div>
         {:else if currentStep === 2}
-            <div in:fly={{ y: 50, duration: 300 }}>
-                <Heading class="text-4xl font-bold my-8 text-slate-700">
+            <div in:fly={{ y: 50, duration: 300 }} class="w-full">
+                <Heading class="text-4xl font-bold my-8 text-center text-slate-700">
                     {$_("midwife.steps.chooseDate")}
                 </Heading>
-                {#if selectedCourse === "email"}
-                    <div class="p-6 bg-blue-50 rounded-lg">
-                        <p class="text-slate-700">{$_("midwife.emailConsultNote")}</p>
-                    </div>
-                {:else}
-                    <DatePicker 
-                        bind:selectedDate 
-                        bind:selectedTimeSlot 
-                        bind:dateSelected
-                    />
-                {/if}
+                <div class="mb-4 p-4 bg-blue-50 rounded-lg">
+                    <p class="font-medium text-blue-800">
+                        {$_("midwife.selectedCourse")}:
+                        <span class="ml-1">{getActiveCourse()?.title || '-'}</span>
+                    </p>
+                    <p class="text-sm text-blue-700">
+                        {getActiveCourse()?.price || '-'} - {getActiveCourse()?.duration || '-'}
+                    </p>
+                </div>
+                <DatePicker 
+                    bind:selectedDate 
+                    bind:selectedTimeSlot 
+                    bind:dateSelected
+                />
             </div>
         {:else if currentStep === 3}
-            <div in:fly={{ y: 50, duration: 300 }}>
-                <Heading class="text-4xl font-bold my-8 text-slate-700">
+            <div in:fly={{ y: 50, duration: 300 }} class="w-full">
+                <Heading class="text-4xl font-bold my-8 text-center text-slate-700 w-full">
                     {$_("midwife.steps.enterInfo")}
                 </Heading>
+                <div class="mb-4 p-4 bg-blue-50 rounded-lg">
+                    <p class="font-medium text-blue-800">
+                        {$_("midwife.appointment")}:
+                    </p>
+                    <p class="text-sm text-blue-700">
+                        {getActiveCourse()?.title || '-'} - {selectedDate?.toLocaleDateString() || '-'} {selectedTimeSlot || '-'}
+                    </p>
+                </div>
                 <InfoForm 
                     bind:name 
                     bind:email 
@@ -146,10 +211,8 @@
             </div>
         {:else if currentStep === 4}
             <ConfirmationScreen 
-                selectedDate={selectedCourse === "email" ? null : selectedDate}
-                selectedTimeSlot={selectedCourse === "email" ? $_("midwife.emailConsult") : selectedTimeSlot}
-                course={selectedCourse}
-                coursePrice={coursePrice}
+                {selectedDate} 
+                {selectedTimeSlot} 
                 {name} 
                 {email} 
                 {phone} 
@@ -171,9 +234,9 @@
                     color="primary"
                     onclick={nextStep}
                     disabled={
-                        (currentStep === 1 && !canProceedFromStep1) || 
-                        (currentStep === 2 && !canProceedFromStep2) || 
-                        (currentStep === 3 && !isFormValid)
+                        currentStep === 1 ? !canProceedFromStep1 : 
+                        currentStep === 2 ? !canProceedFromStep2 : 
+                        currentStep === 3 ? !isFormValid : false
                     }
                     class="mt-8 w-1/2 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white"
                 >

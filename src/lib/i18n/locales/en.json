@@ -233,6 +233,21 @@
       "enterInfo": "Enter Your Information",
       "confirm": "Confirm"
     },
+    "coursePicker": {
+      "title": "Select Consultation Type",
+      "quick": {
+        "title": "Quick Consultation",
+        "description": "For single questions or brief advice"
+      },
+      "inDepth": {
+        "title": "In-depth Consultation",
+        "description": "For complex questions requiring detailed discussion"
+      },
+      "email": {
+        "title": "Email Consultation",
+        "description": "For written communication and inquiries"
+      }
+    },
     "buttons": {
       "previous": "Previous",
       "next": "Next",

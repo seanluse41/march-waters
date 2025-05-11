@@ -5,7 +5,7 @@
         UserEditSolid,
         ClipboardCheckSolid,
         BadgeCheckSolid,
-        ListSolid
+        
     } from "flowbite-svelte-icons";
     import { _ } from "svelte-i18n";
 
@@ -17,7 +17,7 @@
             return [
                 { 
                     key: "chooseCourse", 
-                    icon: ListSolid, 
+                    icon: null, 
                     title: $_("midwife.steps.chooseCourse", { default: "Choose Course" }),
                     description: $_("midwife.steps.chooseCourseDescription", { default: "Select your consultation type" })
                 },

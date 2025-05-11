@@ -5,7 +5,7 @@
     import { fly } from "svelte/transition";
     import PhotoCarousel from "$lib/components/PhotoCarousel.svelte";
     import DatePicker from "$lib/components/DatePicker.svelte";
-    import StepsTimeline from "$lib/components/StepsTimeline.svelte";
+    import StepProgress from "$lib/components/StepProgress.svelte";
     import InfoForm from "$lib/components/InfoForm.svelte";
     import ConfirmationScreen from "$lib/components/ConfirmationScreen.svelte";
 
@@ -22,12 +22,21 @@
 
     let currentStep = $state(1);
 
+    // Define steps and descriptions
+    let steps = [
+        $_("bodychoice.steps.chooseDate"),
+        $_("bodychoice.steps.enterInfo"),
+        $_("bodychoice.steps.confirm")
+    ];
+    
+    let descriptions = [
+        $_("timeline.step1.description"),
+        $_("timeline.step2.description"),
+        $_("timeline.step3.description")
+    ];
+
     let isFormValid = $derived(name.trim() !== "" && email.trim() !== "" && phone.trim() !== "");
     let canProceedFromStep1 = $derived(dateSelected && selectedTimeSlot !== "");
-
-    $effect(() => {
-        console.log("Date:", selectedDate, "Time:", selectedTimeSlot, "Can proceed:", dateSelected && selectedTimeSlot !== "");
-    });
 
     function nextStep() {
         if (currentStep === 1 && canProceedFromStep1) {
@@ -35,7 +44,7 @@
         } else if (currentStep === 2 && isFormValid) {
             currentStep = 3;
         } else if (currentStep === 3) {
-            currentStep = 4;
+            // Handle submission and confirmation logic
             console.log("Booking complete!", {
                 date: selectedDate,
                 time: selectedTimeSlot,
@@ -91,12 +100,17 @@
     <div
         class="w-full md:w-1/2 p-4 md:px-10 md:sticky md:top-0 overflow-y-auto flex flex-col items-center"
     >
-        <StepsTimeline {currentStep} />
+        <StepProgress 
+            {currentStep}
+            {steps}
+            {descriptions}
+            color="blue"
+        />
         <Hr class="mx-auto my-4 h-1 w-48 rounded-sm md:my-10" />
 
         {#if currentStep === 1}
-            <div in:fly={{ y: 50, duration: 300 }}>
-                <Heading class="text-4xl font-bold my-8 text-slate-700">
+            <div in:fly={{ y: 50, duration: 300 }} class="w-full">
+                <Heading class="text-4xl font-bold my-8 text-center text-slate-700">
                     {$_("bodychoice.steps.chooseDate")}
                 </Heading>
                 <DatePicker 
@@ -106,8 +120,8 @@
                 />
             </div>
         {:else if currentStep === 2}
-            <div in:fly={{ y: 50, duration: 300 }}>
-                <Heading class="text-4xl font-bold my-8 text-slate-700">
+            <div in:fly={{ y: 50, duration: 300 }} class="w-full">
+                <Heading class="text-4xl font-bold my-8 text-center text-slate-700">
                     {$_("bodychoice.steps.enterInfo")}
                 </Heading>
                 <InfoForm 
