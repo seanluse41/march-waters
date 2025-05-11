@@ -81,6 +81,7 @@
     </div>
     <div class="flex flex-col space-y-3 w-full md:w-1/2">
       {#each socials as social}
+      {@const Icon = social.icon}
         <a
           href={social.url}
           class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
@@ -90,8 +91,7 @@
           <div
             class="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full mr-4"
           >
-            <svelte:component
-              this={social.icon}
+            <Icon
               class="w-5 h-5 text-gray-700"
             />
           </div>

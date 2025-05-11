@@ -67,6 +67,7 @@
 
 <Timeline order="horizontal">
     {#each steps as step, index}
+    {@const Icon = step.icon}
         <TimelineItem title={step.title} liClass="w-full">
             {#snippet orientationSlot()}
                 <div class="flex items-center">
@@ -80,13 +81,13 @@
                         <div
                             class="z-10 bg-blue-500 flex h-10 w-12 items-center justify-center rounded-full my-2"
                         >
-                            <svelte:component this={step.icon} class="text-white h-6 w-6" />
+                            <Icon class="text-white h-6 w-6" />
                         </div>
                     {:else}
                         <div
                             class="z-10 bg-gray-300 flex h-10 w-12 items-center justify-center rounded-full my-2"
                         >
-                            <svelte:component this={step.icon} class="text-white h-6 w-6" />
+                            <Icon class="text-white h-6 w-6" />
                         </div>
                     {/if}
                     {#if index < steps.length - 1}
