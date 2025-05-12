@@ -29,25 +29,8 @@
 
     let currentStep = $state(1);
 
-    // Define steps and descriptions
-    let steps = [
-        $_("midwife.steps.chooseCourse", { default: "Choose Course" }),
-        $_("midwife.steps.chooseDate"),
-        $_("midwife.steps.enterInfo"),
-        $_("midwife.steps.confirm"),
-    ];
-
-    let descriptions = [
-        $_("midwife.steps.chooseCourseDescription", {
-            default: "Select your consultation type",
-        }),
-        $_("timeline.step1.description"),
-        $_("timeline.step2.description"),
-        $_("timeline.step3.description"),
-    ];
-
-    // Course options
-    const midwifeCourses = [
+    // Replace constant array with derived reactive array
+    let midwifeCourses = $derived([
         {
             id: "quick",
             title: $_("midwife.coursePicker.quick.title"),
@@ -71,7 +54,24 @@
             price: "¥2,500",
             icon: EnvelopeSolid,
         },
-    ];
+    ]);
+
+    // Also make steps and descriptions reactive
+    let steps = $derived([
+        $_("midwife.steps.chooseCourse", { default: "Choose Course" }),
+        $_("midwife.steps.chooseDate"),
+        $_("midwife.steps.enterInfo"),
+        $_("midwife.steps.confirm"),
+    ]);
+
+    let descriptions = $derived([
+        $_("midwife.steps.chooseCourseDescription", {
+            default: "Select your consultation type",
+        }),
+        $_("timeline.step1.description"),
+        $_("timeline.step2.description"),
+        $_("timeline.step3.description"),
+    ]);
 
     // Reactive derived state for the active course
     let activeCourse = $derived(
@@ -163,6 +163,7 @@
         <StepProgress {currentStep} {steps} {descriptions} color="blue" />
         <Hr class="mx-auto my-4 h-1 w-48 rounded-sm md:my-10" />
 
+        <!-- select a course -->
         {#if currentStep === 1}
             <div in:fly={{ y: 50, duration: 300 }} class="w-full">
                 <Heading
@@ -176,6 +177,8 @@
                     courses={midwifeCourses}
                 />
             </div>
+
+            <!-- choose a date and time -->
         {:else if currentStep === 2}
             <div in:fly={{ y: 50, duration: 300 }} class="w-full">
                 <Heading
@@ -183,22 +186,13 @@
                 >
                     {$_("midwife.steps.chooseDate")}
                 </Heading>
-                <div class="mb-4 p-4 bg-blue-50 rounded-lg">
-                    <p class="font-medium text-blue-800">
-                        {$_("midwife.selectedCourse")}:
-                        <span class="ml-1">{activeCourse?.title || "-"}</span>
-                    </p>
-                    <p class="text-sm text-blue-700">
-                        {activeCourse?.price || "-"} - {activeCourse?.duration ||
-                            "-"}
-                    </p>
-                </div>
                 <DatePicker
                     bind:selectedDate
                     bind:selectedTimeSlot
                     bind:dateSelected
                 />
             </div>
+            <!-- enter info -->
         {:else if currentStep === 3}
             <div in:fly={{ y: 50, duration: 300 }} class="flex flex-col w-full">
                 <Heading
@@ -218,6 +212,7 @@
                 </div>
                 <InfoForm bind:name bind:email bind:phone bind:paymentMethod />
             </div>
+            <!-- confirm -->
         {:else if currentStep === 4}
             <div in:fly={{ y: 50, duration: 300 }} class="flex flex-col w-full">
                 <ConfirmationScreen

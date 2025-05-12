@@ -155,6 +155,7 @@
     "confirmation": {
       "title": "Confirm Your Booking",
       "details": "Please confirm your booking details:",
+      "course": "Course",
       "date": "Date",
       "time": "Time",
       "name": "Name",
@@ -231,7 +232,9 @@
     "steps": {
       "chooseDate": "Choose a Date",
       "enterInfo": "Enter Your Information",
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "chooseCourse": "Choose Course",
+      "chooseCourseDescription": "Select your consultation type"
     },
     "coursePicker": {
       "title": "Select Consultation Type",
@@ -248,6 +251,19 @@
         "description": "For written communication and inquiries"
       }
     },
+    "courses": {
+      "quick": {
+        "name": "Quick Consultation"
+      },
+      "indepth": {
+        "name": "In-depth Consultation"
+      },
+      "email": {
+        "name": "Email Consultation"
+      }
+    },
+    "selectedCourse": "Selected course",
+    "appointment": "Appointment",
     "buttons": {
       "previous": "Previous",
       "next": "Next",
