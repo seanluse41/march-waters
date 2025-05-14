@@ -21,8 +21,8 @@
             <div class="w-full">{course.description}</div>
             <div class="mt-2 text-blue-600 font-bold">{course.price}</div>
           </div>
-          <div class="flex flex-col items-center justify-center ml-3">
-            <Icon class="h-8 w-8 text-blue-500" />
+          <div class="flex flex-col items-center justify-center">
+            <Icon class="h-8 w-8 mx-4 text-blue-500" />
             {#if course.duration}
               <span class="text-sm mt-1">{course.duration}</span>
             {/if}

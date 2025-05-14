@@ -26,6 +26,9 @@
     let phone = $state("");
     let paymentMethod = $state("cash");
     let selectedCourse = $state("");
+    
+    // Track if email consultation is selected
+    let isEmailCourse = $derived(selectedCourse === "email");
 
     let currentStep = $state(1);
 
@@ -52,6 +55,7 @@
             title: $_("midwife.coursePicker.email.title"),
             description: $_("midwife.coursePicker.email.description"),
             price: "¥2,500",
+            duration: "---",
             icon: EnvelopeSolid,
         },
     ]);
@@ -86,7 +90,14 @@
 
     function nextStep() {
         if (currentStep === 1 && canProceedFromStep1) {
-            currentStep = 2;
+            // If email consultation is selected, skip the date selection step
+            if (isEmailCourse) {
+                currentStep = 3; // Skip to info entry step
+                // Email consultations only accept credit card payments
+                paymentMethod = "credit";
+            } else {
+                currentStep = 2; // Go to date selection for other consultation types
+            }
         } else if (currentStep === 2 && canProceedFromStep2) {
             currentStep = 3;
         } else if (currentStep === 3 && isFormValid) {
@@ -108,7 +119,13 @@
 
     function prevStep() {
         if (currentStep > 1) {
-            currentStep = currentStep - 1;
+            // If we're at the info step and it's an email consultation,
+            // go back to step 1 (course selection) instead of step 2 (date selection)
+            if (currentStep === 3 && isEmailCourse) {
+                currentStep = 1;
+            } else {
+                currentStep = currentStep - 1;
+            }
         }
     }
 </script>
@@ -160,7 +177,12 @@
     <div
         class="w-full md:w-1/2 p-4 md:px-10 md:sticky md:top-0 overflow-y-auto flex flex-col items-center"
     >
-        <StepProgress {currentStep} {steps} {descriptions} color="blue" />
+        <StepProgress 
+            currentStep={currentStep} 
+            steps={steps} 
+            descriptions={descriptions} 
+            color="blue" 
+        />
         <Hr class="mx-auto my-4 h-1 w-48 rounded-sm md:my-10" />
 
         <!-- select a course -->
@@ -200,28 +222,36 @@
                 >
                     {$_("midwife.steps.enterInfo")}
                 </Heading>
-                <div class="mb-4 p-4 bg-blue-50 rounded-lg">
-                    <p class="font-medium text-blue-800">
-                        {$_("midwife.appointment")}:
-                    </p>
-                    <p class="text-sm text-blue-700">
-                        {activeCourse?.title || "-"} - {selectedDate?.toLocaleDateString() ||
-                            "-"}
-                        {selectedTimeSlot || "-"}
-                    </p>
-                </div>
-                <InfoForm bind:name bind:email bind:phone bind:paymentMethod />
+                    <div class="mb-4 p-4 bg-blue-50 rounded-lg">
+                        <p class="font-medium text-blue-800">
+                            {$_("midwife.appointment")}:
+                        </p>
+                        <p class="text-sm text-blue-700">
+                            {activeCourse?.title || "-"} 
+                            {#if !isEmailCourse}
+                                - {selectedDate?.toLocaleDateString() || "-"}
+                                {selectedTimeSlot || "-"}
+                            {/if}
+                        </p>
+                    </div>
+                    <InfoForm 
+                        bind:name 
+                        bind:email 
+                        bind:phone 
+                        bind:paymentMethod={paymentMethod}
+                        disablePaymentChoice={isEmailCourse}
+                    />
             </div>
             <!-- confirm -->
         {:else if currentStep === 4}
             <div in:fly={{ y: 50, duration: 300 }} class="flex flex-col w-full">
                 <ConfirmationScreen
-                    {selectedDate}
-                    {selectedTimeSlot}
+                    selectedDate={isEmailCourse ? null : selectedDate}
+                    selectedTimeSlot={isEmailCourse ? "N/A" : selectedTimeSlot}
                     {name}
                     {email}
                     {phone}
-                    {paymentMethod}
+                    paymentMethod={isEmailCourse ? "credit" : paymentMethod}
                     coursePrice={activeCourse?.price}
                     course={selectedCourse}
                 />
