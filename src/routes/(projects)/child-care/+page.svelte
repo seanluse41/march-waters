@@ -7,11 +7,9 @@
     import DatePicker from "$lib/components/DatePicker.svelte";
     import StepProgress from "$lib/components/StepProgress.svelte";
     import InfoForm from "$lib/components/InfoForm.svelte";
-    import ConfirmationScreen from "$lib/components/ConfirmationScreen.svelte";
 
     // Persistent state
     let selectedDate = $state(null);
-    let selectedTimeSlot = $state("17:00");
     let dateSelected = $state(false);
     
     // Form validation states
@@ -196,7 +194,7 @@
                 
                 <div class="mb-4 p-4 bg-blue-50 rounded-lg">
                     <p class="font-medium text-blue-800">
-                        {$_("childcare.selectedCourse", { default: "Selected option" })}:
+                        {$_("childcare.selectedCourse")}:
                     </p>
                     <p class="text-sm text-blue-700">
                         {activeCourse?.title || "-"} ({activeCourse?.price || "-"})
@@ -211,7 +209,7 @@
                 
                 <div class="mt-4 text-center">
                     <p class="font-medium text-slate-700">
-                        {$_("childcare.fixedTime", { default: "Fixed time slot" })}: 17:00 - 21:30
+                        {$_("childcare.fixedTime")}
                     </p>
                 </div>
             </div>

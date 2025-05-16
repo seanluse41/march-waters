@@ -1,19 +1,18 @@
 <script>
     import { _ } from "svelte-i18n";
-    import { Button, Heading, Hr, List, Li, Textarea } from "flowbite-svelte";
+    import { Button, Heading, Hr, List, Li, Textarea, Datepicker } from "flowbite-svelte";
     import { ArrowRightOutline, ArrowLeftOutline } from "flowbite-svelte-icons";
     import { fly } from "svelte/transition";
     import PhotoCarousel from "$lib/components/PhotoCarousel.svelte";
     import StepProgress from "$lib/components/StepProgress.svelte";
     import InfoForm from "$lib/components/InfoForm.svelte";
-    import ConfirmationScreen from "$lib/components/ConfirmationScreen.svelte";
 
     // Form validation states
     let name = $state("");
     let email = $state("");
     let phone = $state("");
     let notes = $state("");
-    let preferredDate = $state("");
+    let preferredDate = $state(null);
 
     let currentStep = $state(1);
 
@@ -111,27 +110,24 @@
                     disablePayment={true}
                 />
                 
-                <!-- Additional Fields -->
+                <!-- Date Picker using Flowbite component -->
                 <div class="mb-6">
                     <label for="preferredDate" class="mb-2 block text-slate-700">
-                        Preferred Date (Optional)
+                        {$_("bodychoice.form.preferredDate", { default: "Preferred Date (Optional)" })}
                     </label>
-                    <input 
-                        id="preferredDate" 
-                        type="date" 
-                        bind:value={preferredDate}
-                        class="w-full rounded-lg border border-gray-300 p-2.5 text-sm"
-                    />
+                    <div class="w-full">
+                        <Datepicker bind:value={preferredDate} color="blue" />
+                    </div>
                 </div>
                 
                 <div class="mb-6">
                     <label for="notes" class="mb-2 block text-slate-700">
-                        Additional Notes
+                        {$_("bodychoice.form.notes", { default: "Additional Notes" })}
                     </label>
                     <Textarea
                         id="notes"
                         bind:value={notes}
-                        placeholder="Please share any specific topics or questions you'd like to discuss"
+                        placeholder={$_("bodychoice.form.notesPlaceholder", { default: "Please share any specific topics or questions you'd like to discuss" })}
                         rows={4}
                     />
                 </div>
@@ -158,12 +154,12 @@
                         </p>
                         {#if preferredDate}
                             <p>
-                                <span class="font-semibold">Preferred Date:</span> {new Date(preferredDate).toLocaleDateString()}
+                                <span class="font-semibold">{$_("bodychoice.form.preferredDate", { default: "Preferred Date" })}:</span> {preferredDate.toLocaleDateString()}
                             </p>
                         {/if}
                         {#if notes}
                             <div>
-                                <span class="font-semibold">Additional Notes:</span>
+                                <span class="font-semibold">{$_("bodychoice.form.notes", { default: "Additional Notes" })}:</span>
                                 <p class="mt-1 whitespace-pre-wrap">{notes}</p>
                             </div>
                         {/if}
@@ -172,7 +168,7 @@
 
                 <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
                     <p class="font-medium text-blue-800 mb-4">
-                        Thank you for your interest in our My Body My Choice Project. We'll review your request and contact you shortly to discuss how we can help.
+                        {$_("bodychoice.confirmation.thankYou", { default: "Thank you for your interest in our My Body My Choice Project. We'll review your request and contact you shortly to discuss how we can help." })}
                     </p>
                 </div>
             </div>

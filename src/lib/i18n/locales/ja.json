@@ -151,6 +151,8 @@
   "childcare": {
     "pageTitle": "あとはねるだけプロジェクト",
     "steps": {
+      "chooseCourse": "コースを選択",
+      "chooseCourseDescription": "食事について選択してください",
       "chooseDate": "日時を選択",
       "enterInfo": "お客様情報の入力",
       "confirm": "予約内容の確認"
@@ -193,34 +195,45 @@
         "capacityValue": "3名"
       }
     },
+    "courses": {
+      "normal": {
+        "title": "通常コース",
+        "description": "夕食付きの夕方託児"
+      },
+      "allergy": {
+        "title": "アレルギー対応コース",
+        "description": "夕方託児（お子様の夕食は持参してください）"
+      }
+    },
+    "selectedCourse": "選択したコース",
+    "fixedTime": "夕方17時30分〜21時30分まで",
+    "appointment": "予約内容",
     "childCount": "預かる子供の人数",
     "maxCapacity": "定員は３名様まで"
   },
   "bodychoice": {
     "pageTitle": "MyBody\nMyChoice\nプロジェクト",
     "steps": {
-      "chooseDate": "日時を選択",
       "enterInfo": "お客様情報の入力",
-      "confirm": "予約内容の確認"
+      "confirm": "確認"
     },
     "buttons": {
       "previous": "戻る",
       "next": "次へ",
-      "complete": "申請する"
+      "complete": "送信する"
     },
     "confirmation": {
-      "title": "送信内容の確認",
+      "title": "リクエスト内容の確認",
       "details": "以下の内容をご確認ください：",
-      "date": "希望日時",
-      "time": "時間",
       "name": "お名前",
       "email": "メールアドレス",
       "phone": "電話番号",
-      "note": "備考",
-      "paymentMethod": "お支払い方法",
-      "paymentInstructions": "お支払いについて：",
-      "cashInstructions": "当日、現金にてお支払いください。",
-      "creditInstructions": "確定後、決済ページへ移動します。"
+      "thankYou": "MyBodyMyChoiceプロジェクトにご関心をお寄せいただき、ありがとうございます。ご要望を確認し、どのようにサポートできるかについて近日中にご連絡いたします。"
+    },
+    "form": {
+      "preferredDate": "希望日（任意）",
+      "notes": "追加メモ",
+      "notesPlaceholder": "ご相談したい具体的なトピックや質問などをお書きください"
     },
     "project": {
       "title": "MyBodyMyChoice\nプロジェクト",

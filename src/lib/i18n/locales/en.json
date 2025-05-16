@@ -143,6 +143,8 @@
   "childcare": {
     "pageTitle": "Childcare Service",
     "steps": {
+      "chooseCourse": "Choose Course",
+      "chooseCourseDescription": "Select your childcare type",
       "chooseDate": "Choose an Open Date",
       "enterInfo": "Enter Your Information",
       "confirm": "Confirm"
@@ -185,33 +187,45 @@
         "capacityValue": "3 children"
       }
     },
+    "courses": {
+      "normal": {
+        "title": "Standard Care",
+        "description": "Evening childcare with dinner included"
+      },
+      "allergy": {
+        "title": "Allergy-Friendly Care",
+        "description": "Evening childcare (please bring your child's dinner)"
+      }
+    },
+    "selectedCourse": "Selected option",
+    "fixedTime": "Fixed time slot",
+    "appointment": "Reservation details",
     "childCount": "Number of children",
     "maxCapacity": "Maximum capacity is 3 children"
   },
   "bodychoice": {
     "pageTitle": "My Body My Choice Project",
     "steps": {
-      "chooseDate": "Choose a Date",
       "enterInfo": "Enter Your Information",
       "confirm": "Confirm"
     },
     "buttons": {
       "previous": "Previous",
       "next": "Next",
-      "complete": "Request Booking"
+      "complete": "Submit Request"
     },
     "confirmation": {
-      "title": "Confirm Your Booking",
-      "details": "Please confirm your booking details:",
-      "date": "Date",
-      "time": "Time",
+      "title": "Confirm Your Request",
+      "details": "Please confirm your request details:",
       "name": "Name",
       "email": "Email",
       "phone": "Phone",
-      "paymentMethod": "Payment Method",
-      "paymentInstructions": "Payment Instructions:",
-      "cashInstructions": "Please bring exact cash payment to your appointment.",
-      "creditInstructions": "You will be redirected to our secure payment portal after confirming."
+      "thankYou": "Thank you for your interest in our My Body My Choice Project. We'll review your request and contact you shortly to discuss how we can help."
+    },
+    "form": {
+      "preferredDate": "Preferred Date (Optional)",
+      "notes": "Additional Notes",
+      "notesPlaceholder": "Please share any specific topics or questions you'd like to discuss"
     },
     "project": {
       "title": "About My Body My Choice Project",
