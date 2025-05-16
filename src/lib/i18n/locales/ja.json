@@ -195,7 +195,7 @@
     }
   },
   "bodychoice": {
-    "pageTitle": "MyBodyMyChoiceプロジェクト",
+    "pageTitle": "MyBody\nMyChoice\nプロジェクト",
     "steps": {
       "chooseDate": "日時を選択",
       "enterInfo": "お客様情報の入力",
@@ -207,20 +207,21 @@
       "complete": "申請する"
     },
     "confirmation": {
-      "title": "予約内容の確認",
-      "details": "以下の予約内容をご確認ください：",
-      "date": "日付",
+      "title": "送信内容の確認",
+      "details": "以下の内容をご確認ください：",
+      "date": "希望日時",
       "time": "時間",
       "name": "お名前",
       "email": "メールアドレス",
       "phone": "電話番号",
+      "note": "備考",
       "paymentMethod": "お支払い方法",
       "paymentInstructions": "お支払いについて：",
       "cashInstructions": "当日、現金にてお支払いください。",
       "creditInstructions": "確定後、決済ページへ移動します。"
     },
     "project": {
-      "title": "MyBodyMyChoiceプロジェクト",
+      "title": "MyBodyMyChoice\nプロジェクト",
       "description": "「自分のからだは自分のもの。」そんな当たり前のことを、当たり前にみんなが知っている社会になってほしい。知ることで、自分らしい人生の選択ができますように。知識は、いざというときに自分や周りの人を助けてくれる味方です。そんな思いで、体や性に関するお話をしています。包括的性教育という、国際スタンダードのカリキュラムを軸に性教育を行っています。",
       "services": {
         "title": "できること：",

@@ -1,58 +1,90 @@
 <script>
     import { _ } from "svelte-i18n";
-    import { Button, Heading, Hr, List, Li } from "flowbite-svelte";
+    import { Button, Heading, Hr, List, Li, Radio } from "flowbite-svelte";
     import { ArrowRightOutline, ArrowLeftOutline } from "flowbite-svelte-icons";
     import { fly } from "svelte/transition";
     import PhotoCarousel from "$lib/components/PhotoCarousel.svelte";
     import DatePicker from "$lib/components/DatePicker.svelte";
-    import StepsTimeline from "$lib/components/StepsTimeline.svelte";
+    import StepProgress from "$lib/components/StepProgress.svelte";
     import InfoForm from "$lib/components/InfoForm.svelte";
     import ConfirmationScreen from "$lib/components/ConfirmationScreen.svelte";
-    import StepProgress from "$lib/components/StepProgress.svelte";
 
     // Persistent state
     let selectedDate = $state(null);
-    let selectedTimeSlot = $state("");
+    let selectedTimeSlot = $state("17:00");
     let dateSelected = $state(false);
-
+    
     // Form validation states
     let name = $state("");
     let email = $state("");
     let phone = $state("");
     let paymentMethod = $state("cash");
+    let selectedCourse = $state("normal");
+    let childCount = $state(1);
 
     let currentStep = $state(1);
 
-    let isFormValid = $derived(
-        name.trim() !== "" && email.trim() !== "" && phone.trim() !== "",
-    );
-    let canProceedFromStep1 = $derived(dateSelected && selectedTimeSlot !== "");
+    // Define courses
+    let childcareCourses = $derived([
+        {
+            id: "normal",
+            title: $_("childcare.courses.normal.title", { default: "Standard Care" }),
+            description: $_("childcare.courses.normal.description", { default: "Evening childcare with dinner included" }),
+            price: "¥8,000"
+        },
+        {
+            id: "allergy",
+            title: $_("childcare.courses.allergy.title", { default: "Allergy-Friendly Care" }),
+            description: $_("childcare.courses.allergy.description", { default: "Evening childcare (please bring your child's dinner)" }),
+            price: "¥7,500"
+        }
+    ]);
 
-    $effect(() => {
-        console.log(
-            "Date:",
-            selectedDate,
-            "Time:",
-            selectedTimeSlot,
-            "Can proceed:",
-            dateSelected && selectedTimeSlot !== "",
-        );
-    });
+    // Define steps and descriptions
+    let steps = $derived([
+        $_("childcare.steps.chooseCourse", { default: "Choose Course" }),
+        $_("childcare.steps.chooseDate"),
+        $_("childcare.steps.enterInfo"),
+        $_("childcare.steps.confirm")
+    ]);
+    
+    let descriptions = $derived([
+        $_("childcare.steps.chooseCourseDescription", { default: "Select your childcare type" }),
+        $_("timeline.step1.description"),
+        $_("timeline.step2.description"),
+        $_("timeline.step3.description")
+    ]);
+
+    // Reactive derived state for the active course
+    let activeCourse = $derived(
+        childcareCourses.find((c) => c.id === selectedCourse)
+    );
+
+    let isFormValid = $derived(
+        name.trim() !== "" && email.trim() !== "" && phone.trim() !== ""
+    );
+    let canProceedFromStep1 = $derived(selectedCourse !== "");
+    let canProceedFromStep2 = $derived(dateSelected);
 
     function nextStep() {
         if (currentStep === 1 && canProceedFromStep1) {
             currentStep = 2;
-        } else if (currentStep === 2 && isFormValid) {
+        } else if (currentStep === 2 && canProceedFromStep2) {
             currentStep = 3;
-        } else if (currentStep === 3) {
+        } else if (currentStep === 3 && isFormValid) {
             currentStep = 4;
+        } else if (currentStep === 4) {
+            // Handle submission and confirmation logic
             console.log("Booking complete!", {
+                course: selectedCourse,
+                courseName: activeCourse?.title,
                 date: selectedDate,
-                time: selectedTimeSlot,
+                time: "17:00-21:30",
                 name,
                 email,
                 phone,
-                paymentMethod,
+                childCount,
+                paymentMethod
             });
         }
     }
@@ -62,19 +94,6 @@
             currentStep = currentStep - 1;
         }
     }
-
-    // Define steps and descriptions
-    let steps = [
-        $_("childcare.steps.chooseDate"),
-        $_("childcare.steps.enterInfo"),
-        $_("childcare.steps.confirm"),
-    ];
-
-    let descriptions = [
-        $_("timeline.step1.description"),
-        $_("timeline.step2.description"),
-        $_("timeline.step3.description"),
-    ];
 </script>
 
 <div class="flex flex-col md:flex-row w-full md:overflow-hidden">
@@ -129,39 +148,196 @@
     <div
         class="w-full md:w-1/2 p-4 md:px-10 md:sticky md:top-0 overflow-y-auto flex flex-col items-center"
     >
-        <StepProgress {currentStep} {steps} {descriptions} color="blue" />
+        <StepProgress 
+            currentStep={currentStep} 
+            steps={steps} 
+            descriptions={descriptions} 
+            color="blue" 
+        />
         <Hr class="mx-auto my-4 h-1 w-48 rounded-sm md:my-10" />
 
+        <!-- select a course -->
         {#if currentStep === 1}
             <div in:fly={{ y: 50, duration: 300 }} class="w-full">
-                <Heading class="text-4xl font-bold my-8 text-slate-700">
-                    {$_("childcare.steps.chooseDate")}
+                <Heading
+                    class="text-4xl font-bold my-8 text-center text-slate-700"
+                >
+                    {$_("childcare.steps.chooseCourse", { default: "Choose Course" })}
                 </Heading>
-                <DatePicker
-                    bind:selectedDate
-                    bind:selectedTimeSlot
-                    bind:dateSelected
-                />
+                
+                <div>
+                    <p class="mb-5 text-lg font-medium text-slate-700">
+                        {$_("childcare.coursePicker.title", { default: "Select Childcare Type" })}
+                    </p>
+                    <div class="grid w-full gap-6 md:grid-cols-2">
+                        {#each childcareCourses as course}
+                            <Radio name="childcareCourse" custom bind:group={selectedCourse} value={course.id}>
+                                <div class="dark:peer-checked:text-primary-500 peer-checked:border-blue-600 peer-checked:text-blue-600 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-5 text-gray-500 hover:bg-gray-100 hover:text-gray-600">
+                                    <div>
+                                        <div class="w-full text-lg font-semibold">{course.title}</div>
+                                        <div class="w-full">{course.description}</div>
+                                        <div class="mt-2 text-blue-600 font-bold">{course.price}</div>
+                                    </div>
+                                </div>
+                            </Radio>
+                        {/each}
+                    </div>
+                </div>
             </div>
+
+        <!-- choose a date -->
         {:else if currentStep === 2}
             <div in:fly={{ y: 50, duration: 300 }} class="w-full">
-                <Heading class="text-4xl font-bold my-8 text-slate-700">
+                <Heading
+                    class="text-4xl font-bold my-8 text-center text-slate-700"
+                >
+                    {$_("childcare.steps.chooseDate")}
+                </Heading>
+                
+                <div class="mb-4 p-4 bg-blue-50 rounded-lg">
+                    <p class="font-medium text-blue-800">
+                        {$_("childcare.selectedCourse", { default: "Selected option" })}:
+                    </p>
+                    <p class="text-sm text-blue-700">
+                        {activeCourse?.title || "-"} ({activeCourse?.price || "-"})
+                    </p>
+                </div>
+                
+                <DatePicker
+                    bind:selectedDate
+                    bind:dateSelected
+                />
+                
+                <div class="mt-4 text-center">
+                    <p class="font-medium text-slate-700">
+                        {$_("childcare.fixedTime", { default: "Fixed time slot" })}: 17:00 - 21:30
+                    </p>
+                </div>
+            </div>
+            
+        <!-- enter info -->
+        {:else if currentStep === 3}
+            <div in:fly={{ y: 50, duration: 300 }} class="flex flex-col w-full">
+                <Heading
+                    class="text-4xl font-bold my-8 text-center text-slate-700 w-full"
+                >
                     {$_("childcare.steps.enterInfo")}
                 </Heading>
-                <InfoForm bind:name bind:email bind:phone bind:paymentMethod />
+                <div class="mb-4 p-4 bg-blue-50 rounded-lg">
+                    <p class="font-medium text-blue-800">
+                        {$_("childcare.appointment", { default: "Reservation details" })}:
+                    </p>
+                    <p class="text-sm text-blue-700">
+                        {activeCourse?.title || "-"} - {selectedDate?.toLocaleDateString() || "-"} 17:00-21:30
+                    </p>
+                </div>
+                
+                <InfoForm 
+                    bind:name 
+                    bind:email 
+                    bind:phone 
+                    bind:paymentMethod
+                />
+                
+                <!-- Number of children selector -->
+                <div class="mb-6">
+                    <label class="mb-2 block text-slate-700">
+                        {$_("childcare.childCount", { default: "Number of children" })}
+                    </label>
+                    <div class="flex items-center gap-4">
+                        {#each [1, 2, 3] as count}
+                            <div class="rounded-sm border border-gray-200 px-8 py-4">
+                                <Radio
+                                    id={`child-count-${count}`}
+                                    name="childCount"
+                                    value={count}
+                                    color="blue"
+                                    bind:group={childCount}
+                                    class="scale-125"
+                                >
+                                    {count}
+                                </Radio>
+                            </div>
+                        {/each}
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">
+                        {$_("childcare.maxCapacity", { default: "Maximum capacity is 3 children" })}
+                    </p>
+                </div>
             </div>
-        {:else if currentStep === 3}
-            <ConfirmationScreen
-                {selectedDate}
-                {selectedTimeSlot}
-                {name}
-                {email}
-                {phone}
-                {paymentMethod}
-            />
+            
+        <!-- confirm -->
+        {:else if currentStep === 4}
+            <div in:fly={{ y: 50, duration: 300 }} class="flex flex-col w-full">
+                <Heading class="text-4xl font-bold my-8 text-slate-700">
+                    {$_("childcare.confirmation.title")}
+                </Heading>
+                <div class="bg-white p-6 rounded-lg border border-slate-200 mb-8">
+                    <p class="font-medium text-slate-800 mb-4">
+                        {$_("childcare.confirmation.details")}
+                    </p>
+                    <div class="space-y-3 text-slate-700">
+                        <p>
+                            <span class="font-semibold">{$_("childcare.confirmation.course")}:</span>
+                            {activeCourse?.title}
+                        </p>
+                        <p>
+                            <span class="font-semibold">{$_("childcare.confirmation.date")}:</span>
+                            {selectedDate?.toLocaleDateString()}
+                        </p>
+                        <p>
+                            <span class="font-semibold">{$_("childcare.confirmation.time")}:</span>
+                            17:00 - 21:30
+                        </p>
+                        <p>
+                            <span class="font-semibold">{$_("childcare.childCount", { default: "Number of children" })}:</span>
+                            {childCount}
+                        </p>
+                        <p>
+                            <span class="font-semibold">{$_("childcare.confirmation.name")}:</span>
+                            {name}
+                        </p>
+                        <p>
+                            <span class="font-semibold">{$_("childcare.confirmation.email")}:</span>
+                            {email}
+                        </p>
+                        <p>
+                            <span class="font-semibold">{$_("childcare.confirmation.phone")}:</span>
+                            {phone}
+                        </p>
+                        <p>
+                            <span class="font-semibold">{$_("childcare.confirmation.paymentMethod")}:</span>
+                            {$_(`payment.${paymentMethod}`, { default: paymentMethod })}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                    <p class="font-medium text-blue-800 mb-4">
+                        {$_("childcare.confirmation.paymentInstructions")}
+                    </p>
+                    {#if paymentMethod === "cash"}
+                        <div class="text-slate-700">
+                            <p>{$_("childcare.confirmation.cashInstructions")}</p>
+                            <p class="mt-2">
+                                {$_("childcare.confirmation.amountDue")}
+                                <span class="font-bold">{activeCourse?.price}</span>
+                            </p>
+                        </div>
+                    {:else if paymentMethod === "credit"}
+                        <div class="text-slate-700">
+                            <p>{$_("childcare.confirmation.creditInstructions")}</p>
+                            <p class="mt-2">
+                                {$_("childcare.confirmation.amountCharged")}
+                                <span class="font-bold">{activeCourse?.price}</span>
+                            </p>
+                        </div>
+                    {/if}
+                </div>
+            </div>
         {/if}
 
-        {#if currentStep <= 3}
+        {#if currentStep <= 4}
             <div
                 class="flex gap-8 w-full items-center justify-center px-2 md:px-32"
             >
@@ -180,11 +356,13 @@
                     disabled={currentStep === 1
                         ? !canProceedFromStep1
                         : currentStep === 2
-                          ? !isFormValid
-                          : false}
+                          ? !canProceedFromStep2
+                          : currentStep === 3
+                            ? !isFormValid
+                            : false}
                     class="mt-8 w-1/2 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white"
                 >
-                    {currentStep === 3
+                    {currentStep === 4
                         ? $_("childcare.buttons.complete")
                         : $_("childcare.buttons.next")}
                     <ArrowRightOutline class="ms-2 h-5 w-5" />

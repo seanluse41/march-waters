@@ -13,7 +13,8 @@
         email = $bindable(""),
         phone = $bindable(""),
         paymentMethod = $bindable("cash"),
-        disablePaymentChoice,
+        disableCash,
+        disablePayment,
     } = $props();
 
     function handleSubmit(event) {
@@ -71,41 +72,44 @@
             {/snippet}
         </Input>
     </div>
-
     <!-- Payment Method -->
-    <div class="mb-6">
-        <Label class="mb-2 block text-slate-700"
-            >{$_("childcare.confirmation.paymentMethod")}</Label
-        >
-        <div class="flex items-center gap-4">
-            <div class="rounded-sm border border-gray-200 px-8 py-4">
-                <Radio
-                    disabled={disablePaymentChoice}
-                    id="cash"
-                    name="payment"
-                    value="cash"
-                    color="blue"
-                    bind:group={paymentMethod}
-                    class="scale-125"
+    {#if !disablePayment}
+        <div class="mb-6">
+            <Label class="mb-2 block text-slate-700"
+                >{$_("childcare.confirmation.paymentMethod")}</Label
+            >
+            <div class="flex items-center gap-4">
+                <div class="rounded-sm border border-gray-200 px-8 py-4">
+                    <Radio
+                        disabled={disableCash}
+                        id="cash"
+                        name="payment"
+                        value="cash"
+                        color="blue"
+                        bind:group={paymentMethod}
+                        class="scale-125"
+                    >
+                        {$_("payment.cash")}
+                    </Radio>
+                </div>
+                <div
+                    class="rounded-sm border border-gray-200 px-8 md:px-8 py-4"
                 >
-                    {$_("payment.cash")}
-                </Radio>
+                    <Radio
+                        id="credit"
+                        name="payment"
+                        value="credit"
+                        color="blue"
+                        bind:group={paymentMethod}
+                        class="scale-125"
+                    >
+                        {$_("payment.credit")}
+                    </Radio>
+                </div>
             </div>
-            <div class="rounded-sm border border-gray-200 px-8 md:px-8 py-4">
-                <Radio
-                    id="credit"
-                    name="payment"
-                    value="credit"
-                    color="blue"
-                    bind:group={paymentMethod}
-                    class="scale-125"
-                >
-                    {$_("payment.credit")}
-                </Radio>
-            </div>
+            {#if disableCash}
+                <P class="text-red-500 text-sm mt-2">{$_("payment.note")}</P>
+            {/if}
         </div>
-        {#if disablePaymentChoice}
-            <P class="text-red-500 text-sm mt-2">{$_("payment.note")}</P>
-        {/if}
-    </div>
+    {/if}
 </form>

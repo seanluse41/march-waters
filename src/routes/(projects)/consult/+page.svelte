@@ -26,7 +26,7 @@
     let phone = $state("");
     let paymentMethod = $state("cash");
     let selectedCourse = $state("");
-    
+
     // Track if email consultation is selected
     let isEmailCourse = $derived(selectedCourse === "email");
 
@@ -158,31 +158,12 @@
                 <Li>{$_("midwife.project.services.item4")}</Li>
                 <Li>{$_("midwife.project.services.item5")}</Li>
             </List>
-
-            <div class="mt-6 bg-blue-50 p-4 rounded-lg">
-                <Heading
-                    tag="h3"
-                    class="text-lg font-semibold mb-2 text-slate-700"
-                >
-                    {$_("midwife.project.pricing.title")}
-                </Heading>
-                <List class="space-y-1">
-                    <Li>{$_("midwife.project.pricing.option1")}</Li>
-                    <Li>{$_("midwife.project.pricing.option2")}</Li>
-                    <Li>{$_("midwife.project.pricing.option3")}</Li>
-                </List>
-            </div>
         </div>
     </div>
     <div
         class="w-full md:w-1/2 p-4 md:px-10 md:sticky md:top-0 overflow-y-auto flex flex-col items-center"
     >
-        <StepProgress 
-            currentStep={currentStep} 
-            steps={steps} 
-            descriptions={descriptions} 
-            color="blue" 
-        />
+        <StepProgress {currentStep} {steps} {descriptions} color="blue" />
         <Hr class="mx-auto my-4 h-1 w-48 rounded-sm md:my-10" />
 
         <!-- select a course -->
@@ -222,25 +203,25 @@
                 >
                     {$_("midwife.steps.enterInfo")}
                 </Heading>
-                    <div class="mb-4 p-4 bg-blue-50 rounded-lg">
-                        <p class="font-medium text-blue-800">
-                            {$_("midwife.appointment")}:
-                        </p>
-                        <p class="text-sm text-blue-700">
-                            {activeCourse?.title || "-"} 
-                            {#if !isEmailCourse}
-                                - {selectedDate?.toLocaleDateString() || "-"}
-                                {selectedTimeSlot || "-"}
-                            {/if}
-                        </p>
-                    </div>
-                    <InfoForm 
-                        bind:name 
-                        bind:email 
-                        bind:phone 
-                        bind:paymentMethod={paymentMethod}
-                        disablePaymentChoice={isEmailCourse}
-                    />
+                <div class="mb-4 p-4 bg-blue-50 rounded-lg">
+                    <p class="font-medium text-blue-800">
+                        {$_("midwife.appointment")}:
+                    </p>
+                    <p class="text-sm text-blue-700">
+                        {activeCourse?.title || "-"}
+                        {#if !isEmailCourse}
+                            - {selectedDate?.toLocaleDateString() || "-"}
+                            {selectedTimeSlot || "-"}
+                        {/if}
+                    </p>
+                </div>
+                <InfoForm
+                    bind:name
+                    bind:email
+                    bind:phone
+                    bind:paymentMethod
+                    disableCash={isEmailCourse}
+                />
             </div>
             <!-- confirm -->
         {:else if currentStep === 4}

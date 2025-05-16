@@ -15,7 +15,7 @@
     {#each courses as course}
     {@const Icon = course.icon}
       <Radio name="consultCourse" custom bind:group={selectedCourse} value={course.id}>
-        <div class="dark:peer-checked:text-primary-500 peer-checked:border-blue-600 peer-checked:text-blue-600 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-5 text-gray-500 hover:bg-gray-100 hover:text-gray-600">
+        <div class="md:min-h-36 dark:peer-checked:text-primary-500 peer-checked:border-blue-600 peer-checked:text-blue-600 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-5 text-gray-500 hover:bg-gray-100 hover:text-gray-600">
           <div>
             <div class="w-full text-lg font-semibold">{course.title}</div>
             <div class="w-full">{course.description}</div>
