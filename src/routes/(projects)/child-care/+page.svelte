@@ -206,6 +206,7 @@
                 <DatePicker
                     bind:selectedDate
                     bind:dateSelected
+                    showTimePicker={false}
                 />
                 
                 <div class="mt-4 text-center">
@@ -242,7 +243,7 @@
                 <!-- Number of children selector -->
                 <div class="mb-6">
                     <label class="mb-2 block text-slate-700">
-                        {$_("childcare.childCount", { default: "Number of children" })}
+                        {$_("childcare.childCount")}
                     </label>
                     <div class="flex items-center gap-4">
                         {#each [1, 2, 3] as count}
@@ -255,13 +256,13 @@
                                     bind:group={childCount}
                                     class="scale-125"
                                 >
-                                    {count}
+                                    {count} {$_("helpers.personCounter")}
                                 </Radio>
                             </div>
                         {/each}
                     </div>
                     <p class="text-sm text-gray-500 mt-2">
-                        {$_("childcare.maxCapacity", { default: "Maximum capacity is 3 children" })}
+                        {$_("childcare.maxCapacity")}
                     </p>
                 </div>
             </div>

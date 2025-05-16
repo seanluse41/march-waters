@@ -3,10 +3,11 @@
   import { onMount } from "svelte";
   import { _ } from "svelte-i18n";
 
-  let { 
-    selectedDate = $bindable(null), 
+  let {
+    selectedDate = $bindable(null),
     selectedTimeSlot = $bindable(""),
-    dateSelected = $bindable(false)
+    dateSelected = $bindable(false),
+    showTimePicker = true,
   } = $props();
 
   let availableTimeSlots = $state([]);
@@ -52,7 +53,7 @@
     if (selectedDate === null || date.getTime() !== selectedDate.getTime()) {
       selectedTimeSlot = "";
     }
-    
+
     dateError = "";
 
     if (date <= today) {
@@ -98,7 +99,7 @@
 
     return fullyBookedDays.includes(dateString);
   }
-  
+
   // Initialize time slots if a date is already selected (when navigating back)
   onMount(() => {
     if (selectedDate) {
@@ -112,36 +113,38 @@
 </script>
 
 <div class="space-y-4 flex flex-col items-center">
-    <Datepicker inline value={selectedDate} onselect={handleDateSelect} />
+  <Datepicker inline value={selectedDate} onselect={handleDateSelect} />
   {#if dateError}
     <p class="text-red-500 mt-2">{dateError}</p>
   {/if}
-  {#if dateSelected}
-    <div>
-      <p class="mb-2 font-medium">
-        {$_("datePicker.selectedDate")}: {selectedDate?.toLocaleDateString()}
-      </p>
+  {#if showTimePicker}
+    {#if dateSelected}
+      <div>
+        <p class="mb-2 font-medium">
+          {$_("datePicker.selectedDate")}: {selectedDate?.toLocaleDateString()}
+        </p>
 
-      {#if availableTimeSlots.length > 0}
-        <div class="mt-4 flex flex-col">
-          <label
-            for="time-slot"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            {$_("datePicker.selectTimeSlot")}
-          </label>
-          <Select
-            size="lg"
-            class="pr-16 w-full flex"
-            id="time-slot"
-            items={availableTimeSlots}
-            bind:value={selectedTimeSlot}
-            placeholder={$_("datePicker.chooseTimeSlot")}
-          />
-        </div>
-      {:else}
-        <p class="text-red-500">{$_("datePicker.noTimeSlots")}</p>
-      {/if}
-    </div>
+        {#if availableTimeSlots.length > 0}
+          <div class="mt-4 flex flex-col">
+            <label
+              for="time-slot"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              {$_("datePicker.selectTimeSlot")}
+            </label>
+            <Select
+              size="lg"
+              class="pr-16 w-full flex"
+              id="time-slot"
+              items={availableTimeSlots}
+              bind:value={selectedTimeSlot}
+              placeholder={$_("datePicker.chooseTimeSlot")}
+            />
+          </div>
+        {:else}
+          <p class="text-red-500">{$_("datePicker.noTimeSlots")}</p>
+        {/if}
+      </div>
+    {/if}
   {/if}
 </div>
