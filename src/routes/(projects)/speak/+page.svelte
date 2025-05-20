@@ -27,7 +27,9 @@
         $_("timeline.step3.description")
     ]);
 
-    let isFormValid = $derived(name.trim() !== "" && email.trim() !== "" && phone.trim() !== "");
+    let isFormValid = $derived(
+        name.trim() !== "" && email.trim() !== "" && phone.trim() !== ""
+    );
 
     function nextStep() {
         if (currentStep === 1 && isFormValid) {

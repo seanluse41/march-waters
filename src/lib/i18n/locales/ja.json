@@ -157,6 +157,9 @@
       "enterInfo": "お客様情報の入力",
       "confirm": "予約内容の確認"
     },
+    "coursePicker": {
+      "title": "コースを選択してください"
+    },
     "buttons": {
       "previous": "戻る",
       "next": "次へ",
@@ -165,7 +168,7 @@
     "confirmation": {
       "title": "予約内容の確認",
       "details": "以下の予約内容をご確認ください：",
-      "course": "相談コース",
+      "course": "コース",
       "date": "日付",
       "time": "時間",
       "name": "お名前",
@@ -206,7 +209,7 @@
       }
     },
     "selectedCourse": "選択したコース",
-    "fixedTime": "夕方17時30分〜21時30分まで",
+    "fixedTime": "夕方17時00分〜21時30分まで",
     "appointment": "予約内容",
     "childCount": "預かる子供の人数",
     "maxCapacity": "定員は３名様まで"

@@ -7,6 +7,8 @@
     import DatePicker from "$lib/components/DatePicker.svelte";
     import StepProgress from "$lib/components/StepProgress.svelte";
     import InfoForm from "$lib/components/InfoForm.svelte";
+    import ConfirmationScreen from "$lib/components/ConfirmationScreen.svelte";
+    import CoursePicker from "$lib/components/CoursePicker.svelte";
 
     // Persistent state
     let selectedDate = $state(null);
@@ -163,24 +165,11 @@
                     {$_("childcare.steps.chooseCourse", { default: "Choose Course" })}
                 </Heading>
                 
-                <div>
-                    <p class="mb-5 text-lg font-medium text-slate-700">
-                        {$_("childcare.coursePicker.title", { default: "Select Childcare Type" })}
-                    </p>
-                    <div class="grid w-full gap-6 md:grid-cols-2">
-                        {#each childcareCourses as course}
-                            <Radio name="childcareCourse" custom bind:group={selectedCourse} value={course.id}>
-                                <div class="dark:peer-checked:text-primary-500 peer-checked:border-blue-600 peer-checked:text-blue-600 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-5 text-gray-500 hover:bg-gray-100 hover:text-gray-600">
-                                    <div>
-                                        <div class="w-full text-lg font-semibold">{course.title}</div>
-                                        <div class="w-full">{course.description}</div>
-                                        <div class="mt-2 text-blue-600 font-bold">{course.price}</div>
-                                    </div>
-                                </div>
-                            </Radio>
-                        {/each}
-                    </div>
-                </div>
+                <CoursePicker
+                    bind:selectedCourse
+                    title={$_("childcare.coursePicker.title", { default: "Select Childcare Type" })}
+                    courses={childcareCourses}
+                />
             </div>
 
         <!-- choose a date -->
@@ -290,7 +279,7 @@
                         </p>
                         <p>
                             <span class="font-semibold">{$_("childcare.childCount", { default: "Number of children" })}:</span>
-                            {childCount}
+                            {childCount} {$_("helpers.personCounter")}
                         </p>
                         <p>
                             <span class="font-semibold">{$_("childcare.confirmation.name")}:</span>
