@@ -242,10 +242,10 @@
                     <label class="mb-2 block text-slate-700">
                         {$_("childcare.childCount")}
                     </label>
-                    <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-4 flex-wrap flex-col md:flex-row">
                         {#each [1, 2, 3] as count}
                             <div
-                                class="rounded-sm border border-gray-200 px-8 py-4"
+                                class="rounded-sm border border-gray-200 px-8 py-4 w-full md:w-auto"
                             >
                                 <Radio
                                     id={`child-count-${count}`}
