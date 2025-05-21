@@ -245,88 +245,88 @@
         "costValue": "Varies based on content and budget (please inquire for details)"
       }
     },
-    "midwife": {
-      "pageTitle": "Talk with a Midwife",
-      "steps": {
-        "chooseDate": "Choose a Date",
-        "enterInfo": "Enter Your Information",
-        "confirm": "Confirm",
-        "chooseCourse": "Choose Course",
-        "chooseCourseDescription": "Select your consultation type"
-      },
-      "coursePicker": {
-        "title": "Select Consultation Type",
-        "quick": {
-          "title": "Quick Consultation",
-          "description": "For single questions or brief advice"
-        },
-        "inDepth": {
-          "title": "In-depth Consultation",
-          "description": "For complex questions requiring detailed discussion"
-        },
-        "email": {
-          "title": "Email Consultation",
-          "description": "For written communication and inquiries"
-        }
-      },
-      "courses": {
-        "quick": {
-          "name": "Quick Consultation"
-        },
-        "indepth": {
-          "name": "In-depth Consultation"
-        },
-        "email": {
-          "name": "Email Consultation"
-        }
-      },
-      "selectedCourse": "Selected course",
-      "appointment": "Appointment",
-      "buttons": {
-        "previous": "Previous",
-        "next": "Next",
-        "complete": "Request Booking"
-      },
-      "confirmation": {
-        "title": "Confirm Your Booking",
-        "details": "Please confirm your booking details:",
-        "date": "Date",
-        "time": "Time",
-        "name": "Name",
-        "email": "Email",
-        "phone": "Phone",
-        "paymentMethod": "Payment Method",
-        "paymentInstructions": "Payment Instructions:",
-        "cashInstructions": "Please bring exact cash payment to your appointment.",
-        "creditInstructions": "You will be redirected to our secure payment portal after confirming."
-      },
-      "project": {
-        "title": "Talk with a Midwife",
-        "description": "\"Is it okay to ask my doctor about this? Should I go to the hospital for this concern?\" Working in hospitals, I've heard these questions many times. Whether you're concerned about your body or sexuality, carrying uncertainties, or simply need someone to talk to—regardless of your age, nationality, or pregnancy status—please feel free to reach out. English service is available.",
-        "services": {
-          "title": "Our Services Include:",
-          "item1": "Pregnancy and childcare consultations (including for those living overseas)",
-          "item2": "Pregnancy and childcare support for foreign residents in Japan (English available)",
-          "item3": "Support for those experiencing difficulties after miscarriage, stillbirth, during fertility treatment, or with childbirth concerns",
-          "item4": "Assistance with physical health issues during postpartum or child-rearing, body concerns, menstrual problems, marital relationships, family dynamics, and family planning",
-          "item5": "Consultations for single mothers and working parents, drawing from personal experience with career development alongside parenting and entrepreneurship"
-        },
-        "pricing": {
-          "title": "Pricing Options",
-          "option1": "Quick Consultation (Zoom) - 30 minutes for ¥3,000",
-          "option2": "In-depth Consultation (Zoom) - 60 minutes for ¥5,500",
-          "option3": "Email Consultation - ¥2,500 per inquiry"
-        }
-      }
-    },
     "payment": {
       "cash": "Cash",
       "credit": "Credit Card",
       "note": "Email Consultations are Credit Only"
+    }
+  },
+  "midwife": {
+    "pageTitle": "Talk with a Midwife",
+    "steps": {
+      "chooseDate": "Choose a Date",
+      "enterInfo": "Enter Your Information",
+      "confirm": "Confirm",
+      "chooseCourse": "Choose Course",
+      "chooseCourseDescription": "Select your consultation type"
     },
-    "helpers": {
-      "personCounter": " "
+    "coursePicker": {
+      "title": "Select Consultation Type",
+      "quick": {
+        "title": "Quick Consultation",
+        "description": "For single questions or brief advice"
+      },
+      "inDepth": {
+        "title": "In-depth Consultation",
+        "description": "For complex questions requiring detailed discussion"
+      },
+      "email": {
+        "title": "Email Consultation",
+        "description": "For written communication and inquiries"
+      }
     },
-    "lorum": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  }
+    "courses": {
+      "quick": {
+        "name": "Quick Consultation"
+      },
+      "indepth": {
+        "name": "In-depth Consultation"
+      },
+      "email": {
+        "name": "Email Consultation"
+      }
+    },
+    "selectedCourse": "Selected course",
+    "appointment": "Appointment",
+    "buttons": {
+      "previous": "Previous",
+      "next": "Next",
+      "complete": "Request Booking"
+    },
+    "confirmation": {
+      "title": "Confirm Your Booking",
+      "details": "Please confirm your booking details:",
+      "date": "Date",
+      "time": "Time",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "paymentMethod": "Payment Method",
+      "paymentInstructions": "Payment Instructions:",
+      "cashInstructions": "Please bring exact cash payment to your appointment.",
+      "creditInstructions": "You will be redirected to our secure payment portal after confirming."
+    },
+    "project": {
+      "title": "Talk with a Midwife",
+      "description": "\"Is it okay to ask my doctor about this? Should I go to the hospital for this concern?\" Working in hospitals, I've heard these questions many times. Whether you're concerned about your body or sexuality, carrying uncertainties, or simply need someone to talk to—regardless of your age, nationality, or pregnancy status—please feel free to reach out. English service is available.",
+      "services": {
+        "title": "Our Services Include:",
+        "item1": "Pregnancy and childcare consultations (including for those living overseas)",
+        "item2": "Pregnancy and childcare support for foreign residents in Japan (English available)",
+        "item3": "Support for those experiencing difficulties after miscarriage, stillbirth, during fertility treatment, or with childbirth concerns",
+        "item4": "Assistance with physical health issues during postpartum or child-rearing, body concerns, menstrual problems, marital relationships, family dynamics, and family planning",
+        "item5": "Consultations for single mothers and working parents, drawing from personal experience with career development alongside parenting and entrepreneurship"
+      },
+      "pricing": {
+        "title": "Pricing Options",
+        "option1": "Quick Consultation (Zoom) - 30 minutes for ¥3,000",
+        "option2": "In-depth Consultation (Zoom) - 60 minutes for ¥5,500",
+        "option3": "Email Consultation - ¥2,500 per inquiry"
+      }
+    }
+  },
+  "helpers": {
+    "personCounter": " "
+  },
+  "lorum": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 }
