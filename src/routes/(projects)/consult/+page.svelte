@@ -234,7 +234,18 @@
                     {phone}
                     paymentMethod={isEmailCourse ? "credit" : paymentMethod}
                     coursePrice={activeCourse?.price}
-                    course={selectedCourse}
+                    course={activeCourse?.title}
+                    title={$_("midwife.confirmation.title")}
+                    detailsText={$_("midwife.confirmation.details")}
+                    paymentInstructionsText={$_(
+                        "midwife.confirmation.paymentInstructions",
+                    )}
+                    cashInstructionsText={$_(
+                        "midwife.confirmation.cashInstructions",
+                    )}
+                    creditInstructionsText={$_(
+                        "midwife.confirmation.creditInstructions",
+                    )}
                 />
             </div>
         {/if}

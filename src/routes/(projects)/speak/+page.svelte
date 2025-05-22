@@ -6,6 +6,7 @@
     import PhotoCarousel from "$lib/components/PhotoCarousel.svelte";
     import StepProgress from "$lib/components/StepProgress.svelte";
     import InfoForm from "$lib/components/InfoForm.svelte";
+    import ConfirmationScreen from "$lib/components/ConfirmationScreen.svelte";
 
     // Form validation states
     let name = $state("");
@@ -136,43 +137,36 @@
             </div>
         {:else if currentStep === 2}
             <div in:fly={{ y: 50, duration: 300 }} class="w-full">
-                <Heading class="text-4xl font-bold my-8 text-center text-slate-700">
-                    {$_("bodychoice.confirmation.title")}
-                </Heading>
+                <ConfirmationScreen
+                    selectedDate={null}
+                    selectedTimeSlot="TBD"
+                    {name}
+                    {email}
+                    {phone}
+                    paymentMethod=""
+                    course=""
+                    coursePrice=""
+                    title={$_("bodychoice.confirmation.title")}
+                    detailsText={$_("bodychoice.confirmation.details")}
+                    paymentInstructionsText={$_("bodychoice.confirmation.thankYou", { default: "Thank you for your interest in our My Body My Choice Project. We'll review your request and contact you shortly to discuss how we can help." })}
+                    cashInstructionsText=""
+                    creditInstructionsText=""
+                />
                 
-                <div class="bg-white p-6 rounded-lg border border-slate-200 mb-8">
-                    <p class="font-medium text-slate-800 mb-4">
-                        {$_("bodychoice.confirmation.details")}
-                    </p>
-                    <div class="space-y-3 text-slate-700">
-                        <p>
-                            <span class="font-semibold">{$_("bodychoice.confirmation.name")}:</span> {name}
-                        </p>
-                        <p>
-                            <span class="font-semibold">{$_("bodychoice.confirmation.email")}:</span> {email}
-                        </p>
-                        <p>
-                            <span class="font-semibold">{$_("bodychoice.confirmation.phone")}:</span> {phone}
-                        </p>
-                        {#if preferredDate}
-                            <p>
-                                <span class="font-semibold">{$_("bodychoice.form.preferredDate", { default: "Preferred Date" })}:</span> {preferredDate.toLocaleDateString()}
-                            </p>
-                        {/if}
-                        {#if notes}
-                            <div>
-                                <span class="font-semibold">{$_("bodychoice.form.notes", { default: "Additional Notes" })}:</span>
-                                <p class="mt-1 whitespace-pre-wrap">{notes}</p>
-                            </div>
-                        {/if}
+                {#if preferredDate || notes?.trim()}
+                    <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                        <p class="font-medium text-gray-800 mb-2">Additional Information:</p>
+                        <div class="text-gray-700 space-y-1">
+                            {#if preferredDate}
+                                <p><span class="font-medium">{$_("bodychoice.form.preferredDate")}:</span> {preferredDate.toLocaleDateString()}</p>
+                            {/if}
+                            {#if notes?.trim()}
+                                <p><span class="font-medium">{$_("bodychoice.form.notes")}:</span></p>
+                                <p class="whitespace-pre-wrap pl-4">{notes}</p>
+                            {/if}
+                        </div>
                     </div>
-                </div>
-
-                <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
-                    <p class="font-medium text-blue-800 mb-4">
-                        {$_("bodychoice.confirmation.thankYou", { default: "Thank you for your interest in our My Body My Choice Project. We'll review your request and contact you shortly to discuss how we can help." })}
-                    </p>
-                </div>
+                {/if}
             </div>
         {/if}
 

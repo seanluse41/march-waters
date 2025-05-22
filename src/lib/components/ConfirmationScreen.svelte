@@ -12,84 +12,86 @@
         paymentMethod = "cash",
         course = "",
         coursePrice = "",
+        childCount = null,
+        // Text props
+        title = "",
+        detailsText = "",
+        paymentInstructionsText = "",
+        cashInstructionsText = "",
+        creditInstructionsText = "",
     } = $props();
 </script>
 
 <div in:fly={{ y: 50, duration: 300 }}>
     <Heading class="text-4xl font-bold my-8 text-slate-700">
-        {$_("childcare.confirmation.title")}
+        {title}
     </Heading>
     <div class="bg-white p-6 rounded-lg border border-slate-200 mb-8">
         <p class="font-medium text-slate-800 mb-4">
-            {$_("childcare.confirmation.details")}
+            {detailsText}
         </p>
         <div class="space-y-3 text-slate-700">
             {#if course}
                 <p>
-                    <span class="font-semibold"
-                        >{$_("childcare.confirmation.course")}:</span
-                    >
-                    {$_(`midwife.courses.${course}.name`)}
+                    <span class="font-semibold">{$_("confirmationscreen.course")}:</span>
+                    {course}
                 </p>
             {/if}
             {#if selectedDate}
                 <p>
-                    <span class="font-semibold"
-                        >{$_("childcare.confirmation.date")}:</span
-                    >
+                    <span class="font-semibold">{$_("confirmationscreen.date")}:</span>
                     {selectedDate?.toLocaleDateString()}
                 </p>
             {/if}
             <p>
-                <span class="font-semibold"
-                    >{$_("childcare.confirmation.time")}:</span
-                >
+                <span class="font-semibold">{$_("confirmationscreen.time")}:</span>
                 {selectedTimeSlot}
             </p>
+            {#if childCount}
+                <p>
+                    <span class="font-semibold">{$_("confirmationscreen.childCount")}:</span>
+                    {childCount}
+                    {$_("helpers.personCounter")}
+                </p>
+            {/if}
             <p>
-                <span class="font-semibold"
-                    >{$_("childcare.confirmation.name")}:</span
-                >
+                <span class="font-semibold">{$_("confirmationscreen.name")}:</span>
                 {name}
             </p>
             <p>
-                <span class="font-semibold"
-                    >{$_("childcare.confirmation.email")}:</span
-                >
+                <span class="font-semibold">{$_("confirmationscreen.email")}:</span>
                 {email}
             </p>
             <p>
-                <span class="font-semibold"
-                    >{$_("childcare.confirmation.phone")}:</span
-                >
+                <span class="font-semibold">{$_("confirmationscreen.phone")}:</span>
                 {phone}
             </p>
-            <p>
-                <span class="font-semibold"
-                    >{$_("childcare.confirmation.paymentMethod")}:</span
-                >
-                {$_(`payment.${paymentMethod}`, { default: paymentMethod })}
-            </p>
+            {#if paymentMethod}
+                <p>
+                    <span class="font-semibold">{$_("confirmationscreen.paymentMethod")}:</span>
+                    {$_(`payment.${paymentMethod}`, { default: paymentMethod })}
+                </p>
+            {/if}
         </div>
     </div>
 
     <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
         <p class="font-medium text-blue-800 mb-4">
-            {$_("childcare.confirmation.paymentInstructions")}
+            {paymentInstructionsText}
         </p>
         {#if paymentMethod === "cash"}
             <div class="text-slate-700">
-                <p>{$_("childcare.confirmation.cashInstructions")}</p>
+                <p>{cashInstructionsText}</p>
                 <p class="mt-2">
-                    {$_("childcare.confirmation.amountDue")}
+                    {$_("confirmationscreen.amountDue")}
                     <span class="font-bold">{coursePrice || "¥8,000"}</span>
                 </p>
             </div>
         {:else if paymentMethod === "credit"}
             <div class="text-slate-700">
-                <p>{$_("childcare.confirmation.creditInstructions")}</p>
+                <p>{creditInstructionsText}</p>
                 <p class="mt-2">
-                    {$_("childcare.confirmation.amountCharged")}
+                    {$_("confirmationscreen.amountCharged")}
                     <span class="font-bold">{coursePrice || "¥8,000"}</span>
                 </p>
             </div>

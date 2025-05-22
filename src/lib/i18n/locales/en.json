@@ -160,18 +160,10 @@
     "confirmation": {
       "title": "Confirm Your Booking",
       "details": "Please confirm your booking details:",
-      "course": "Course",
-      "date": "Date",
-      "time": "Time",
-      "name": "Name",
-      "email": "Email",
-      "phone": "Phone",
       "paymentMethod": "Payment Method",
       "paymentInstructions": "Payment Instructions:",
       "cashInstructions": "Please bring exact cash payment to your appointment.",
-      "creditInstructions": "You will be redirected to our secure payment portal after confirming.",
-      "amountDue": "Amount due:",
-      "amountCharged": "Amount to be charged:"
+      "creditInstructions": "You will be redirected to our secure payment portal after confirming."
     },
     "project": {
       "title": "About Our Childcare Service",
@@ -220,9 +212,6 @@
     "confirmation": {
       "title": "Confirm Your Request",
       "details": "Please confirm your request details:",
-      "name": "Name",
-      "email": "Email",
-      "phone": "Phone",
       "thankYou": "Thank you for your interest in our My Body My Choice Project. We'll review your request and contact you shortly to discuss how we can help."
     },
     "form": {
@@ -244,11 +233,6 @@
         "cost": "Cost",
         "costValue": "Varies based on content and budget (please inquire for details)"
       }
-    },
-    "payment": {
-      "cash": "Cash",
-      "credit": "Credit Card",
-      "note": "Email Consultations are Credit Only"
     }
   },
   "midwife": {
@@ -275,18 +259,6 @@
         "description": "For written communication and inquiries"
       }
     },
-    "courses": {
-      "quick": {
-        "name": "Quick Consultation"
-      },
-      "indepth": {
-        "name": "In-depth Consultation"
-      },
-      "email": {
-        "name": "Email Consultation"
-      }
-    },
-    "selectedCourse": "Selected course",
     "appointment": "Appointment",
     "buttons": {
       "previous": "Previous",
@@ -296,12 +268,6 @@
     "confirmation": {
       "title": "Confirm Your Booking",
       "details": "Please confirm your booking details:",
-      "date": "Date",
-      "time": "Time",
-      "name": "Name",
-      "email": "Email",
-      "phone": "Phone",
-      "paymentMethod": "Payment Method",
       "paymentInstructions": "Payment Instructions:",
       "cashInstructions": "Please bring exact cash payment to your appointment.",
       "creditInstructions": "You will be redirected to our secure payment portal after confirming."
@@ -316,14 +282,25 @@
         "item3": "Support for those experiencing difficulties after miscarriage, stillbirth, during fertility treatment, or with childbirth concerns",
         "item4": "Assistance with physical health issues during postpartum or child-rearing, body concerns, menstrual problems, marital relationships, family dynamics, and family planning",
         "item5": "Consultations for single mothers and working parents, drawing from personal experience with career development alongside parenting and entrepreneurship"
-      },
-      "pricing": {
-        "title": "Pricing Options",
-        "option1": "Quick Consultation (Zoom) - 30 minutes for ¥3,000",
-        "option2": "In-depth Consultation (Zoom) - 60 minutes for ¥5,500",
-        "option3": "Email Consultation - ¥2,500 per inquiry"
       }
     }
+  },
+  "payment": {
+    "cash": "Cash",
+    "credit": "Credit",
+    "note": "Mail Consulation is Credit Only"
+  },
+  "confirmationscreen": {
+    "course": "Course",
+    "date": "Date",
+    "time": "Time",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "paymentMethod": "Payment Method",
+    "amountDue": "Amount due:",
+    "amountCharged": "Amount to be charged:",
+    "childCount": "Number of children"
   },
   "helpers": {
     "personCounter": " "

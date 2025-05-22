@@ -1,7 +1,12 @@
 <script>
     import { _ } from "svelte-i18n";
     import { Button, Heading, Hr, List, Li, Radio } from "flowbite-svelte";
-    import { ArrowRightOutline, ArrowLeftOutline, BowlRiceOutline, CloseCircleOutline } from "flowbite-svelte-icons";
+    import {
+        ArrowRightOutline,
+        ArrowLeftOutline,
+        BowlRiceOutline,
+        CloseCircleOutline,
+    } from "flowbite-svelte-icons";
     import { fly } from "svelte/transition";
     import PhotoCarousel from "$lib/components/PhotoCarousel.svelte";
     import DatePicker from "$lib/components/DatePicker.svelte";
@@ -35,7 +40,7 @@
                 default: "Evening childcare with dinner included",
             }),
             price: "¥8,000",
-            icon: BowlRiceOutline
+            icon: BowlRiceOutline,
         },
         {
             id: "allergy",
@@ -46,7 +51,7 @@
                 default: "Evening childcare (please bring your child's dinner)",
             }),
             price: "¥7,500",
-            icon: CloseCircleOutline
+            icon: CloseCircleOutline,
         },
     ]);
 
@@ -242,7 +247,9 @@
                     <label class="mb-2 block text-slate-700">
                         {$_("childcare.childCount")}
                     </label>
-                    <div class="flex items-center gap-4 flex-wrap flex-col md:flex-row">
+                    <div
+                        class="flex items-center gap-4 flex-wrap flex-col md:flex-row"
+                    >
                         {#each [1, 2, 3] as count}
                             <div
                                 class="rounded-sm border border-gray-200 px-8 py-4 w-full md:w-auto"
@@ -270,106 +277,28 @@
             <!-- confirm -->
         {:else if currentStep === 4}
             <div in:fly={{ y: 50, duration: 300 }} class="flex flex-col w-full">
-                <Heading class="text-4xl font-bold my-8 text-slate-700">
-                    {$_("childcare.confirmation.title")}
-                </Heading>
-                <div
-                    class="bg-white p-6 rounded-lg border border-slate-200 mb-8"
-                >
-                    <p class="font-medium text-slate-800 mb-4">
-                        {$_("childcare.confirmation.details")}
-                    </p>
-                    <div class="space-y-3 text-slate-700">
-                        <p>
-                            <span class="font-semibold"
-                                >{$_("childcare.confirmation.course")}:</span
-                            >
-                            {activeCourse?.title}
-                        </p>
-                        <p>
-                            <span class="font-semibold"
-                                >{$_("childcare.confirmation.date")}:</span
-                            >
-                            {selectedDate?.toLocaleDateString()}
-                        </p>
-                        <p>
-                            <span class="font-semibold"
-                                >{$_("childcare.confirmation.time")}:</span
-                            >
-                            17:00 - 21:30
-                        </p>
-                        <p>
-                            <span class="font-semibold"
-                                >{$_("childcare.childCount", {
-                                    default: "Number of children",
-                                })}:</span
-                            >
-                            {childCount}
-                            {$_("helpers.personCounter")}
-                        </p>
-                        <p>
-                            <span class="font-semibold"
-                                >{$_("childcare.confirmation.name")}:</span
-                            >
-                            {name}
-                        </p>
-                        <p>
-                            <span class="font-semibold"
-                                >{$_("childcare.confirmation.email")}:</span
-                            >
-                            {email}
-                        </p>
-                        <p>
-                            <span class="font-semibold"
-                                >{$_("childcare.confirmation.phone")}:</span
-                            >
-                            {phone}
-                        </p>
-                        <p>
-                            <span class="font-semibold"
-                                >{$_(
-                                    "childcare.confirmation.paymentMethod",
-                                )}:</span
-                            >
-                            {$_(`payment.${paymentMethod}`, {
-                                default: paymentMethod,
-                            })}
-                        </p>
-                    </div>
-                </div>
-
-                <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
-                    <p class="font-medium text-blue-800 mb-4">
-                        {$_("childcare.confirmation.paymentInstructions")}
-                    </p>
-                    {#if paymentMethod === "cash"}
-                        <div class="text-slate-700">
-                            <p>
-                                {$_("childcare.confirmation.cashInstructions")}
-                            </p>
-                            <p class="mt-2">
-                                {$_("childcare.confirmation.amountDue")}
-                                <span class="font-bold"
-                                    >{activeCourse?.price}</span
-                                >
-                            </p>
-                        </div>
-                    {:else if paymentMethod === "credit"}
-                        <div class="text-slate-700">
-                            <p>
-                                {$_(
-                                    "childcare.confirmation.creditInstructions",
-                                )}
-                            </p>
-                            <p class="mt-2">
-                                {$_("childcare.confirmation.amountCharged")}
-                                <span class="font-bold"
-                                    >{activeCourse?.price}</span
-                                >
-                            </p>
-                        </div>
-                    {/if}
-                </div>
+                <ConfirmationScreen
+                    {selectedDate}
+                    selectedTimeSlot="17:00 - 21:30"
+                    {name}
+                    {email}
+                    {phone}
+                    {paymentMethod}
+                    coursePrice={activeCourse?.price}
+                    course={activeCourse?.title}
+                    {childCount}
+                    title={$_("childcare.confirmation.title")}
+                    detailsText={$_("childcare.confirmation.details")}
+                    paymentInstructionsText={$_(
+                        "childcare.confirmation.paymentInstructions",
+                    )}
+                    cashInstructionsText={$_(
+                        "childcare.confirmation.cashInstructions",
+                    )}
+                    creditInstructionsText={$_(
+                        "childcare.confirmation.creditInstructions",
+                    )}
+                />
             </div>
         {/if}
 

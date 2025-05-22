@@ -168,18 +168,10 @@
     "confirmation": {
       "title": "予約内容の確認",
       "details": "以下の予約内容をご確認ください：",
-      "course": "コース",
-      "date": "日付",
-      "time": "時間",
-      "name": "お名前",
-      "email": "メールアドレス",
-      "phone": "電話番号",
-      "paymentMethod": "お支払い方法",
+      "paymentMethod":"お支払い方法",
       "paymentInstructions": "お支払いについて：",
       "cashInstructions": "当日、現金にてお支払いください。",
-      "creditInstructions": "確定後、決済ページへ移動します。",
-      "amountDue": "料金：",
-      "amountCharged": "料金："
+      "creditInstructions": "確定後、決済ページへ移動します。"
     },
     "project": {
       "title": "あとはねるだけプロジェクト",
@@ -228,9 +220,6 @@
     "confirmation": {
       "title": "リクエスト内容の確認",
       "details": "以下の内容をご確認ください：",
-      "name": "お名前",
-      "email": "メールアドレス",
-      "phone": "電話番号",
       "thankYou": "MyBodyMyChoiceプロジェクトにご関心をお寄せいただき、ありがとうございます。ご要望を確認し、どのようにサポートできるかについて近日中にご連絡いたします。"
     },
     "form": {
@@ -278,18 +267,6 @@
         "description": "文章でのやりとりを希望の方に"
       }
     },
-    "courses": {
-      "quick": {
-        "name": "さくっと相談"
-      },
-      "indepth": {
-        "name": "じっくり相談"
-      },
-      "email": {
-        "name": "メール相談"
-      }
-    },
-    "selectedCourse": "選択したコース",
     "appointment": "予約内容",
     "buttons": {
       "previous": "戻る",
@@ -299,12 +276,6 @@
     "confirmation": {
       "title": "予約内容の確認",
       "details": "以下の予約内容をご確認ください：",
-      "date": "日付",
-      "time": "時間",
-      "name": "お名前",
-      "email": "メールアドレス",
-      "phone": "電話番号",
-      "paymentMethod": "お支払い方法",
       "paymentInstructions": "お支払いについて：",
       "cashInstructions": "当日、現金にてお支払いください。",
       "creditInstructions": "確定後、決済ページへ移動します。"
@@ -319,12 +290,6 @@
         "item3": "流産死産後や不妊治療中のもやもや、出産にまつわるもやもや",
         "item4": "産後や育児中の体調不良、からだの悩み、生理の困り事、夫婦関係、家族関係、家族計画等",
         "item5": "シングルマザー、社会人育児中に受験した経験や開業に挑戦中の経験があるため、それらに関するお悩み相談も対応可"
-      },
-      "pricing": {
-        "title": "費用：",
-        "option1": "さくっと相談（zoom）⇒30分3000円",
-        "option2": "じっくり相談(zoom)⇒60分5500円",
-        "option3": "メール相談⇒1件2500円"
       }
     }
   },
@@ -332,6 +297,18 @@
     "cash": "現金",
     "credit": "カード決済",
     "note": "メール相談はオンライン決済のみ"
+  },
+  "confirmationscreen": {
+    "course": "コース",
+    "date": "日付",
+    "time": "時間",
+    "name": "お名前",
+    "email": "メールアドレス",
+    "phone": "電話番号",
+    "paymentMethod": "お支払い方法",
+    "amountDue": "料金：",
+    "amountCharged": "料金：",
+    "childCount": "預かる子供の人数"
   },
   "helpers": {
     "personCounter": "名様"
