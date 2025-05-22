@@ -16,7 +16,7 @@ export async function GET() {
     const data = await response.json();
 
     const filteredContents = data.data.contents.filter(article => {
-      return article.hashtags.some(tag => tag.hashtag.name != "#ニュース");
+      return article.hashtags.some(tag => tag.hashtag.name === "#ニュース");
     });
 
     const filteredData = {
