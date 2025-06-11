@@ -14,8 +14,8 @@
 		"@sveltejs/kit": "^2.21.1",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
 		"@tailwindcss/vite": "^4.1.4",
-		"flowbite-svelte": "^1.4.3",
-		"flowbite-svelte-icons": "^2.1.1",
+		"flowbite-svelte": "^1.6.2",
+		"flowbite-svelte-icons": "^2.2.0",
 		"svelte": "^5.32.1",
 		"tailwindcss": "^4.1.4",
 		"vite": "^6.3.3"
