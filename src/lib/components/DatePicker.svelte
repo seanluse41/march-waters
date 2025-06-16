@@ -12,7 +12,6 @@
 
   let availableTimeSlots = $state([]);
   let dateError = $state("");
-  let datepickerEl = $state(null);
   let calendarEvents = $state([]);
   let isLoadingCalendar = $state(true);
   let loadError = $state(null);
@@ -22,9 +21,6 @@
   $effect(() => {
     if (selectedDate !== null) {
       dateSelected = true;
-      styleSelectedDate(selectedDate);
-    } else {
-      clearDateStyling();
     }
   });
 
@@ -137,55 +133,6 @@
     }
   }
 
-  function clearDateStyling() {
-    if (!datepickerEl) return;
-
-    // Find all date buttons
-    const allButtons = datepickerEl.querySelectorAll('[role="gridcell"]');
-
-    allButtons.forEach((btn) => {
-      if (btn.querySelector(".date-circle")) {
-        btn.textContent = btn.querySelector(".date-circle").textContent;
-      }
-    });
-  }
-
-  function styleSelectedDate(date) {
-    if (!date || !datepickerEl) return;
-    clearDateStyling();
-
-    const dayLabel = date.toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-
-    // Find the selected date button
-    const selectedButton = datepickerEl.querySelector(
-      `[aria-label="${dayLabel}"]`,
-    );
-    if (selectedButton) {
-      const dateNumber = selectedButton.textContent.trim();
-      selectedButton.innerHTML = "";
-
-      // Create a span for the date number with circle styling
-      const span = document.createElement("span");
-      span.textContent = dateNumber;
-      span.className = "date-circle";
-      span.style.display = "flex";
-      span.style.alignItems = "center";
-      span.style.justifyContent = "center";
-      span.style.width = "28px";
-      span.style.height = "28px";
-      span.style.borderRadius = "50%";
-      span.style.backgroundColor = "#3b82f6"; // Blue-500 color
-      span.style.color = "white";
-
-      selectedButton.appendChild(span);
-    }
-  }
-
   function updateAvailableTimeSlots(date) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -231,7 +178,7 @@
   {#if isLoadingCalendar}
     <div class="flex flex-col items-center justify-center p-8">
       <Spinner class="mb-4" />
-      <p class="text-gray-600">{$_("datePicker.loadingAvailability", { default: "Loading availability..." })}</p>
+      <p class="text-gray-600">{$_("datePicker.loading")}</p>
     </div>
   {:else if loadError}
     <div class="text-center p-8">
@@ -240,11 +187,11 @@
         onclick={() => fetchCalendarEvents()} 
         class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
       >
-        {$_("datePicker.retry", { default: "Retry" })}
+        {$_("datePicker.error")}
       </button>
     </div>
   {:else}
-    <div bind:this={datepickerEl}>
+    <div>
       <Datepicker
         inline
         value={selectedDate}

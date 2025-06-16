@@ -138,7 +138,9 @@
     "selectTimeSlot": "Select a time slot",
     "chooseTimeSlot": "Choose a time slot",
     "noTimeSlots": "No available time slots for this date",
-    "pastDateError": "Please select a future date. Today and past dates are not available."
+    "pastDateError": "Please select a future date. Today and past dates are not available.",
+    "loading": "Loading Availability",
+    "error": "Retry"
   },
   "childcare": {
     "pageTitle": "Childcare Service",

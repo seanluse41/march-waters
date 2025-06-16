@@ -146,7 +146,9 @@
     "selectTimeSlot": "時間枠を選択",
     "chooseTimeSlot": "時間枠を選択してください",
     "noTimeSlots": "この日に利用可能な時間枠はありません",
-    "pastDateError": "適切な日付を選択してください。今日または過去の日付は利用できません。"
+    "pastDateError": "適切な日付を選択してください。今日または過去の日付は利用できません。",
+    "loading": "読み込み中",
+    "error": "再読み込み"
   },
   "childcare": {
     "pageTitle": "あとはねるだけプロジェクト",
@@ -168,7 +170,7 @@
     "confirmation": {
       "title": "予約内容の確認",
       "details": "以下の予約内容をご確認ください：",
-      "paymentMethod":"お支払い方法",
+      "paymentMethod": "お支払い方法",
       "paymentInstructions": "お支払いについて：",
       "cashInstructions": "当日、現金にてお支払いください。",
       "creditInstructions": "確定後、決済ページへ移動します。"
