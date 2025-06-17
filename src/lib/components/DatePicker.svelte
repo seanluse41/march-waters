@@ -18,7 +18,6 @@
   let busySlots = $state({});
   let datepickerElement = $state();
 
-  // Set dateSelected based on initial selectedDate
   $effect(() => {
     if (selectedDate !== null) {
       dateSelected = true;
@@ -46,15 +45,10 @@
       isLoadingCalendar = true;
       loadError = null;
       
-      console.log('🚀 fetchCalendarEvents started');
-      
-      // Calculate date range: today to 30 days from now
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       const thirtyDaysFromNow = new Date(today);
       thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
-      
-      console.log('📅 Fetching events from', today.toISOString(), 'to', thirtyDaysFromNow.toISOString());
       
       const response = await fetch(`/api/get-calendar?timeMin=${today.toISOString()}&timeMax=${thirtyDaysFromNow.toISOString()}&maxResults=100`);
       
@@ -63,17 +57,9 @@
       }
       
       const data = await response.json();
-      console.log('📥 Raw calendar API response:', data);
-      
       calendarEvents = data.events || [];
-      console.log('📅 Calendar events set:', calendarEvents);
-      
-      // Process events immediately after fetching
-      console.log('📋 About to call processCalendarEvents with:', calendarEvents);
       busySlots = processCalendarEvents(calendarEvents);
-      console.log('🔄 busySlots after processing:', busySlots);
       
-      // Apply disabled styles after a short delay to ensure DOM is ready
       await tick();
       setTimeout(() => {
         applyDisabledDates();
@@ -87,63 +73,43 @@
     }
   }
 
-  // Process calendar events to extract busy times
   function processCalendarEvents(events) {
     const slots = {};
     
     events.forEach(event => {
       if (event.start) {
-        // Handle all-day events (start.date exists)
         if (event.start.date) {
-          const dateString = event.start.date; // Already in YYYY-MM-DD format
+          const dateString = event.start.date;
           
-          // Initialize array for this date if it doesn't exist
           if (!slots[dateString]) {
             slots[dateString] = [];
           }
           
-          // Mark all time slots as busy for all-day events
           allTimeSlots.forEach(slot => {
-            if (!slots[dateString].includes(slot.value)) {
-              slots[dateString].push(slot.value);
-            }
+            slots[dateString].push(slot.value);
           });
         }
-        // Handle timed events (start.dateTime exists)
         else if (event.start.dateTime) {
           const startDate = new Date(event.start.dateTime);
           const endDate = new Date(event.end.dateTime);
           
-          // Get the date string in YYYY-MM-DD format
-          const dateString = startDate.toISOString().split('T')[0];
+          const year = startDate.getFullYear();
+          const month = String(startDate.getMonth() + 1).padStart(2, "0");
+          const day = String(startDate.getDate()).padStart(2, "0");
+          const dateString = `${year}-${month}-${day}`;
           
-          // Initialize array for this date if it doesn't exist
           if (!slots[dateString]) {
             slots[dateString] = [];
           }
           
-          // Add all hours that this event covers
-          const startHour = startDate.getHours();
-          const startMinute = startDate.getMinutes();
-          const endHour = endDate.getHours();
-          const endMinute = endDate.getMinutes();
+          const eventStartHour = startDate.getHours() + (startDate.getMinutes() / 60);
+          const eventEndHour = endDate.getHours() + (endDate.getMinutes() / 60);
           
-          // Check each of our available time slots (9:00-16:00)
           allTimeSlots.forEach(slot => {
             const slotHour = parseInt(slot.value.split(':')[0]);
-            const slotStart = slotHour; // 9, 10, 11, etc.
-            const slotEnd = slotHour + 1; // 10, 11, 12, etc.
             
-            // Get event times as decimal hours for accurate overlap detection
-            const eventStartHour = startHour + (startMinute / 60);
-            const eventEndHour = endHour + (endMinute / 60);
-            
-            // If event overlaps with our time slot, mark it as busy
-            // Overlap occurs if: event starts before slot ends AND event ends after slot starts
-            if (eventStartHour < slotEnd && eventEndHour > slotStart) {
-              if (!slots[dateString].includes(slot.value)) {
-                slots[dateString].push(slot.value);
-              }
+            if (eventStartHour <= slotHour && eventEndHour > slotHour) {
+              slots[dateString].push(slot.value);
             }
           });
         }
@@ -156,20 +122,17 @@
   function applyDisabledDates() {
     if (!datepickerElement) return;
     
-    // Find all date buttons in the datepicker
     const dateButtons = datepickerElement.querySelectorAll('button[role="gridcell"]');
     
     dateButtons.forEach(button => {
       const ariaLabel = button.getAttribute('aria-label');
       if (!ariaLabel) return;
       
-      // Extract date from aria-label (format: "Monday, June 16, 2025")
       const dateMatch = ariaLabel.match(/(\w+), (\w+) (\d+), (\d+)/);
       if (!dateMatch) return;
       
       const [, , monthName, day, year] = dateMatch;
       
-      // Convert month name to number
       const monthMap = {
         'January': 0, 'February': 1, 'March': 2, 'April': 3,
         'May': 4, 'June': 5, 'July': 6, 'August': 7,
@@ -183,21 +146,16 @@
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       
-      // Skip if it's a past date or today (already handled by existing logic)
       if (date <= today) return;
       
-      // Check if this date is fully booked
       if (isDateFullyBooked(date)) {
-        // Disable the button
         button.disabled = true;
         button.style.pointerEvents = 'none';
         button.style.cursor = 'not-allowed';
         
-        // Add disabled styling
         button.classList.add('opacity-50', 'bg-red-50');
         button.classList.remove('hover:bg-gray-100', 'focus-within:text-primary-700');
         
-        // Add red X overlay
         const existingX = button.querySelector('.booked-overlay');
         if (!existingX) {
           const overlay = document.createElement('div');
@@ -208,7 +166,6 @@
             </svg>
           `;
           
-          // Make button position relative if it isn't already
           if (getComputedStyle(button).position === 'static') {
             button.style.position = 'relative';
           }
@@ -216,15 +173,12 @@
           button.appendChild(overlay);
         }
       } else {
-        // Re-enable the button if it was previously disabled but is now available
         button.disabled = false;
         button.style.pointerEvents = '';
         button.style.cursor = '';
         
-        // Remove disabled styling
         button.classList.remove('opacity-50', 'bg-red-50');
         
-        // Remove red X overlay
         const existingX = button.querySelector('.booked-overlay');
         if (existingX) {
           existingX.remove();
@@ -238,7 +192,6 @@
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    // Only reset time slot if selecting a different date
     if (selectedDate === null || date.getTime() !== selectedDate.getTime()) {
       selectedTimeSlot = "";
     }
@@ -252,7 +205,6 @@
       return;
     }
 
-    // Check if date is fully booked
     if (isDateFullyBooked(date)) {
       dateError = $_("datePicker.noTimeSlots");
       dateSelected = false;
@@ -272,19 +224,12 @@
     const day = String(date.getDate()).padStart(2, "0");
     const dateString = `${year}-${month}-${day}`;
 
-    console.log(`📅 updateAvailableTimeSlots for ${dateString}`);
-    console.log(`🔒 Busy slots for this date:`, busySlots[dateString] || 'none');
-
     if (busySlots[dateString]) {
-      // Filter out busy slots
       availableTimeSlots = allTimeSlots.filter((slot) =>
         !busySlots[dateString].includes(slot.value)
       );
-      console.log(`✅ Available slots after filtering:`, availableTimeSlots.map(s => s.value));
     } else {
-      // No events on this day, all slots available
       availableTimeSlots = allTimeSlots;
-      console.log(`✅ No events, all slots available:`, allTimeSlots.map(s => s.value));
     }
   }
 
@@ -296,36 +241,25 @@
     const day = String(date.getDate()).padStart(2, "0");
     const dateString = `${year}-${month}-${day}`;
 
-    console.log(`🤔 isDateFullyBooked check for ${dateString}`);
-    console.log(`🔒 Busy slots for this date:`, busySlots[dateString] || 'none');
-    console.log(`📊 All available slots:`, allTimeSlots.map(s => s.value));
-
-    // Check if all slots (9am-5pm) are busy
     if (busySlots[dateString]) {
       const allSlotsBooked = allTimeSlots.every(slot => 
         busySlots[dateString].includes(slot.value)
       );
-      console.log(`❌ All slots booked?`, allSlotsBooked);
       return allSlotsBooked;
     }
     
-    console.log(`✅ No busy slots, date is available`);
     return false;
   }
 
-  // Re-apply disabled dates when calendar view changes (month navigation)
   $effect(() => {
     if (!isLoadingCalendar && Object.keys(busySlots).length > 0) {
-      // Use a slight delay to ensure DOM is updated after month changes
       setTimeout(() => {
         applyDisabledDates();
       }, 50);
     }
   });
 
-  // Initialize by fetching calendar data
   onMount(() => {
-    console.log('🎯 DatePicker onMount called');
     fetchCalendarEvents();
   });
 </script>
