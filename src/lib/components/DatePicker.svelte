@@ -55,12 +55,7 @@
       isLoadingCalendar = true;
       loadError = null;
       
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const thirtyDaysFromNow = new Date(today);
-      thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
-      
-      const response = await fetch(`/api/get-calendar?timeMin=${today.toISOString()}&timeMax=${thirtyDaysFromNow.toISOString()}&maxResults=100`);
+      const response = await fetch('/api/get-calendar');
       
       if (!response.ok) {
         throw new Error('Failed to fetch calendar events');
@@ -135,6 +130,20 @@
     const dateButtons = datepickerElement.querySelectorAll('button[role="gridcell"]');
     
     dateButtons.forEach(button => {
+      button.disabled = false;
+      button.style.pointerEvents = '';
+      button.style.cursor = '';
+      
+      button.classList.remove('opacity-50', 'bg-red-50');
+      button.classList.add('hover:bg-gray-100', 'focus-within:text-primary-700');
+      
+      const existingX = button.querySelector('.booked-overlay');
+      if (existingX) {
+        existingX.remove();
+      }
+    });
+    
+    dateButtons.forEach(button => {
       const ariaLabel = button.getAttribute('aria-label');
       if (!ariaLabel) return;
       
@@ -156,7 +165,15 @@
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       
-      if (date <= today) return;
+      // Handle past dates (including today)
+      if (date <= today) {
+        button.disabled = true;
+        button.style.pointerEvents = 'none';
+        button.style.cursor = 'not-allowed';
+        button.classList.add('opacity-50');
+        button.classList.remove('hover:bg-gray-100', 'focus-within:text-primary-700');
+        return;
+      }
       
       if (isDateFullyBooked(date)) {
         button.disabled = true;
@@ -166,33 +183,19 @@
         button.classList.add('opacity-50', 'bg-red-50');
         button.classList.remove('hover:bg-gray-100', 'focus-within:text-primary-700');
         
-        const existingX = button.querySelector('.booked-overlay');
-        if (!existingX) {
-          const overlay = document.createElement('div');
-          overlay.className = 'booked-overlay absolute inset-0 flex items-center justify-center pointer-events-none';
-          overlay.innerHTML = `
-            <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-            </svg>
-          `;
-          
-          if (getComputedStyle(button).position === 'static') {
-            button.style.position = 'relative';
-          }
-          
-          button.appendChild(overlay);
-        }
-      } else {
-        button.disabled = false;
-        button.style.pointerEvents = '';
-        button.style.cursor = '';
+        const overlay = document.createElement('div');
+        overlay.className = 'booked-overlay absolute inset-0 flex items-center justify-center pointer-events-none';
+        overlay.innerHTML = `
+          <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        `;
         
-        button.classList.remove('opacity-50', 'bg-red-50');
-        
-        const existingX = button.querySelector('.booked-overlay');
-        if (existingX) {
-          existingX.remove();
+        if (getComputedStyle(button).position === 'static') {
+          button.style.position = 'relative';
         }
+        
+        button.appendChild(overlay);
       }
     });
   }

@@ -20,11 +20,15 @@ async function getCalendarClient() {
   return google.calendar({ version: 'v3', auth });
 }
 
-export async function GET({ url }) {
+export async function GET() {
   try {
-    const timeMin = url.searchParams.get('timeMin') || new Date().toISOString();
-    const timeMax = url.searchParams.get('timeMax') || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
-    const maxResults = parseInt(url.searchParams.get('maxResults') || '10', 10);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const timeMin = today.toISOString();
+    
+    const threeMonthsFromNow = new Date(today);
+    threeMonthsFromNow.setMonth(threeMonthsFromNow.getMonth() + 3);
+    const timeMax = threeMonthsFromNow.toISOString();
 
     const calendar = await getCalendarClient();
 
@@ -32,7 +36,6 @@ export async function GET({ url }) {
       calendarId: CALENDAR_ID,
       timeMin,
       timeMax,
-      maxResults,
       singleEvents: true,
       orderBy: 'startTime',
     });
