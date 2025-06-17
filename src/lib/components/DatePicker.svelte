@@ -1,6 +1,6 @@
 <script>
   import { Datepicker, Select, P, Spinner } from "flowbite-svelte";
-  import { onMount, tick } from "svelte";
+  import { onMount, tick, onDestroy } from "svelte";
   import { _ } from "svelte-i18n";
 
   let {
@@ -17,12 +17,22 @@
   let loadError = $state(null);
   let busySlots = $state({});
   let datepickerElement = $state();
+  let currentMonth = $state(null);
+  let monthObserver = null;
 
   $effect(() => {
     if (selectedDate !== null) {
       dateSelected = true;
     }
   });
+
+  function onMonthChanged(newMonth) {
+    console.log('Month changed to:', newMonth);
+    // Re-apply disabled dates when month changes
+    setTimeout(() => {
+      applyDisabledDates();
+    }, 100);
+  }
 
   function generateTimeSlots() {
     const slots = [];
@@ -261,6 +271,46 @@
 
   onMount(() => {
     fetchCalendarEvents();
+    
+    // Set up interval to check for month changes
+    let checkInterval;
+    let lastCheckedMonth = null;
+    
+    setTimeout(() => {
+      checkInterval = setInterval(() => {
+        if (datepickerElement) {
+          // Find any date button to extract current month
+          const dateButton = datepickerElement.querySelector('button[role="gridcell"][aria-label*="2025"]');
+          
+          if (dateButton) {
+            const ariaLabel = dateButton.getAttribute('aria-label');
+            const monthMatch = ariaLabel.match(/\w+, (\w+) \d+, (\d+)/);
+            if (monthMatch) {
+              const currentDisplayedMonth = `${monthMatch[1]} ${monthMatch[2]}`;
+              if (lastCheckedMonth && lastCheckedMonth !== currentDisplayedMonth) {
+                onMonthChanged(currentDisplayedMonth);
+              }
+              
+              lastCheckedMonth = currentDisplayedMonth;
+            }
+          }
+        }
+      }, 500); // Check every 250ms
+      
+      // Initial application of disabled dates
+      applyDisabledDates();
+    }, 500);
+    
+    // Clean up interval on destroy
+    onDestroy(() => {
+      if (checkInterval) {
+        clearInterval(checkInterval);
+      }
+    });
+  });
+
+  onDestroy(() => {
+    // Cleanup handled in onMount
   });
 </script>
 
