@@ -189,10 +189,12 @@
                 >
                     {$_("midwife.steps.chooseDate")}
                 </Heading>
+
                 <DatePicker
                     bind:selectedDate
                     bind:selectedTimeSlot
                     bind:dateSelected
+                    context="consult"
                 />
             </div>
             <!-- enter info -->

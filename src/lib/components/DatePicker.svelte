@@ -2,12 +2,16 @@
   import { Datepicker, Select, P, Spinner } from "flowbite-svelte";
   import { onMount, tick, onDestroy } from "svelte";
   import { _ } from "svelte-i18n";
+  import { fetchCalendarEvents } from "$lib/requests/fetchCalendarEvents.js";
+  import { generateTimeSlots, processCalendarEvents, isDateFullyBooked } from "$lib/helpers/timeSlotHelpers.js";
+  import { updateAvailableTimeSlots, isPastDate } from "$lib/helpers/dateHelpers.js";
 
   let {
     selectedDate = $bindable(null),
     selectedTimeSlot = $bindable(""),
     dateSelected = $bindable(false),
     showTimePicker = true,
+    context = "general",
   } = $props();
 
   let availableTimeSlots = $state([]);
@@ -19,6 +23,8 @@
   let datepickerElement = $state();
   let currentMonth = $state(null);
   let monthObserver = null;
+
+  const allTimeSlots = generateTimeSlots();
 
   $effect(() => {
     if (selectedDate !== null) {
@@ -34,101 +40,28 @@
     }, 100);
   }
 
-  function generateTimeSlots() {
-    const slots = [];
-    for (let hour = 9; hour < 17; hour++) {
-      const startHour = hour.toString().padStart(2, "0");
-      const endHour = (hour + 1).toString().padStart(2, "0");
-      const displayTime = `${startHour}:00 ~ ${endHour}:00`;
-      slots.push({
-        value: `${startHour}:00`,
-        name: displayTime,
-      });
-    }
-    return slots;
-  }
-
-  const allTimeSlots = generateTimeSlots();
-
-  async function fetchCalendarEvents() {
-    try {
-      isLoadingCalendar = true;
-      loadError = null;
-      
-      const response = await fetch('/api/get-calendar');
-      
-      if (!response.ok) {
-        throw new Error('Failed to fetch calendar events');
-      }
-      
-      const data = await response.json();
-      calendarEvents = data.events || [];
-      busySlots = processCalendarEvents(calendarEvents);
+  async function handleCalendarFetch() {
+    isLoadingCalendar = true;
+    loadError = null;
+    
+    const result = await fetchCalendarEvents();
+    
+    if (result.success) {
+      calendarEvents = result.events;
+      busySlots = processCalendarEvents(calendarEvents, allTimeSlots);
       
       await tick();
       setTimeout(() => {
         applyDisabledDates();
       }, 100);
-      
-    } catch (error) {
-      console.error('Error fetching calendar events:', error);
+    } else {
       loadError = $_("datePicker.loadError", { default: "Unable to load availability. Please refresh the page or try again later." });
-    } finally {
-      isLoadingCalendar = false;
     }
+    
+    isLoadingCalendar = false;
   }
 
-  function processCalendarEvents(events) {
-    const slots = {};
-    
-    events.forEach(event => {
-      if (event.start) {
-        if (event.start.date) {
-          const dateString = event.start.date;
-          
-          if (!slots[dateString]) {
-            slots[dateString] = [];
-          }
-          
-          allTimeSlots.forEach(slot => {
-            slots[dateString].push(slot.value);
-          });
-        }
-        else if (event.start.dateTime) {
-          const startDate = new Date(event.start.dateTime);
-          const endDate = new Date(event.end.dateTime);
-          
-          const year = startDate.getFullYear();
-          const month = String(startDate.getMonth() + 1).padStart(2, "0");
-          const day = String(startDate.getDate()).padStart(2, "0");
-          const dateString = `${year}-${month}-${day}`;
-          
-          if (!slots[dateString]) {
-            slots[dateString] = [];
-          }
-          
-          const eventStartHour = startDate.getHours() + (startDate.getMinutes() / 60);
-          const eventEndHour = endDate.getHours() + (endDate.getMinutes() / 60);
-          
-          allTimeSlots.forEach(slot => {
-            const slotHour = parseInt(slot.value.split(':')[0]);
-            
-            if (eventStartHour <= slotHour && eventEndHour > slotHour) {
-              slots[dateString].push(slot.value);
-            }
-          });
-        }
-      }
-    });
-    
-    return slots;
-  }
-
-  function applyDisabledDates() {
-    if (!datepickerElement) return;
-    
-    const dateButtons = datepickerElement.querySelectorAll('button[role="gridcell"]');
-    
+  function resetDisabledDates(dateButtons) {
     dateButtons.forEach(button => {
       button.disabled = false;
       button.style.pointerEvents = '';
@@ -142,6 +75,13 @@
         existingX.remove();
       }
     });
+  }
+
+  function applyDisabledDates() {
+    if (!datepickerElement) return;
+    const dateButtons = datepickerElement.querySelectorAll('button[role="gridcell"]');
+    
+    resetDisabledDates(dateButtons);
     
     dateButtons.forEach(button => {
       const ariaLabel = button.getAttribute('aria-label');
@@ -166,7 +106,7 @@
       today.setHours(0, 0, 0, 0);
       
       // Handle past dates (including today)
-      if (date <= today) {
+      if (isPastDate(date)) {
         button.disabled = true;
         button.style.pointerEvents = 'none';
         button.style.cursor = 'not-allowed';
@@ -175,7 +115,7 @@
         return;
       }
       
-      if (isDateFullyBooked(date)) {
+      if (isDateFullyBooked(date, busySlots, allTimeSlots)) {
         button.disabled = true;
         button.style.pointerEvents = 'none';
         button.style.cursor = 'not-allowed';
@@ -202,8 +142,6 @@
 
   function handleDateSelect(detail) {
     const date = new Date(detail);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
 
     if (selectedDate === null || date.getTime() !== selectedDate.getTime()) {
       selectedTimeSlot = "";
@@ -211,14 +149,14 @@
 
     dateError = "";
 
-    if (date <= today) {
+    if (isPastDate(date)) {
       dateError = $_("datePicker.pastDateError");
       dateSelected = false;
       selectedDate = null;
       return;
     }
 
-    if (isDateFullyBooked(date)) {
+    if (isDateFullyBooked(date, busySlots, allTimeSlots)) {
       dateError = $_("datePicker.noTimeSlots");
       dateSelected = false;
       selectedDate = null;
@@ -228,52 +166,11 @@
     selectedDate = date;
     dateSelected = true;
 
-    updateAvailableTimeSlots(date);
+    availableTimeSlots = updateAvailableTimeSlots(date, busySlots, allTimeSlots);
   }
-
-  function updateAvailableTimeSlots(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    const dateString = `${year}-${month}-${day}`;
-
-    if (busySlots[dateString]) {
-      availableTimeSlots = allTimeSlots.filter((slot) =>
-        !busySlots[dateString].includes(slot.value)
-      );
-    } else {
-      availableTimeSlots = allTimeSlots;
-    }
-  }
-
-  function isDateFullyBooked(date) {
-    if (!date) return false;
-
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    const dateString = `${year}-${month}-${day}`;
-
-    if (busySlots[dateString]) {
-      const allSlotsBooked = allTimeSlots.every(slot => 
-        busySlots[dateString].includes(slot.value)
-      );
-      return allSlotsBooked;
-    }
-    
-    return false;
-  }
-
-  $effect(() => {
-    if (!isLoadingCalendar && Object.keys(busySlots).length > 0) {
-      setTimeout(() => {
-        applyDisabledDates();
-      }, 50);
-    }
-  });
 
   onMount(() => {
-    fetchCalendarEvents();
+    handleCalendarFetch();
     
     // Set up interval to check for month changes
     let checkInterval;
@@ -327,7 +224,7 @@
     <div class="text-center p-8">
       <p class="text-red-500 mb-4">{loadError}</p>
       <button 
-        onclick={() => fetchCalendarEvents()} 
+        onclick={() => handleCalendarFetch()} 
         class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
       >
         {$_("datePicker.error")}
