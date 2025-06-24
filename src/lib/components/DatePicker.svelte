@@ -3,8 +3,16 @@
   import { onMount, tick, onDestroy } from "svelte";
   import { _ } from "svelte-i18n";
   import { fetchCalendarEvents } from "$lib/requests/fetchCalendarEvents.js";
-  import { generateTimeSlots, processCalendarEvents, isDateFullyBooked } from "$lib/helpers/timeSlotHelpers.js";
-  import { updateAvailableTimeSlots, isPastDate } from "$lib/helpers/dateHelpers.js";
+  import { isPastDate } from "$lib/helpers/dateHelpers.js";
+  import { 
+    processChildCareAvailability, 
+    isChildCareDateFullyBooked 
+  } from "$lib/helpers/child-careAvailabilityCalc.js";
+  import { 
+    processConsultAvailability, 
+    getAvailableConsultSlots, 
+    isConsultDateFullyBooked 
+  } from "$lib/helpers/consultAvailabilityCalc.js";
 
   let {
     selectedDate = $bindable(null),
@@ -20,11 +28,9 @@
   let isLoadingCalendar = $state(true);
   let loadError = $state(null);
   let busySlots = $state({});
+  let fullyBookedDates = $state([]);
+  let allTimeSlots = $state([]);
   let datepickerElement = $state();
-  let currentMonth = $state(null);
-  let monthObserver = null;
-
-  const allTimeSlots = generateTimeSlots();
 
   $effect(() => {
     if (selectedDate !== null) {
@@ -33,8 +39,6 @@
   });
 
   function onMonthChanged(newMonth) {
-    console.log('Month changed to:', newMonth);
-    // Re-apply disabled dates when month changes
     setTimeout(() => {
       applyDisabledDates();
     }, 100);
@@ -48,8 +52,18 @@
     
     if (result.success) {
       calendarEvents = result.events;
-      busySlots = processCalendarEvents(calendarEvents, allTimeSlots);
       
+      if (context === "child-care") {
+        const availability = processChildCareAvailability(calendarEvents);
+        fullyBookedDates = availability.fullyBookedDates;
+        busySlots = availability.busySlots;
+        allTimeSlots = [];
+      } else if (context === "consult") {
+        const availability = processConsultAvailability(calendarEvents);
+        fullyBookedDates = availability.fullyBookedDates;
+        busySlots = availability.busySlots;
+        allTimeSlots = availability.timeSlots;
+      }      
       await tick();
       setTimeout(() => {
         applyDisabledDates();
@@ -115,7 +129,15 @@
         return;
       }
       
-      if (isDateFullyBooked(date, busySlots, allTimeSlots)) {
+      // Check if date is fully booked based on context
+      let isFullyBooked = false;
+      if (context === "child-care") {
+        isFullyBooked = isChildCareDateFullyBooked(date, fullyBookedDates);
+      } else {
+        isFullyBooked = isConsultDateFullyBooked(date, busySlots, allTimeSlots);
+      }
+      
+      if (isFullyBooked) {
         button.disabled = true;
         button.style.pointerEvents = 'none';
         button.style.cursor = 'not-allowed';
@@ -142,31 +164,37 @@
 
   function handleDateSelect(detail) {
     const date = new Date(detail);
-
     if (selectedDate === null || date.getTime() !== selectedDate.getTime()) {
       selectedTimeSlot = "";
     }
-
     dateError = "";
-
     if (isPastDate(date)) {
       dateError = $_("datePicker.pastDateError");
       dateSelected = false;
       selectedDate = null;
       return;
     }
-
-    if (isDateFullyBooked(date, busySlots, allTimeSlots)) {
+    // Check if date is fully booked based on context
+    let isFullyBooked = false;
+    if (context === "child-care") {
+      isFullyBooked = isChildCareDateFullyBooked(date, fullyBookedDates);
+    } else {
+      isFullyBooked = isConsultDateFullyBooked(date, busySlots, allTimeSlots);
+    }
+    if (isFullyBooked) {
       dateError = $_("datePicker.noTimeSlots");
       dateSelected = false;
       selectedDate = null;
       return;
     }
-
     selectedDate = date;
     dateSelected = true;
-
-    availableTimeSlots = updateAvailableTimeSlots(date, busySlots, allTimeSlots);
+    // Update available time slots for consult context
+    if (context === "consult") {
+      availableTimeSlots = getAvailableConsultSlots(date, busySlots, allTimeSlots);
+    } else {
+      availableTimeSlots = [];
+    }
   }
 
   onMount(() => {
@@ -201,16 +229,11 @@
       applyDisabledDates();
     }, 500);
     
-    // Clean up interval on destroy
     onDestroy(() => {
       if (checkInterval) {
         clearInterval(checkInterval);
       }
     });
-  });
-
-  onDestroy(() => {
-    // Cleanup handled in onMount
   });
 </script>
 
