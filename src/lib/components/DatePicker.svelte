@@ -19,7 +19,8 @@
     selectedTimeSlot = $bindable(""),
     dateSelected = $bindable(false),
     showTimePicker = true,
-    context = "general",
+    context,
+    consultationType = "indepth",
   } = $props();
 
   let availableTimeSlots = $state([]);
@@ -31,6 +32,14 @@
   let fullyBookedDates = $state([]);
   let allTimeSlots = $state([]);
   let datepickerElement = $state();
+
+  // Reset time slot when consultation type changes
+  $effect(() => {
+    if (selectedDate && context === "consult") {
+      selectedTimeSlot = "";
+      availableTimeSlots = getAvailableConsultSlots(selectedDate, busySlots, consultationType);
+    }
+  });
 
   $effect(() => {
     if (selectedDate !== null) {
@@ -62,7 +71,7 @@
         const availability = processConsultAvailability(calendarEvents);
         fullyBookedDates = availability.fullyBookedDates;
         busySlots = availability.busySlots;
-        allTimeSlots = availability.timeSlots;
+        allTimeSlots = availability.timeSlots30Min;
       }      
       await tick();
       setTimeout(() => {
@@ -191,7 +200,7 @@
     dateSelected = true;
     // Update available time slots for consult context
     if (context === "consult") {
-      availableTimeSlots = getAvailableConsultSlots(date, busySlots, allTimeSlots);
+      availableTimeSlots = getAvailableConsultSlots(date, busySlots, consultationType);
     } else {
       availableTimeSlots = [];
     }
@@ -223,7 +232,7 @@
             }
           }
         }
-      }, 500); // Check every 250ms
+      }, 500);
       
       // Initial application of disabled dates
       applyDisabledDates();

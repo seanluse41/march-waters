@@ -1,9 +1,34 @@
 // src/lib/helpers/consultAvailabilityCalc.js
 
 /**
- * Generate time slots for consultations (9:00 AM - 5:00 PM)
+ * Generate 30-minute time slots for consultations (9:00 AM - 5:00 PM)
  */
-export function generateConsultTimeSlots() {
+export function generateConsult30MinSlots() {
+  const slots = [];
+  for (let hour = 9; hour < 17; hour++) {
+    for (let minute = 0; minute < 60; minute += 30) {
+      const startHour = hour.toString().padStart(2, "0");
+      const startMin = minute.toString().padStart(2, "0");
+      
+      const endTime = new Date();
+      endTime.setHours(hour, minute + 30, 0, 0);
+      const endHour = endTime.getHours().toString().padStart(2, "0");
+      const endMin = endTime.getMinutes().toString().padStart(2, "0");
+      
+      const displayTime = `${startHour}:${startMin} ~ ${endHour}:${endMin}`;
+      slots.push({
+        value: `${startHour}:${startMin}`,
+        name: displayTime,
+      });
+    }
+  }
+  return slots;
+}
+
+/**
+ * Generate 1-hour time slots for consultations (9:00 AM - 5:00 PM)
+ */
+export function generateConsult1HourSlots() {
   const slots = [];
   for (let hour = 9; hour < 17; hour++) {
     const startHour = hour.toString().padStart(2, "0");
@@ -19,11 +44,11 @@ export function generateConsultTimeSlots() {
 
 /**
  * Process calendar events for consultation availability
- * Returns busy slots and fully booked dates
  */
 export function processConsultAvailability(events) {
   const busySlots = {};
-  const allTimeSlots = generateConsultTimeSlots();
+  const timeSlots30Min = generateConsult30MinSlots();
+  const timeSlots1Hour = generateConsult1HourSlots();
   
   events.forEach(event => {
     if (!event.start) return;
@@ -36,8 +61,8 @@ export function processConsultAvailability(events) {
         busySlots[dateString] = [];
       }
       
-      // Block all time slots for this date
-      allTimeSlots.forEach(slot => {
+      // Block all 30-minute slots for this date
+      timeSlots30Min.forEach(slot => {
         busySlots[dateString].push(slot.value);
       });
     } else if (event.start.dateTime) {
@@ -57,21 +82,23 @@ export function processConsultAvailability(events) {
       const eventStartHour = startDate.getHours() + (startDate.getMinutes() / 60);
       const eventEndHour = endDate.getHours() + (endDate.getMinutes() / 60);
       
-      // Block overlapping time slots
-      allTimeSlots.forEach(slot => {
-        const slotHour = parseInt(slot.value.split(':')[0]);
+      // Block overlapping 30-minute slots
+      timeSlots30Min.forEach(slot => {
+        const [slotHourStr, slotMinStr] = slot.value.split(':');
+        const slotTime = parseInt(slotHourStr) + (parseInt(slotMinStr) / 60);
+        const slotEndTime = slotTime + 0.5; // 30 minutes = 0.5 hours
         
-        if (eventStartHour <= slotHour && eventEndHour > slotHour) {
+        if (eventStartHour < slotEndTime && eventEndHour > slotTime) {
           busySlots[dateString].push(slot.value);
         }
       });
     }
   });
   
-  // Calculate fully booked dates
+  // Calculate fully booked dates (when all 30-min slots are blocked)
   const fullyBookedDates = [];
   Object.entries(busySlots).forEach(([date, slots]) => {
-    if (slots.length === allTimeSlots.length) {
+    if (slots.length === timeSlots30Min.length) {
       fullyBookedDates.push(date);
     }
   });
@@ -79,26 +106,40 @@ export function processConsultAvailability(events) {
   return {
     fullyBookedDates,
     busySlots,
-    timeSlots: allTimeSlots
+    timeSlots30Min,
+    timeSlots1Hour
   };
 }
 
 /**
- * Get available time slots for a specific date
+ * Get available time slots for a specific date and consultation type
  */
-export function getAvailableConsultSlots(date, busySlots, allTimeSlots) {
+export function getAvailableConsultSlots(date, busySlots, consultationType) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   const dateString = `${year}-${month}-${day}`;
   
-  if (busySlots[dateString]) {
-    return allTimeSlots.filter(slot => 
-      !busySlots[dateString].includes(slot.value)
-    );
-  }
+  const timeSlots30Min = generateConsult30MinSlots();
+  const timeSlots1Hour = generateConsult1HourSlots();
   
-  return allTimeSlots;
+  const busySlotsForDate = busySlots[dateString] || [];
+  
+  if (consultationType === "quick") {
+    // 30-minute consultation - show 30-minute slots
+    return timeSlots30Min.filter(slot => 
+      !busySlotsForDate.includes(slot.value)
+    );
+  } else {
+    // 1-hour consultation - show 1-hour slots, check if both 30-min slots are free
+    return timeSlots1Hour.filter(slot => {
+      const [hourStr] = slot.value.split(':');
+      const slot1 = `${hourStr}:00`;
+      const slot2 = `${hourStr}:30`;
+      
+      return !busySlotsForDate.includes(slot1) && !busySlotsForDate.includes(slot2);
+    });
+  }
 }
 
 /**
@@ -113,7 +154,9 @@ export function isConsultDateFullyBooked(date, busySlots, allTimeSlots) {
   const dateString = `${year}-${month}-${day}`;
   
   if (busySlots[dateString]) {
-    return busySlots[dateString].length === allTimeSlots.length;
+    // Use 30-minute slots as the base for determining if fully booked
+    const timeSlots30Min = generateConsult30MinSlots();
+    return busySlots[dateString].length === timeSlots30Min.length;
   }
   
   return false;

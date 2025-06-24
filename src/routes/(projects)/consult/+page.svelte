@@ -195,6 +195,7 @@
                     bind:selectedTimeSlot
                     bind:dateSelected
                     context="consult"
+                    consultationType={selectedCourse}
                 />
             </div>
             <!-- enter info -->
