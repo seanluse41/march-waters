@@ -13,7 +13,12 @@
     import StepProgress from "$lib/components/StepProgress.svelte";
     import InfoForm from "$lib/components/InfoForm.svelte";
     import ConfirmationScreen from "$lib/components/ConfirmationScreen.svelte";
+    import SuccessCard from "$lib/components/SuccessCard.svelte";
     import CoursePicker from "$lib/components/CoursePicker.svelte";
+    import {
+        addCalendarEvent,
+        createConsultEventData,
+    } from "$lib/requests/addCalendarEvent.js";
 
     // Persistent state
     let selectedDate = $state(null);
@@ -26,6 +31,8 @@
     let phone = $state("");
     let paymentMethod = $state("cash");
     let selectedCourse = $state("");
+    let isSubmitting = $state(false);
+    let submissionError = $state("");
 
     // Track if email consultation is selected
     let isEmailCourse = $derived(selectedCourse === "email");
@@ -103,17 +110,45 @@
         } else if (currentStep === 3 && isFormValid) {
             currentStep = 4;
         } else if (currentStep === 4) {
-            // Handle submission and confirmation logic
-            console.log("Booking complete!", {
-                course: selectedCourse,
-                courseName: activeCourse?.title,
-                date: selectedDate,
-                time: selectedTimeSlot,
+            handleSubmission();
+        }
+    }
+
+    async function handleSubmission() {
+        isSubmitting = true;
+        submissionError = "";
+
+        try {
+            // For email consultations, use current date
+            const eventDate = isEmailCourse ? new Date() : selectedDate;
+
+            // Create calendar event data
+            const eventData = createConsultEventData({
+                selectedDate: eventDate,
+                selectedTimeSlot: isEmailCourse ? "N/A" : selectedTimeSlot,
                 name,
                 email,
                 phone,
+                selectedCourse,
                 paymentMethod,
+                courseDuration: activeCourse?.duration,
             });
+
+            // Add event to calendar
+            const result = await addCalendarEvent(eventData);
+
+            if (result.success) {
+                currentStep = 5;
+            } else {
+                submissionError =
+                    result.error ||
+                    "Failed to create booking. Please try again.";
+            }
+        } catch (error) {
+            console.error("Submission error:", error);
+            submissionError = "An unexpected error occurred. Please try again.";
+        } finally {
+            isSubmitting = false;
         }
     }
 
@@ -195,7 +230,6 @@
                     bind:selectedTimeSlot
                     bind:dateSelected
                     context="consult"
-                    consultationType={selectedCourse}
                 />
             </div>
             <!-- enter info -->
@@ -251,6 +285,29 @@
                     )}
                 />
             </div>
+            <!-- success -->
+        {:else if currentStep === 5}
+            <SuccessCard
+                selectedDate={isEmailCourse ? null : selectedDate}
+                selectedTimeSlot={isEmailCourse ? "N/A" : selectedTimeSlot}
+                {name}
+                {email}
+                {phone}
+                paymentMethod={isEmailCourse ? "credit" : paymentMethod}
+                coursePrice={activeCourse?.price}
+                course={activeCourse?.title}
+                title={$_("midwife.success.title", {
+                    default: "Consultation Booked!",
+                })}
+                successMessage={$_("midwife.success.message", {
+                    default:
+                        "Your consultation has been successfully scheduled.",
+                })}
+                nextStepsText={$_("midwife.success.nextSteps", {
+                    default:
+                        "You'll receive a confirmation email shortly with meeting details and payment instructions.",
+                })}
+            />
         {/if}
 
         {#if currentStep <= 4}
@@ -275,15 +332,27 @@
                           ? !canProceedFromStep2
                           : currentStep === 3
                             ? !isFormValid
-                            : false}
+                            : isSubmitting}
                     class="mt-8 w-1/2 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white"
                 >
-                    {currentStep === 4
-                        ? $_("midwife.buttons.complete")
-                        : $_("midwife.buttons.next")}
+                    {#if currentStep === 4 && isSubmitting}
+                        Processing...
+                    {:else}
+                        {currentStep === 4
+                            ? $_("midwife.buttons.complete")
+                            : $_("midwife.buttons.next")}
+                    {/if}
                     <ArrowRightOutline class="ms-2 h-5 w-5" />
                 </Button>
             </div>
+
+            {#if submissionError}
+                <div
+                    class="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg"
+                >
+                    <p class="text-red-800 text-sm">{submissionError}</p>
+                </div>
+            {/if}
         {/if}
     </div>
 </div>

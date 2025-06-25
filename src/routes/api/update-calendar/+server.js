@@ -32,6 +32,7 @@ export async function POST({ request }) {
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
+    
     const calendar = await getCalendarClient();
 
     const response = await calendar.events.insert({

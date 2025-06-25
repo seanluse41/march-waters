@@ -14,6 +14,11 @@
     import InfoForm from "$lib/components/InfoForm.svelte";
     import ConfirmationScreen from "$lib/components/ConfirmationScreen.svelte";
     import CoursePicker from "$lib/components/CoursePicker.svelte";
+    import {
+        addCalendarEvent,
+        createChildCareEventData,
+    } from "$lib/requests/addCalendarEvent.js";
+    import SuccessCard from "$lib/components/SuccessCard.svelte";
 
     // Persistent state
     let selectedDate = $state(null);
@@ -26,6 +31,8 @@
     let paymentMethod = $state("cash");
     let selectedCourse = $state("normal");
     let childCount = $state(1);
+    let isSubmitting = $state(false);
+    let submissionError = $state("");
 
     let currentStep = $state(1);
 
@@ -91,18 +98,41 @@
         } else if (currentStep === 3 && isFormValid) {
             currentStep = 4;
         } else if (currentStep === 4) {
-            // Handle submission and confirmation logic
-            console.log("Booking complete!", {
-                course: selectedCourse,
-                courseName: activeCourse?.title,
-                date: selectedDate,
-                time: "17:00-21:30",
+            handleSubmission();
+        }
+    }
+
+    async function handleSubmission() {
+        isSubmitting = true;
+        submissionError = "";
+
+        try {
+            // Create calendar event data
+            const eventData = createChildCareEventData({
+                selectedDate,
                 name,
                 email,
                 phone,
                 childCount,
+                selectedCourse: activeCourse?.title,
                 paymentMethod,
             });
+
+            // Add event to calendar
+            const result = await addCalendarEvent(eventData);
+
+            if (result.success) {
+                currentStep = 5;
+            } else {
+                submissionError =
+                    result.error ||
+                    "Failed to create booking. Please try again.";
+            }
+        } catch (error) {
+            console.error("Submission error:", error);
+            submissionError = "An unexpected error occurred. Please try again.";
+        } finally {
+            isSubmitting = false;
         }
     }
 
@@ -301,6 +331,21 @@
                     )}
                 />
             </div>
+        {:else if currentStep === 5}
+            <SuccessCard
+                {selectedDate}
+                selectedTimeSlot="17:00 - 21:30"
+                {name}
+                {email}
+                {phone}
+                {paymentMethod}
+                coursePrice={activeCourse?.price}
+                course={activeCourse?.title}
+                {childCount}
+                title={$_("childcare.success.title")}
+                successMessage={$_("childcare.success.message")}
+                nextStepsText={$_("childcare.success.nextSteps")}
+            />
         {/if}
 
         {#if currentStep <= 4}
@@ -325,15 +370,27 @@
                           ? !canProceedFromStep2
                           : currentStep === 3
                             ? !isFormValid
-                            : false}
+                            : isSubmitting}
                     class="mt-8 w-1/2 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white"
                 >
-                    {currentStep === 4
-                        ? $_("childcare.buttons.complete")
-                        : $_("childcare.buttons.next")}
+                    {#if currentStep === 4 && isSubmitting}
+                        Processing...
+                    {:else}
+                        {currentStep === 4
+                            ? $_("childcare.buttons.complete")
+                            : $_("childcare.buttons.next")}
+                    {/if}
                     <ArrowRightOutline class="ms-2 h-5 w-5" />
                 </Button>
             </div>
+
+            {#if submissionError}
+                <div
+                    class="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg"
+                >
+                    <p class="text-red-800 text-sm">{submissionError}</p>
+                </div>
+            {/if}
         {/if}
     </div>
 </div>

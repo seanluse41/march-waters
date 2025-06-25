@@ -167,6 +167,11 @@
       "cashInstructions": "Please bring exact cash payment to your appointment.",
       "creditInstructions": "You will be redirected to our secure payment portal after confirming."
     },
+    "success": {
+      "title": "Booking Confirmed!",
+      "message": "Your childcare booking has been successfully created.",
+      "nextSteps": "We'll contact you soon to confirm the details and payment arrangements."
+    },
     "project": {
       "title": "About Our Childcare Service",
       "description": "We provide evening childcare for children aged 0 to preschool from 5:00PM to 9:30PM. In Japan, it can be difficult for parents to find time for themselves, to have uninterrupted conversations with partners or friends, or simply to relax without careful planning. While children are important, adults also deserve time for self-care. Let us help you incorporate self-care into your daily routine.",
@@ -274,6 +279,11 @@
       "cashInstructions": "Please bring exact cash payment to your appointment.",
       "creditInstructions": "You will be redirected to our secure payment portal after confirming."
     },
+    "success": {
+      "title": "Consultation Booked!",
+      "message": "Your consultation has been successfully scheduled.",
+      "nextSteps": "You'll receive a confirmation email shortly with meeting details and payment instructions."
+    },
     "project": {
       "title": "Talk with a Midwife",
       "description": "\"Is it okay to ask my doctor about this? Should I go to the hospital for this concern?\" Working in hospitals, I've heard these questions many times. Whether you're concerned about your body or sexuality, carrying uncertainties, or simply need someone to talk to—regardless of your age, nationality, or pregnancy status—please feel free to reach out. English service is available.",
@@ -303,6 +313,9 @@
     "amountDue": "Amount due:",
     "amountCharged": "Amount to be charged:",
     "childCount": "Number of children"
+  },
+  "success": {
+    "returnHome": "Return to Home"
   },
   "helpers": {
     "personCounter": " "

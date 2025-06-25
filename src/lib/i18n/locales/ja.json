@@ -206,7 +206,12 @@
     "fixedTime": "夕方17時00分〜21時30分まで",
     "appointment": "予約内容",
     "childCount": "預かる子供の人数",
-    "maxCapacity": "定員は３名様まで"
+    "maxCapacity": "定員は３名様まで",
+    "success": {
+      "title": "予約が確定しました！",
+      "message": "あとはねるだけプロジェクトの予約が正常に作成されました。",
+      "nextSteps": "詳細と支払いの確認のため、近日中にご連絡いたします。"
+    }
   },
   "bodychoice": {
     "pageTitle": "MyBody\nMyChoice\nプロジェクト",
@@ -282,6 +287,11 @@
       "cashInstructions": "当日、現金にてお支払いください。",
       "creditInstructions": "確定後、決済ページへ移動します。"
     },
+    "success": {
+      "title": "相談予約が完了しました！",
+      "message": "じょさんしとはなそうの予約が正常に作成されました。",
+      "nextSteps": "ミーティングの詳細と支払い方法について、確認メールを近日中にお送りします。"
+    },
     "project": {
       "title": "じょさんしとはなそう",
       "description": "こんな話、病院で聞いてもいいのかな？こんなことで、病院に行ってもいいのかな？そういったお声を病院で勤務する中で沢山聞いてきました。あらゆる年代、国籍、妊娠の有無に限らず体や性に関する悩みを解決したい人、もやもやを抱えている人、または悩みはないけど話を聞いてほしい人、気軽にお越し下さい。English available",
@@ -311,6 +321,9 @@
     "amountDue": "料金：",
     "amountCharged": "料金：",
     "childCount": "預かる子供の人数"
+  },
+  "success": {
+    "returnHome": "ホームに戻る"
   },
   "helpers": {
     "personCounter": "名様"
