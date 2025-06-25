@@ -95,6 +95,42 @@
       }
     }
   },
+  "about": {
+    "timeline": {
+      "heading": "Career History & Professional Journey",
+      "2017": {
+        "title": "Registered Nurse License Obtained",
+        "date": "2017",
+        "description": "Worked at a general hospital and emergency medical center in Tokyo. Gained experience at the forefront of acute care medicine, facing many lives daily."
+      },
+      "2019": {
+        "title": "Transferred to Chronic Care Unit After Childbirth",
+        "date": "2019",
+        "description": "Practiced nursing with careful attention to patients with neurological diseases. Experienced diverse fields including home care, end-of-life care, and family support."
+      },
+      "2022": {
+        "title": "Certified Midwife License Obtained",
+        "date": "2022",
+        "description": "Worked at a comprehensive perinatal care center. Provided medical care for pregnant women from low-risk to high-risk cases. Realized the importance of continuous community support."
+      },
+      "2024": {
+        "title": "Adolescent Health Counselor Certification",
+        "date": "2024",
+        "description": "Started activities as a sex education instructor alongside main work. Practiced in various settings.",
+        "achievements": {
+          "heading": "Teaching Experience",
+          "item1": "• Classes for elementary and high school students",
+          "item2": "• Workshops for PTA and parents of young children",
+          "item3": "• Ongoing programs at children's residential facilities"
+        }
+      },
+      "2025": {
+        "title": "Transition to Local Obstetrics and Gynecology Clinic",
+        "date": "2025",
+        "description": "Chose a work style without night shifts to match lifestyle. While continuing community-based care, officially launched individual practice 'March Waters'. Currently exploring new forms of support as a midwife, sex education instructor, and SRHR provider."
+      }
+    }
+  },
   "timeline": {
     "step1": {
       "label": "Step 1",
