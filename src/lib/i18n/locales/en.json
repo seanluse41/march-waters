@@ -96,6 +96,12 @@
     }
   },
   "about": {
+    "heading": {
+      "prefix": "March Waters aims for",
+      "highlight": "life-long",
+      "suffix": "sexual education, wellness, and barrier free discourse."
+    },
+    "subheading": "Creating inclusive spaces for learning and growth at every stage of life.",
     "timeline": {
       "heading": "Career History & Professional Journey",
       "2017": {

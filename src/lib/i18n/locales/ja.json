@@ -104,6 +104,12 @@
     }
   },
   "about": {
+    "heading": {
+      "prefix": "March Watersは",
+      "highlight": "一生涯に渡る",
+      "suffix": "性教育、ウェルネス、そしてバリアフリーな対話を目指しています。"
+    },
+    "subheading": "人生のあらゆる段階で学習と成長のための包括的な空間を創造する。",
     "timeline": {
       "heading": "職務経歴・活動のあゆみ",
       "2017": {
