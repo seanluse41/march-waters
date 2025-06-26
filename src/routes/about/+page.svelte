@@ -1,8 +1,9 @@
 <script>
-    import { Card, Heading, P, Span, Hr } from "flowbite-svelte";
+    import { Card, Heading, P, Span, Hr, Img } from "flowbite-svelte";
     import CareerTimeline from "$lib/components/CareerTimeline.svelte";
     import AboutTabs from "$lib/components/AboutTabs.svelte";
     import { _ } from "svelte-i18n";
+    import stock2 from "$lib/assets/photos/stock2.png";
 </script>
 
 <Card color="primary" class="p-4 md:p-16 border-0 bg-white max-w-none mt-16">
@@ -23,12 +24,19 @@
     <div class="hidden md:block">
         <div class="grid grid-cols-2 gap-8 mb-12">
             <!-- Left column - empty for now -->
-            <div class="space-y-6">
-                <!-- Placeholder for future content -->
+            <div class="space-y-6 flex">
+                <Img
+                    src={stock2}
+                    alt="sample 1"
+                    class="h-64 w-64 rounded-full border-4 border-blue-500 object-cover"
+                />
+                <div class="flex flex-col">
+                    <Heading>Hello</Heading>
+                </div>
             </div>
 
             <!-- Right column - Career Timeline -->
-            <div>
+            <div class="pl-8">
                 <CareerTimeline />
             </div>
         </div>
