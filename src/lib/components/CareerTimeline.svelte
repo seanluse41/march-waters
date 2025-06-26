@@ -11,7 +11,7 @@
 </script>
 
 <div class="career-timeline">
-  <h2 class="text-3xl font-bold text-slate-700 mb-8">{$_("about.timeline.heading")}</h2>
+  <h2 class="text-2xl md:text-3xl font-bold text-slate-700 mb-8">{$_("about.timeline.heading")}</h2>
   
   <Timeline order="vertical">
     <TimelineItem title={$_("about.timeline.2017.title")} date={$_("about.timeline.2017.date")}>

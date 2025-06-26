@@ -22,21 +22,31 @@
 
     <!-- Desktop: Two-column layout -->
     <div class="hidden md:block">
-        <div class="grid grid-cols-2 gap-8 mb-12">
-            <!-- Left column - empty for now -->
-            <div class="space-y-6 flex">
-                <Img
-                    src={stock2}
-                    alt="sample 1"
-                    class="h-64 w-64 rounded-full border-4 border-blue-500 object-cover"
-                />
-                <div class="flex flex-col">
-                    <Heading>Hello</Heading>
+        <div class="grid grid-cols-2 gap-24 mb-12">
+            <!-- Left column - Director's message -->
+            <div class="flex flex-col space-y-6">
+                <Heading
+                    tag="h2"
+                    class="text-2xl md:text-3xl font-bold text-slate-700 mb-4 self-end"
+                >
+                    {$_("about.director.heading")}
+                </Heading>
+
+                <div class="relative">
+                    <Img
+                        src={stock2}
+                        alt="Director"
+                        class="h-48 w-48 rounded-full border-4 border-blue-500 object-cover float-left mr-6 mb-4"
+                        style="shape-outside: circle(50%); shape-margin: 1.5rem;"
+                    />
+                    <P class="text-slate-700 leading-relaxed text-justify">
+                        {$_("about.director.message")}
+                    </P>
                 </div>
             </div>
 
             <!-- Right column - Career Timeline -->
-            <div class="pl-8">
+            <div>
                 <CareerTimeline />
             </div>
         </div>
