@@ -1,5 +1,6 @@
 <script>
     import { Card, Heading, P, Span, Hr, Img } from "flowbite-svelte";
+    import DirectorMessage from "$lib/components/DirectorMessage.svelte";
     import CareerTimeline from "$lib/components/CareerTimeline.svelte";
     import AboutTabs from "$lib/components/AboutTabs.svelte";
     import { _ } from "svelte-i18n";
@@ -22,31 +23,12 @@
 
     <!-- Desktop: Two-column layout -->
     <div class="hidden md:block">
-        <div class="grid grid-cols-2 gap-24 mb-12">
+        <div class="grid grid-cols-2 gap-28 mb-12">
             <!-- Left column - Director's message -->
-            <div class="flex flex-col space-y-6">
-                <Heading
-                    tag="h2"
-                    class="text-2xl md:text-3xl font-bold text-slate-700 mb-4 self-end"
-                >
-                    {$_("about.director.heading")}
-                </Heading>
-
-                <div class="relative">
-                    <Img
-                        src={stock2}
-                        alt="Director"
-                        class="h-48 w-48 rounded-full border-4 border-blue-500 object-cover float-left mr-6 mb-4"
-                        style="shape-outside: circle(50%); shape-margin: 1.5rem;"
-                    />
-                    <P class="text-slate-700 leading-relaxed text-justify">
-                        {$_("about.director.message")}
-                    </P>
-                </div>
-            </div>
+            <DirectorMessage />
 
             <!-- Right column - Career Timeline -->
-            <div>
+            <div class="px-8">
                 <CareerTimeline />
             </div>
         </div>
