@@ -18,6 +18,7 @@
         addCalendarEvent,
         createChildCareEventData,
     } from "$lib/requests/addCalendarEvent.js";
+    import { createPaymentIntent } from "$lib/requests/createPaymentIntent.js";
     import SuccessCard from "$lib/components/SuccessCard.svelte";
 
     // Persistent state
@@ -107,7 +108,22 @@
         submissionError = "";
 
         try {
-            // Create calendar event data
+            // Create payment intent first
+            const paymentResult = await createPaymentIntent(
+                name,
+                activeCourse?.title,
+                phone,
+                email,
+            );
+
+            if (!paymentResult.success) {
+                submissionError =
+                    paymentResult.error ||
+                    "Failed to create payment. Please try again.";
+                return;
+            }
+
+            // If payment intent created successfully, create calendar event
             const eventData = createChildCareEventData({
                 selectedDate,
                 name,
@@ -118,7 +134,6 @@
                 paymentMethod,
             });
 
-            // Add event to calendar
             const result = await addCalendarEvent(eventData);
 
             if (result.success) {

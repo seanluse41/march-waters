@@ -357,6 +357,7 @@
     "note": "メール相談はオンライン決済のみ"
   },
   "confirmationscreen": {
+    "details": "以下の予約内容をご確認ください：",
     "course": "コース",
     "date": "日付",
     "time": "時間",

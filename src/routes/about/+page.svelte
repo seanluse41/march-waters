@@ -4,7 +4,6 @@
     import CareerTimeline from "$lib/components/CareerTimeline.svelte";
     import AboutTabs from "$lib/components/AboutTabs.svelte";
     import { _ } from "svelte-i18n";
-    import stock2 from "$lib/assets/photos/stock2.png";
 </script>
 
 <Card color="primary" class="p-4 md:p-16 border-0 bg-white max-w-none mt-16">

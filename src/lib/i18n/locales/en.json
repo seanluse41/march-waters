@@ -349,6 +349,7 @@
     "note": "Mail Consulation is Credit Only"
   },
   "confirmationscreen": {
+    "details": "Reservation Request Details:",
     "course": "Course",
     "date": "Date",
     "time": "Time",

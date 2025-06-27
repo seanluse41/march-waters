@@ -19,6 +19,7 @@
         addCalendarEvent,
         createConsultEventData,
     } from "$lib/requests/addCalendarEvent.js";
+    import { createPaymentIntent } from "$lib/requests/createPaymentIntent.js";
 
     // Persistent state
     let selectedDate = $state(null);
@@ -119,10 +120,25 @@
         submissionError = "";
 
         try {
+            // Create payment intent first
+            const paymentResult = await createPaymentIntent(
+                name,
+                activeCourse?.title,
+                phone,
+                email,
+            );
+
+            if (!paymentResult.success) {
+                submissionError =
+                    paymentResult.error ||
+                    "Failed to create payment. Please try again.";
+                return;
+            }
+
+            // If payment intent created successfully, create calendar event
             // For email consultations, use current date
             const eventDate = isEmailCourse ? new Date() : selectedDate;
 
-            // Create calendar event data
             const eventData = createConsultEventData({
                 selectedDate: eventDate,
                 selectedTimeSlot: isEmailCourse ? "N/A" : selectedTimeSlot,
@@ -134,7 +150,6 @@
                 courseDuration: activeCourse?.duration,
             });
 
-            // Add event to calendar
             const result = await addCalendarEvent(eventData);
 
             if (result.success) {
