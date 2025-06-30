@@ -1,0 +1,37 @@
+// src/lib/emails/childCare.js
+import { formatEventDateTime, parseEventDescription } from '$lib/helpers/emailHelpers.js';
+
+export function childCareEmailTemplate(eventData) {
+    const { summary, description, start, end } = eventData;
+    const details = parseEventDescription(description);
+    const { dateStr, timeStr } = formatEventDateTime(start, end);
+
+    return `
+予約確認のお知らせ
+
+${details['お名前'] || 'お客様'}　様
+
+この度は、March Watersのあとはねるだけプロジェクトをご利用いただき、誠にありがとうございます。
+下記の通り、ご予約を確認いたしました。
+
+【予約内容】
+サービス名: ${summary}
+日時: ${dateStr} ${timeStr}
+お名前: ${details['お名前'] || ''}
+メールアドレス: ${details['メールアドレス'] || ''}
+電話番号: ${details['電話番号'] || ''}
+コース: ${details['コース'] || ''}
+子供の人数: ${details['子供の人数'] || ''}
+お支払い方法: ${details['お支払い方法'] || ''}
+
+当日は上記の日時にお待ちしております。
+お子様のお預かりの準備を整えてお迎えいたします。
+
+ご不明な点やご質問がございましたら、お気軽にお問い合わせください。
+
+今後ともMarch Watersをよろしくお願いいたします。
+
+March Waters
+Email: talk@march-waters.com
+    `;
+}

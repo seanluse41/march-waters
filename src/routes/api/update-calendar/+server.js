@@ -37,6 +37,7 @@ export async function POST({ request }) {
 
     const response = await calendar.events.insert({
       calendarId: CALENDAR_ID,
+      conferenceDataVersion: 1,
       requestBody: eventData,
     });
 

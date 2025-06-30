@@ -23,6 +23,7 @@
 	"dependencies": {
 		"@lottiefiles/dotlottie-svelte": "^0.5.3",
 		"googleapis": "^148.0.0",
+		"nodemailer": "^7.0.4",
 		"stripe": "^18.2.1",
 		"svelte-i18n": "^4.0.1",
 		"svelte-inview": "^4.0.4",

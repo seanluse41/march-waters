@@ -36,7 +36,7 @@
                 class="h-5 w-5 text-gray-500 hover:text-gray-900"
             />
         </FooterIcon>
-        <FooterIcon href="mailto:talk@march-waters.jp" aria-label={$_("footer.mail")}>
+        <FooterIcon href="mailto:talk@march-waters.com" aria-label={$_("footer.mail")}>
             <EnvelopeOutline
                 class="h-5 w-5 text-gray-500 hover:text-gray-900"
             />

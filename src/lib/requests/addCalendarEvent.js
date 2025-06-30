@@ -1,4 +1,6 @@
-export async function addCalendarEvent(eventDetails) {
+import { sendConfirmationEmail } from './sendEmail.js';
+
+export async function addCalendarEvent(eventDetails, recipientEmail, serviceType = null) {
   try {
     const response = await fetch('/api/update-calendar', {
       method: 'POST',
@@ -7,18 +9,26 @@ export async function addCalendarEvent(eventDetails) {
       },
       body: JSON.stringify(eventDetails)
     });
-    
+
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.error || 'Failed to create calendar event');
     }
-    
+
     const data = await response.json();
+
+    // Send confirmation email after successful calendar event creation
+    if (recipientEmail) {
+      const emailResult = await sendConfirmationEmail(data.event, recipientEmail, serviceType);
+      if (!emailResult.success) {
+        console.warn('Calendar event created but email failed:', emailResult.error);
+      }
+    }
     return {
       success: true,
       event: data.event
     };
-    
+
   } catch (error) {
     console.error('Error adding calendar event:', error);
     return {
@@ -34,13 +44,13 @@ export async function addCalendarEvent(eventDetails) {
 export function createChildCareEventData({ selectedDate, name, email, phone, childCount, selectedCourse, paymentMethod }) {
   const startDate = new Date(selectedDate);
   startDate.setHours(17, 0, 0, 0); // 5:00 PM
-  
+
   const endDate = new Date(selectedDate);
   endDate.setHours(21, 30, 0, 0); // 9:30 PM
-  
+
   // Force Japanese text for calendar events
   const paymentJP = paymentMethod === 'cash' ? '現金' : 'カード決済';
-  
+
   const description = [
     `お名前: ${name}`,
     `メールアドレス: ${email}`,
@@ -50,7 +60,7 @@ export function createChildCareEventData({ selectedDate, name, email, phone, chi
     `お支払い方法: ${paymentJP}`,
     'サービス: あとはねるだけプロジェクト (17:00-21:30)'
   ].join('\n');
-  
+
   return {
     summary: 'あとはねるだけプロジェクト',
     description,
@@ -71,19 +81,19 @@ export function createChildCareEventData({ selectedDate, name, email, phone, chi
 export function createConsultEventData({ selectedDate, selectedTimeSlot, name, email, phone, selectedCourse, paymentMethod, courseDuration }) {
   // Force Japanese text for calendar events
   const paymentJP = paymentMethod === 'cash' ? '現金' : 'カード決済';
-  
+
   // Determine event title based on course
   let eventTitle = 'じょさんしとはなそう';
   let serviceNameJP = 'オンライン相談';
-  
+
   if (selectedCourse === 'email') {
     eventTitle = 'メール相談';
     serviceNameJP = 'メール相談';
-    
+
     // Create task at current date/time for email consultations
     const now = new Date();
     const taskEnd = new Date(now.getTime() + 60 * 60 * 1000); // 1 hour from now
-    
+
     return {
       summary: eventTitle,
       description: [
@@ -105,16 +115,16 @@ export function createConsultEventData({ selectedDate, selectedTimeSlot, name, e
       }
     };
   }
-  
+
   // For scheduled consultations
   const [startHour] = selectedTimeSlot.split(':').map(Number);
-  
+
   const startDate = new Date(selectedDate);
   startDate.setHours(startHour, 0, 0, 0);
-  
+
   const endDate = new Date(startDate);
   endDate.setHours(startHour + 1, 0, 0, 0); // Default to 1 hour
-  
+
   if (selectedCourse === 'quick') {
     eventTitle = 'さくっと相談 (30分)';
     serviceNameJP = 'さくっと相談 (30分)';
@@ -123,7 +133,7 @@ export function createConsultEventData({ selectedDate, selectedTimeSlot, name, e
     eventTitle = 'じっくり相談 (60分)';
     serviceNameJP = 'じっくり相談 (60分)';
   }
-  
+
   const description = [
     `お名前: ${name}`,
     `メールアドレス: ${email}`,
@@ -133,7 +143,7 @@ export function createConsultEventData({ selectedDate, selectedTimeSlot, name, e
     `お支払い方法: ${paymentJP}`,
     `サービス: ${serviceNameJP}`
   ].join('\n');
-  
+
   return {
     summary: eventTitle,
     description,
