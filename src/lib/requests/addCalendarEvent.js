@@ -1,6 +1,6 @@
 import { sendConfirmationEmail } from './sendEmail.js';
 
-export async function addCalendarEvent(eventDetails, recipientEmail, serviceType = null) {
+export async function addCalendarEvent(eventDetails, email, serviceType = null) {
   try {
     const response = await fetch('/api/update-calendar', {
       method: 'POST',
@@ -9,26 +9,27 @@ export async function addCalendarEvent(eventDetails, recipientEmail, serviceType
       },
       body: JSON.stringify(eventDetails)
     });
-
+    
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.error || 'Failed to create calendar event');
     }
-
+    
     const data = await response.json();
-
+    
     // Send confirmation email after successful calendar event creation
-    if (recipientEmail) {
-      const emailResult = await sendConfirmationEmail(data.event, recipientEmail, serviceType);
+    if (email) {
+      const emailResult = await sendConfirmationEmail(data.event, email, serviceType);
       if (!emailResult.success) {
         console.warn('Calendar event created but email failed:', emailResult.error);
       }
     }
+    
     return {
       success: true,
       event: data.event
     };
-
+    
   } catch (error) {
     console.error('Error adding calendar event:', error);
     return {

@@ -133,8 +133,11 @@
                 courseDuration: activeCourse?.duration,
             });
 
-            const result = await addCalendarEvent(eventData);
-
+            const result = await addCalendarEvent(
+                eventData,
+                email,
+                "consultation",
+            );
             if (result.success) {
                 currentStep = 5;
             } else {

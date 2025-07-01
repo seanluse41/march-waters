@@ -35,7 +35,7 @@ export async function POST({ request }) {
 
         const emailContent = constructEmailContent(eventData, serviceType);
 
-        let transporter = nodemailer.createTransporter({
+        let transporter = nodemailer.createTransport({
             host: 'smtp.porkbun.com',
             port: 587,
             secure: false,

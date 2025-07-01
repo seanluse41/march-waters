@@ -117,7 +117,11 @@
                 paymentMethod,
             });
 
-            const result = await addCalendarEvent(eventData);
+            const result = await addCalendarEvent(
+                eventData,
+                email,
+                "childcare",
+            );
 
             if (result.success) {
                 currentStep = 5;
