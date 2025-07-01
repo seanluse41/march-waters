@@ -2,7 +2,7 @@
 import { formatEventDateTime, parseEventDescription } from '$lib/helpers/emailHelpers.js';
 
 export function consultationEmailTemplate(eventData) {
-    const { summary, description, start, end, hangoutLink } = eventData;
+    const { summary, description, start, end } = eventData;
     const details = parseEventDescription(description);
     const { dateStr, timeStr } = formatEventDateTime(start, end);
 
@@ -27,18 +27,16 @@ ${isEmailConsult ? '対応方法' : '日時'}: ${timeDisplay}
 コース: ${details['コース'] || ''}
 お支払い方法: ${details['お支払い方法'] || ''}
 
-${!isEmailConsult && hangoutLink ? `
+${!isEmailConsult ? `
 【Google Meetリンク】
-${hangoutLink}
+https://meet.google.com/cqj-jtmg-gau
 
 当日は上記の日時に、Google Meetリンクからご参加ください。
 ` : ''}
 
 ${isEmailConsult 
     ? 'メールでのご相談内容を確認後、24時間以内にご返信いたします。' 
-    : hangoutLink 
-        ? '上記のGoogle Meetリンクからオンライン相談にご参加いただけます。'
-        : '当日は上記の日時にオンラインでお待ちしております。ミーティングリンクは別途お送りいたします。'
+    : '上記のGoogle Meetリンクからオンライン相談にご参加いただけます。'
 }
 
 ご不明な点やご質問がございましたら、お気軽にお問い合わせください。
