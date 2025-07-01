@@ -8,18 +8,16 @@ export const actions = {
         const phone = formData.get('phone') || '';
         const message = formData.get('message') || '';
         const otherReason = formData.get('otherReason') || '';
-        const dinner = formData.has('dinner'); // honeypot checkbox
+        const dinner = formData.has('dinner');
         
-        // Bot detection - honeypot field
         if (dinner) {
           console.log('Bot detected - dinner checkbox checked');
-          // Return success to avoid revealing we detected a bot
           return {
             success: true,
             data: null
           };
         }
-        
+                
         const reasons = {
           childcare: formData.has('childcare'),
           bodyChoice: formData.has('bodyChoice'),
@@ -38,6 +36,14 @@ export const actions = {
         };
         
         console.log('Valid form submitted:', contactData);
+        
+        // Send contact email
+        const { sendContactEmail } = await import('$lib/requests/sendContactEmail.js');
+        const emailResult = await sendContactEmail(contactData);
+        if (!emailResult.success) {
+          console.warn('Contact email failed to send:', emailResult.error);
+          // Don't fail the form submission, just log the issue
+        }
         
         return {
           success: true,
