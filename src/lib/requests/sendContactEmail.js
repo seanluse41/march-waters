@@ -1,7 +1,10 @@
 // src/lib/requests/sendContactEmail.js
-export async function sendContactEmail(contactData) {
+export async function sendContactEmail(contactData, fetchFn = null) {
   try {
-    const response = await fetch('/api/send-contact-email', {
+    // Use provided fetch function (for server-side) or global fetch (for client-side)
+    const useFetch = fetchFn || fetch;
+    
+    const response = await useFetch('/api/send-contact-email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

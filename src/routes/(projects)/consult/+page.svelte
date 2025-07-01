@@ -1,6 +1,6 @@
 <script>
     import { _ } from "svelte-i18n";
-    import { Button, Heading, Hr, List, Li } from "flowbite-svelte";
+    import { Button, Heading, Hr, List, Li, Spinner } from "flowbite-svelte";
     import {
         ArrowRightOutline,
         ArrowLeftOutline,
@@ -344,7 +344,8 @@
                     class="mt-8 w-1/2 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white"
                 >
                     {#if currentStep === 4 && isSubmitting}
-                        Processing...
+                        <Spinner class="me-3" size="4" color="white" />
+                        送信中...
                     {:else}
                         {currentStep === 4
                             ? $_("midwife.buttons.complete")
