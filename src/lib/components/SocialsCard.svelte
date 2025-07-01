@@ -8,7 +8,7 @@
   } from "flowbite-svelte-icons";
     import { Card } from "flowbite-svelte";
 
-  $: socials = [
+  let socials = $state([
     {
       name: "instagram",
       icon: InstagramSolid,
@@ -24,10 +24,10 @@
     {
       name: "mail",
       icon: EnvelopeOutline,
-      url: "#",
+      url: "/contact",
       handle: $_("top.socials.mail.handle"),
     },
-  ];
+  ]);
 </script>
 
 <Card color="primary" class="p-8 border-0 bg-white max-w-none">
