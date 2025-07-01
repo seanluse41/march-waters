@@ -1,17 +1,25 @@
 export const actions = {
     default: async ({ request }) => {
       try {
-        // Get form data
         const formData = await request.formData();
         
-        // Extract form values
         const name = formData.get('name') || '';
         const email = formData.get('email') || '';
         const phone = formData.get('phone') || '';
         const message = formData.get('message') || '';
         const otherReason = formData.get('otherReason') || '';
+        const dinner = formData.has('dinner'); // honeypot checkbox
         
-        // Extract reasons for contact
+        // Bot detection - honeypot field
+        if (dinner) {
+          console.log('Bot detected - dinner checkbox checked');
+          // Return success to avoid revealing we detected a bot
+          return {
+            success: true,
+            data: null
+          };
+        }
+        
         const reasons = {
           childcare: formData.has('childcare'),
           bodyChoice: formData.has('bodyChoice'),
@@ -20,7 +28,6 @@ export const actions = {
           other: formData.has('other')
         };
         
-        // Create data object to log
         const contactData = {
           name,
           email,
@@ -30,10 +37,8 @@ export const actions = {
           message
         };
         
-        // Log data to console (server-side)
-        console.log('Form submitted:', contactData);
+        console.log('Valid form submitted:', contactData);
         
-        // Return success message to the page
         return {
           success: true,
           data: contactData

@@ -25,6 +25,8 @@
     let selectedTimeSlot = $state("");
     let dateSelected = $state(false);
 
+    let dinner = $state(false);
+
     // Form validation states
     let name = $state("");
     let email = $state("");
@@ -115,6 +117,11 @@
     }
 
     async function handleSubmission() {
+        if (dinner) {
+            console.log("Bot detected - dinner checkbox checked");
+            submissionError = "Please try again later.";
+            return;
+        }
         isSubmitting = true;
         submissionError = "";
 

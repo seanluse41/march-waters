@@ -7,7 +7,6 @@
     } from "flowbite-svelte-icons";
     import { _ } from "svelte-i18n";
 
-    // Props with two-way binding for form validation
     let {
         name = $bindable(""),
         email = $bindable(""),
@@ -15,6 +14,7 @@
         paymentMethod = $bindable("cash"),
         disableCash,
         disablePayment,
+        dinner = $bindable(false), // honeypot checkbox
     } = $props();
 
     function handleSubmit(event) {
@@ -23,6 +23,19 @@
 </script>
 
 <form onsubmit={handleSubmit} class="w-full">
+    <!-- Honeypot field - hidden checkbox -->
+    <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+        <label for="dinner">I would like dinner information</label>
+        <input 
+            id="dinner" 
+            name="dinner" 
+            type="checkbox" 
+            bind:checked={dinner}
+            tabindex="-1"
+            autocomplete="off"
+        />
+    </div>
+
     <!-- Name Field -->
     <div class="mb-6">
         <Label for="name" class="mb-2 block text-slate-700"
@@ -72,6 +85,7 @@
             {/snippet}
         </Input>
     </div>
+
     <!-- Payment Method -->
     {#if !disablePayment}
         <div class="mb-6">
