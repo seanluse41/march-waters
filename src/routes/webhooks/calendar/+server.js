@@ -1,47 +1,68 @@
 // src/routes/webhooks/calendar/+server.js
-import { json } from '@sveltejs/kit';
 
 export async function POST({ request }) {
   try {
     const headers = Object.fromEntries(request.headers.entries());
-    const body = await request.text();
     
+    // Log all headers for debugging
     console.log('=== Calendar Webhook Received ===');
-    console.log('Headers:', headers);
-    console.log('Body:', body);
     console.log('Timestamp:', new Date().toISOString());
-    console.log('================================');
+    console.log('Headers:', JSON.stringify(headers, null, 2));
     
-    // Parse body if it's JSON
-    let parsedBody;
-    try {
-      parsedBody = JSON.parse(body);
-      console.log('Parsed Body:', JSON.stringify(parsedBody, null, 2));
-    } catch (e) {
-      console.log('Body is not JSON:', body);
+    // Google sends these specific headers
+    const channelId = headers['x-goog-channel-id'];
+    const resourceId = headers['x-goog-resource-id'];
+    const resourceState = headers['x-goog-resource-state'];
+    const messageNumber = headers['x-goog-message-number'];
+    
+    console.log('Google Calendar Notification:', {
+      channelId,
+      resourceId,
+      resourceState,
+      messageNumber
+    });
+    
+    // Handle different resource states
+    if (resourceState === 'sync') {
+      console.log('Sync message - webhook setup confirmation');
+    } else if (resourceState === 'exists') {
+      console.log('Calendar event changed - triggering refresh');
+      // Here you could trigger a cache refresh or notify your app
     }
     
-    return json({ success: true, received: true });
+    const body = await request.text();
+    if (body) {
+      console.log('Body:', body);
+    }
+    
+    console.log('================================');
+    
+    return new Response('OK', { status: 200 });
     
   } catch (error) {
     console.error('Webhook error:', error);
-    return json({ error: 'Failed to process webhook' }, { status: 500 });
+    return new Response('Error', { status: 500 });
   }
 }
 
 export async function GET({ url }) {
-  // Handle verification challenge for webhook setup
+  // Handle Google's verification challenge
   const challenge = url.searchParams.get('hub.challenge');
   const verify_token = url.searchParams.get('hub.verify_token');
   
-  console.log('Webhook verification:', { challenge, verify_token });
-  
   if (challenge) {
+    console.log('Webhook verification challenge:', challenge);
     return new Response(challenge, { 
       status: 200,
       headers: { 'Content-Type': 'text/plain' }
     });
   }
   
-  return json({ message: 'Calendar webhook endpoint' });
+  // Manual trigger for testing
+  if (url.searchParams.get('test') === 'true') {
+    console.log('Manual webhook test triggered');
+    return new Response('Webhook endpoint is working', { status: 200 });
+  }
+  
+  return new Response('Calendar webhook endpoint', { status: 200 });
 }

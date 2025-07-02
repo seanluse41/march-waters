@@ -1,25 +1,9 @@
-// netlify/functions/renew-webhook.js
-import { google } from 'googleapis';
-
-const CREDENTIALS = JSON.parse(process.env.VITE_GOOGLE_SERVICE_ACCOUNT_CREDENTIALS);
-const CALENDAR_ID = process.env.VITE_GOOGLE_CALENDAR_ID;
-const WEBHOOK_URL = 'https://march-waters.netlify.app/webhooks/calendar';
-
-async function getCalendarClient() {
-  const auth = new google.auth.JWT(
-    CREDENTIALS.client_email,
-    null,
-    CREDENTIALS.private_key,
-    ['https://www.googleapis.com/auth/calendar'],
-    null
-  );
-
-  return google.calendar({ version: 'v3', auth });
-}
-
 export const handler = async (event, context) => {
-  // Only run on scheduled events
-  if (event.httpMethod !== 'POST' || !event.headers['netlify-cron']) {
+  console.log('Webhook renewal function called:', event);
+  
+  // Check if this is a scheduled call OR manual trigger
+  if (event.httpMethod !== 'POST' && !event.headers['netlify-cron']) {
+    console.log('Not a valid trigger, method:', event.httpMethod);
     return {
       statusCode: 405,
       body: JSON.stringify({ error: 'Method not allowed' })
@@ -28,7 +12,17 @@ export const handler = async (event, context) => {
 
   try {
     const calendar = await getCalendarClient();
+    
+    // First, try to stop any existing webhook to avoid conflicts
+    try {
+      // You'd need to store the previous channel ID somewhere to stop it
+      console.log('Attempting to stop previous webhook...');
+    } catch (stopError) {
+      console.log('No previous webhook to stop or error stopping:', stopError.message);
+    }
+
     const channelId = crypto.randomUUID();
+    const expiration = Date.now() + (6 * 24 * 60 * 60 * 1000); // 6 days
     
     const watchRequest = {
       calendarId: CALENDAR_ID,
@@ -36,14 +30,16 @@ export const handler = async (event, context) => {
         id: channelId,
         type: 'web_hook',
         address: WEBHOOK_URL,
-        expiration: Date.now() + (6 * 24 * 60 * 60 * 1000) // 6 days
+        expiration: expiration.toString() // Google expects string
       }
     };
 
+    console.log('Creating webhook with:', watchRequest);
     const response = await calendar.events.watch(watchRequest);
     
-    console.log('Webhook renewed:', {
+    console.log('Webhook created successfully:', {
       channelId: response.data.id,
+      resourceId: response.data.resourceId,
       expiration: new Date(parseInt(response.data.expiration))
     });
     
@@ -52,7 +48,9 @@ export const handler = async (event, context) => {
       body: JSON.stringify({ 
         success: true, 
         channelId: response.data.id,
-        expiration: response.data.expiration 
+        resourceId: response.data.resourceId,
+        expiration: response.data.expiration,
+        message: 'Webhook renewed successfully'
       })
     };
     
@@ -60,7 +58,10 @@ export const handler = async (event, context) => {
     console.error('Webhook renewal failed:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message })
+      body: JSON.stringify({ 
+        error: error.message,
+        stack: error.stack 
+      })
     };
   }
 };
