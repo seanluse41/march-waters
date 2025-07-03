@@ -1,5 +1,3 @@
-import { sendConfirmationEmail } from './sendEmail.js';
-
 export async function addCalendarEvent(eventDetails, email, serviceType = null) {
   try {
     const response = await fetch('/api/update-calendar', {
@@ -17,13 +15,8 @@ export async function addCalendarEvent(eventDetails, email, serviceType = null) 
     
     const data = await response.json();
     
-    // Send confirmation email after successful calendar event creation
-    if (email) {
-      const emailResult = await sendConfirmationEmail(data.event, email, serviceType);
-      if (!emailResult.success) {
-        console.warn('Calendar event created but email failed:', emailResult.error);
-      }
-    }
+    // Email sending removed - will be handled by webhook when staff confirms
+    console.log('Calendar event created, waiting for staff confirmation');
     
     return {
       success: true,

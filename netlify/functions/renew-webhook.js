@@ -8,7 +8,7 @@ export default async (req) => {
 
     // Check environment variables
     const credentials = process.env.VITE_GOOGLE_SERVICE_ACCOUNT_CREDENTIALS;
-    const calendarId = process.env.VITE_GOOGLE_CALENDAR_ID;
+    const calendarId = process.env.VITE_GOOGLE_CALENDAR_CONFIRMED_ID;
     
     console.log("Environment check:", {
       hasCredentials: !!credentials,
@@ -62,7 +62,7 @@ export default async (req) => {
     // Create new push notification channel
     console.log("Creating new push notification channel...");
     const channelId = `scheduled-${Date.now()}`;
-    const expiration = Date.now() + (6 * 24 * 60 * 60 * 1000); // 6 days
+    const expiration = Date.now() + (7 * 24 * 60 * 60 * 1000); // 7 days
     const webhookUrl = 'https://march-waters.netlify.app/webhooks/calendar';
 
     const watchRequest = {
@@ -124,5 +124,5 @@ export default async (req) => {
 }
 
 export const config = {
-  schedule: "0 0 */7 * *" // Every 7 days at midnight
+  schedule: "*/10 * * * *" // Every 10 minutes
 }
