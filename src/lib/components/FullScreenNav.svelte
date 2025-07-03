@@ -69,7 +69,7 @@
 <nav class="absolute z-20">
   <ul
     bind:this={menu}
-    class="fixed inset-0 p-0 m-0 list-none flex flex-col justify-center items-center gap-5 bg-blue-500 hover:bg-blue-600 transition-[clip-path] duration-500"
+    class="fixed inset-0 md:p-0 pt-16 m-0 list-none flex flex-col md:justify-center items-center gap-5 bg-blue-500 hover:bg-blue-600 transition-[clip-path] duration-500"
     style:clip-path={isOpen
       ? "circle(100% at 50% 50%)"
       : "circle(20px at calc(100vw - 5vw) 31px)"}
@@ -110,13 +110,13 @@
         onclick={handleLinkClick}>{$_("nav.consult")}</a
       >
     </li>
-    <li class="relative z-10 nav-link">
+    <!-- <li class="relative z-10 nav-link">
       <a
         class="no-underline text-slate-200 text-lg uppercase font-bold inline-block w-64 p-4"
         href="/stories"
         onclick={handleLinkClick}>{$_("nav.stories")}</a
       >
-    </li>
+    </li> -->
 
     <!-- Custom dropdown implementation -->
     <li class="relative z-10 nav-link">

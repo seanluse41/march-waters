@@ -42,12 +42,12 @@
       iconName: "HeadphonesOutline",
       link: "/consult"
     },
-    {
-      title: $_('top.cards.card4.title'),
-      text: $_('top.cards.card4.text'),
-      iconName: "BookOpenOutline",
-      link: "/stories"
-    },
+    // {
+    //   title: $_('top.cards.card4.title'),
+    //   text: $_('top.cards.card4.text'),
+    //   iconName: "BookOpenOutline",
+    //   link: "/stories"
+    // },
     {
       title: $_('top.cards.card5.title'),
       text: $_('top.cards.card5.text'),
