@@ -1,6 +1,50 @@
-// Updated webhook handler with time-based filtering
-import { getConfirmedEvent } from '$lib/requests/getConfirmedEvent.js';
+// src/routes/webhooks/calendar/+server.js
+import { google } from 'googleapis';
 import { sendConfirmationEmail } from '$lib/requests/sendEmail.js';
+
+const CREDENTIALS = import.meta.env.VITE_GOOGLE_SERVICE_ACCOUNT_CREDENTIALS;
+const CONFIRMED_CALENDAR_ID = import.meta.env.VITE_GOOGLE_CALENDAR_CONFIRMED_ID;
+
+async function getCalendarClient() {
+  const jsonCredentials = JSON.parse(CREDENTIALS);
+
+  const auth = new google.auth.JWT(
+    jsonCredentials.client_email,
+    null,
+    jsonCredentials.private_key,
+    ['https://www.googleapis.com/auth/calendar'],
+    null
+  );
+
+  return google.calendar({ version: 'v3', auth });
+}
+
+async function getConfirmedEventDirect() {
+  try {
+    const calendar = await getCalendarClient();
+
+    const response = await calendar.events.list({
+      calendarId: CONFIRMED_CALENDAR_ID,
+      singleEvents: true,
+      orderBy: 'updated',
+      maxResults: 1,
+    });
+
+    const mostRecentEvent = response.data.items?.[0] || null;
+
+    return {
+      success: true,
+      event: mostRecentEvent,
+      hasEvents: !!mostRecentEvent
+    };
+  } catch (error) {
+    console.error('Error fetching confirmed event:', error);
+    return {
+      success: false,
+      error: error.message
+    };
+  }
+}
 
 export async function POST({ request }) {
   try {
@@ -19,8 +63,8 @@ export async function POST({ request }) {
     if (resourceState === 'exists') {
       console.log('Calendar event changed - checking for recent confirmations');
       
-      // Fetch the most recent confirmed event
-      const eventResult = await getConfirmedEvent();
+      // Fetch the most recent confirmed event directly
+      const eventResult = await getConfirmedEventDirect();
       
       if (!eventResult.success || !eventResult.hasEvents) {
         console.log('No confirmed events found');
