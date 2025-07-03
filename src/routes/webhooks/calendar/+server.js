@@ -31,7 +31,7 @@ async function getConfirmedEventDirect() {
       maxResults: 250,
     });
 
-    console.log(response)
+    console.log(response.data.items)
 
     const mostRecentEvent = response.data.items?.[0] || null;
 
@@ -76,6 +76,8 @@ export async function POST({ request }) {
       
       const event = eventResult.event;
       const description = event.description || '';
+      console.log("event to change ----------------")
+      console.log(event)
       
       // Check if this event has already been processed
       if (description.includes('@@Confirmed@@')) {
