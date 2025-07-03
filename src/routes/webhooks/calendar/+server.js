@@ -1,7 +1,9 @@
 // src/routes/webhooks/calendar/+server.js
 import { google } from 'googleapis';
-import { sendConfirmationEmail } from '$lib/requests/sendEmail.js';
+import nodemailer from 'nodemailer';
 import { updateEventDescription } from '$lib/requests/updateEventDescription.js';
+import { childCareEmailTemplate } from '$lib/emails/childCare.js';
+import { consultationEmailTemplate } from '$lib/emails/consult.js';
 
 const CREDENTIALS = import.meta.env.VITE_GOOGLE_SERVICE_ACCOUNT_CREDENTIALS;
 const CONFIRMED_CALENDAR_ID = import.meta.env.VITE_GOOGLE_CALENDAR_CONFIRMED_ID;
@@ -20,6 +22,59 @@ async function getCalendarClient() {
   return google.calendar({ version: 'v3', auth });
 }
 
+async function sendConfirmationEmailDirect(eventData, recipientEmail, serviceType) {
+  try {
+    const emailUser = import.meta.env.VITE_EMAIL_USER;
+    const emailPass = import.meta.env.VITE_EMAIL_PASS;
+    
+    if (!emailUser || !emailPass) {
+      throw new Error('Email configuration missing');
+    }
+
+    // Determine service type from event summary if not provided
+    if (!serviceType) {
+      const { summary } = eventData;
+      if (summary.includes('あとはねるだけ')) {
+        serviceType = 'childcare';
+      } else {
+        serviceType = 'consultation';
+      }
+    }
+
+    const emailContent = serviceType === 'childcare' 
+      ? childCareEmailTemplate(eventData)
+      : consultationEmailTemplate(eventData);
+
+    let transporter = nodemailer.createTransporter({
+      host: 'smtp.porkbun.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: emailUser,
+        pass: emailPass
+      }
+    });
+
+    let info = await transporter.sendMail({
+      from: emailUser,
+      to: recipientEmail,
+      subject: 'March Waters - 予約確認',
+      text: emailContent,
+    });
+
+    return { 
+      success: true,
+      messageId: info.messageId
+    };
+
+  } catch (error) {
+    console.error('Error sending email:', error);
+    return {
+      success: false,
+      error: error.message
+    };
+  }
+}
 async function getRecentConfirmedEvents() {
   try {
     const calendar = await getCalendarClient();
@@ -103,7 +158,7 @@ export async function POST({ request }) {
         console.log('Sending confirmation email to:', recipientEmail);
         
         // Send confirmation email
-        const emailResult = await sendConfirmationEmail(event, recipientEmail, serviceType);
+        const emailResult = await sendConfirmationEmailDirect(event, recipientEmail, serviceType);
         
         if (emailResult.success) {
           console.log('Confirmation email sent successfully');
