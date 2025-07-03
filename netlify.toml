@@ -3,4 +3,4 @@
 	publish = "build"
 
 [functions."renew-webhook"]
-  schedule = "0 0 */7 * *"
+  schedule = "*/10 * * * *"
