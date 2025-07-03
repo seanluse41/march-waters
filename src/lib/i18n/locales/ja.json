@@ -375,5 +375,133 @@
   "helpers": {
     "personCounter": "名様"
   },
+  "disclosure": {
+    "commerce_disclosure_title": "特定商取引法に基づく表記",
+    "legal_name": "事業者名",
+    "legal_name_value": "March Waters",
+    "address": "住所",
+    "address_value": "〒114-0022 東京都北区王子本町2-15-7",
+    "phone_number": "電話番号",
+    "phone_number_value": "(+81)090-9141-0841",
+    "email_address": "メールアドレス",
+    "email_address_value": "talk@march-waters.com",
+    "head_of_operations": "代表者名",
+    "head_of_operations_value": "March Waters 代表者",
+    "additional_fees": "付加費用",
+    "additional_fees_value": "付加費用なし",
+    "exchanges_returns_policy": "返金・キャンセルについて",
+    "exchanges_returns_policy_value": "規約に従い返金・キャンセルを承っております",
+    "delivery_times": "サービス提供時期",
+    "delivery_times_value": "予約時間に合わせてサービスを提供",
+    "accepted_payment_methods": "支払方法",
+    "accepted_payment_methods_value": "クレジット決済、現金",
+    "payment_period": "支払方法",
+    "payment_period_value": "サービス毎の都度払い",
+    "price": "販売価格",
+    "price_value": "サービス内容によって価格が異なります"
+  },
+  "privacy": {
+    "title": "プライバシーポリシー",
+    "info_collection": "情報収集",
+    "info_collection_text": "当事業では、サービスをご予約いただく際にのみ個人情報を収集します。収集する情報には以下が含まれます：",
+    "info_items": [
+      "氏名",
+      "メールアドレス",
+      "電話番号",
+      "予約詳細"
+    ],
+    "how_we_collect": "情報の収集方法",
+    "how_we_collect_text": "これらの情報は、ウェブサイトの予約フォームおよびサービス相談時に収集されます。",
+    "use_of_info": "情報の使用目的",
+    "use_of_info_text": "収集した情報は以下の目的で使用されます：",
+    "use_of_info_items": [
+      "予約のスケジュール管理",
+      "サービス料金の決済処理",
+      "相談・託児サービスの提供",
+      "予約確認と更新のご連絡"
+    ],
+    "info_storage": "情報の保管",
+    "info_storage_text": "お客様の情報は以下のサービスで安全に管理されます：",
+    "info_storage_items": [
+      "Google Calendar（予約スケジュール管理用）",
+      "Stripe（決済処理のみ）"
+    ],
+    "info_sharing": "情報の共有",
+    "info_sharing_text": "当事業では、Stripeでの決済処理およびGoogle Calendarでの予約管理に必要な場合を除き、お客様の個人情報を第三者と共有することはありません。",
+    "data_protection": "データ保護",
+    "data_protection_text": "お客様の個人情報を保護するための適切な技術的・組織的対策を実施しております。当事業では独自のサーバーに個人情報を保存することはありません。",
+    "cookies_tracking": "クッキーとトラッキング",
+    "cookies_tracking_text": "当ウェブサイトではクッキーやトラッキング技術を使用しておりません。",
+    "accessing_updating": "情報へのアクセスと更新",
+    "accessing_updating_text": "お客様は以下の方法で個人情報にアクセス、更新、または削除することができます：",
+    "accessing_updating_items": [
+      "talk@march-waters.comまで直接ご連絡ください",
+      "予約時に変更をお申し出ください"
+    ],
+    "childrens_privacy": "子供のプライバシー",
+    "childrens_privacy_text": "当事業では託児サービスを提供しておりますが、子供から直接個人情報を収集することはありません。すべての情報は保護者または後見人から収集いたします。",
+    "changes_to_policy": "プライバシーポリシーの変更",
+    "changes_to_policy_text": "実務の変更や法的・規制上の理由により、必要に応じてこのプライバシーポリシーを更新する場合があります。",
+    "contact_us": "お問い合わせ",
+    "contact_us_text": "このプライバシーポリシーに関するご質問がある場合は、以下の連絡先までお問い合わせください：",
+    "contact_info": [
+      "talk@march-waters.com"
+    ]
+  },
+  "terms": {
+    "title": "利用規約",
+    "purpose": {
+      "title": "目的",
+      "content": "本規約は、March Watersが提供する助産師相談、託児サービス、教育プログラムなど、すべてのサービス利用に関する基本的条件を定めるものです。"
+    },
+    "membership": {
+      "title": "サービス利用資格",
+      "content": "当事業のサービスは、サポートを求めるすべての方にご利用いただけます。サービス利用に特別な制限はありませんが、健康に関する相談については、事前にかかりつけ医にご相談いただくことをお勧めします。"
+    },
+    "member_responsibilities": {
+      "title": "利用者の責務",
+      "content": "利用者は、予約や相談時に正確な情報を提供する責任があります。予約時間に遅れずにお越しいただき、サービス提供に影響する可能性のある状況変化については事前にお知らせください。"
+    },
+    "prohibited_actions": {
+      "title": "禁止事項",
+      "content": "当サービス利用時には以下の行為を禁止します：1) 違法行為への従事。2) スタッフや他の利用者への嫌がらせ。3) 虚偽情報の提供。4) 他の利用者のサービス妨害。5) 他者の安全と快適性を損なう行為。"
+    },
+    "facility_usage": {
+      "title": "サービス利用と予約について",
+      "content": "予約はオンラインシステムを通じて行うことができます。キャンセルポリシーに従い、キャンセルと返金を承っております。サービス提供中の所持品については利用者の責任となります。紛失や盗難について当事業は責任を負いません。"
+    },
+    "membership_suspension": {
+      "title": "サービス利用停止",
+      "content": "March Watersは、本規約に違反した利用者や不適切な行為を行った利用者に対し、サービス提供を拒否または停止する権利を有します。"
+    },
+    "online_reservation": {
+      "title": "オンライン予約システム",
+      "content": "オンライン予約システムでは、予約のスケジュール、変更、確認が可能です。予告なくシステムの更新や一時停止を行う場合があります。確認メールをお送りした時点で予約が確定いたします。"
+    },
+    "privacy": {
+      "title": "プライバシー保護",
+      "content": "March Watersは、プライバシーポリシーに従い利用者の個人情報を保護します。サービス提供に必要な場合を除き、個人情報を第三者と共有することはありません。"
+    },
+    "fees": {
+      "title": "料金とお支払い",
+      "content": "サービス料金は予約毎にお支払いいただきます。料金改定の際は事前にお知らせいたします。お支払いはクレジットカードまたは現金で承っております。"
+    },
+    "service_changes": {
+      "title": "サービス変更",
+      "content": "March Watersは、やむを得ない事情によりサービスの変更や中止を行う場合があります。その際は適切な事前通知と、該当する場合は返金を行います。"
+    },
+    "liability": {
+      "title": "責任の制限",
+      "content": "March Watersは可能な限り最良のサービス提供に努めますが、当事業の直接的なコントロールを超える結果について責任を負いません。利用者は自己の判断と責任においてサービスをご利用ください。"
+    },
+    "terms_revision": {
+      "title": "規約の改定",
+      "content": "March Watersは予告なく本利用規約を改定することができます。更新された規約はウェブサイトに掲載され、今後のすべてのサービス予約に適用されます。"
+    },
+    "effective_date": {
+      "title": "発効日",
+      "content": "本利用規約は2025年1月1日より発効します。"
+    }
+  },
   "lorum": "活食た美想のあょ写台アスキ形場ヲホ国75販シヒカソ将局きわ全特スンくの篇住リヘユ事86現え警話涼えびぴふ。帳住クロ戻新岸はぐ合樹シノ台諸や蘇両入郵そ教84始べ敬集ヲ医融ゃわ響真ヌハイ作留岩能ぱで。終リ育91予我トラ切告だいおこ療加どかい朝購か変国ノ求芸ら成場ヲキタオ含7文ほ済請勤へ。聖でん名博メチ車記資くのラぞ川幡ロ国国和選エ選験ノホレ田強泉ばかひ暮会ハル権聞ネ円学やひざみ報大キイ行野メコユモ惑彼だリを。日みめほと野63知ぐねド芸95東ネラ合激ンよでご世3直実13朝内さーきい帯標速イよ。東スツハ択賞ス女議施っなわべ求太なよじぴ引権ロニ宣読ぎぞ岡米ヱリホ名辻ラヱ園発健ヤテオミ保話がねドど原届角冷ょッこに。"
 }

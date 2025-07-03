@@ -367,5 +367,133 @@
   "helpers": {
     "personCounter": " "
   },
+  "disclosure": {
+    "commerce_disclosure_title": "Commercial Disclosure",
+    "legal_name": "Legal Name",
+    "legal_name_value": "March Waters",
+    "address": "Address",
+    "address_value": "114-0022 Tokyo-to Kita-ku Oji-honcho 2-15-7",
+    "phone_number": "Phone Number",
+    "phone_number_value": "(+81)090-9141-0841",
+    "email_address": "Email Address",
+    "email_address_value": "talk@march-waters.com",
+    "head_of_operations": "Head of Operations",
+    "head_of_operations_value": "March Waters Representative",
+    "additional_fees": "Additional Fees",
+    "additional_fees_value": "No additional fees",
+    "exchanges_returns_policy": "Refunds & Cancellations Policy",
+    "exchanges_returns_policy_value": "Refunds and cancellations allowed according to our terms",
+    "delivery_times": "Service Delivery",
+    "delivery_times_value": "Services provided at scheduled appointment times",
+    "accepted_payment_methods": "Accepted Payment Methods",
+    "accepted_payment_methods_value": "Credit Card, Cash",
+    "payment_period": "Payment Method",
+    "payment_period_value": "One-time payment per service",
+    "price": "Price",
+    "price_value": "Prices vary by service type"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "info_collection": "Information Collection",
+    "info_collection_text": "We collect personal information only when you book our services. The information we collect includes:",
+    "info_items": [
+      "Full Name",
+      "Email Address",
+      "Phone Number",
+      "Appointment Details"
+    ],
+    "how_we_collect": "How We Collect Information",
+    "how_we_collect_text": "We collect this information through our website booking forms and during service consultations.",
+    "use_of_info": "Use of Information",
+    "use_of_info_text": "The information we collect is used to:",
+    "use_of_info_items": [
+      "Schedule and manage your appointments",
+      "Process payments for services",
+      "Provide consultation and childcare services",
+      "Send appointment confirmations and updates"
+    ],
+    "info_storage": "Information Storage",
+    "info_storage_text": "Your information is stored securely with:",
+    "info_storage_items": [
+      "Google Calendar (for appointment scheduling)",
+      "Stripe (for payment processing only)"
+    ],
+    "info_sharing": "Information Sharing",
+    "info_sharing_text": "We do not share your personal information with third parties, except as necessary to process payments through Stripe and manage appointments through Google Calendar.",
+    "data_protection": "Data Protection",
+    "data_protection_text": "We implement appropriate technical and organizational measures to protect your personal information. We do not store personal information on our own servers.",
+    "cookies_tracking": "Cookies and Tracking",
+    "cookies_tracking_text": "We do not use cookies or tracking technologies on our website.",
+    "accessing_updating": "Accessing and Updating Your Information",
+    "accessing_updating_text": "You can access, update, or delete your personal information by:",
+    "accessing_updating_items": [
+      "Contacting us directly at talk@march-waters.com",
+      "Requesting changes during your appointment"
+    ],
+    "childrens_privacy": "Children's Privacy",
+    "childrens_privacy_text": "While our services include childcare, we do not collect personal information from children. All information is collected from parents or guardians.",
+    "changes_to_policy": "Changes to This Privacy Policy",
+    "changes_to_policy_text": "We may update this privacy policy as needed to reflect changes in our practices or for legal and regulatory reasons.",
+    "contact_us": "Contact Us",
+    "contact_us_text": "If you have any questions about this privacy policy, please contact us at:",
+    "contact_info": [
+      "talk@march-waters.com"
+    ]
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "purpose": {
+      "title": "Purpose",
+      "content": "These terms of service define the basic conditions for using all services provided by March Waters, including midwife consultations, childcare services, and educational programs."
+    },
+    "membership": {
+      "title": "Service Eligibility",
+      "content": "Our services are available to all individuals seeking support. There are no specific restrictions for accessing our services, though we recommend consulting with your healthcare provider before participating in any health-related consultations."
+    },
+    "member_responsibilities": {
+      "title": "Client Responsibilities",
+      "content": "Clients are responsible for providing accurate information during bookings and consultations. You agree to arrive on time for scheduled appointments and to inform us of any changes to your circumstances that may affect the service provided."
+    },
+    "prohibited_actions": {
+      "title": "Prohibited Actions",
+      "content": "The following actions are prohibited when using our services: 1) Engaging in illegal activities. 2) Harassment of staff or other clients. 3) Providing false information. 4) Disrupting services for other clients. 5) Any behavior that compromises the safety and comfort of others."
+    },
+    "facility_usage": {
+      "title": "Service Usage and Appointments",
+      "content": "Appointments can be booked through our online system. Cancellations and refunds are allowed according to our cancellation policy. Clients are responsible for their own belongings during service provision. We are not liable for lost or stolen items."
+    },
+    "membership_suspension": {
+      "title": "Service Suspension",
+      "content": "March Waters reserves the right to refuse or suspend services to clients who violate these terms or engage in inappropriate behavior."
+    },
+    "online_reservation": {
+      "title": "Online Booking System",
+      "content": "Our online booking system allows you to schedule, modify, and confirm appointments. We may update or temporarily suspend the booking system without notice. Appointments are confirmed when you receive a confirmation email."
+    },
+    "privacy": {
+      "title": "Privacy Protection",
+      "content": "March Waters protects client personal information in accordance with our Privacy Policy. We do not share personal information with third parties except as necessary for service provision."
+    },
+    "fees": {
+      "title": "Fees and Payment",
+      "content": "Service fees are paid per appointment. We reserve the right to update our pricing with advance notice. Payment is accepted via credit card or cash."
+    },
+    "service_changes": {
+      "title": "Service Modifications",
+      "content": "March Waters may modify or discontinue services due to circumstances beyond our control. In such cases, we will provide appropriate notice and refunds where applicable."
+    },
+    "liability": {
+      "title": "Limitation of Liability",
+      "content": "March Waters provides services to the best of our ability but is not liable for outcomes beyond our direct control. Clients use our services at their own discretion and responsibility."
+    },
+    "terms_revision": {
+      "title": "Terms Revision",
+      "content": "March Waters may revise these terms of service without prior notice. Updated terms will be posted on our website and apply to all future service bookings."
+    },
+    "effective_date": {
+      "title": "Effective Date",
+      "content": "These terms of service are effective from January 1, 2025."
+    }
+  },
   "lorum": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 }
