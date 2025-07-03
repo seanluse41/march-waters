@@ -20,7 +20,7 @@ async function getCalendarClient() {
   return google.calendar({ version: 'v3', auth });
 }
 
-async function getConfirmedEventDirect() {
+async function getRecentConfirmedEvents() {
   try {
     const calendar = await getCalendarClient();
 
@@ -28,20 +28,16 @@ async function getConfirmedEventDirect() {
       calendarId: CONFIRMED_CALENDAR_ID,
       singleEvents: true,
       orderBy: 'updated',
-      maxResults: 250,
+      maxResults: 10, // Get more events to check
     });
-
-    console.log(response.data.items)
-
-    const mostRecentEvent = response.data.items?.[0] || null;
 
     return {
       success: true,
-      event: mostRecentEvent,
-      hasEvents: !!mostRecentEvent
+      events: response.data.items || [],
+      hasEvents: !!(response.data.items?.length)
     };
   } catch (error) {
-    console.error('Error fetching confirmed event:', error);
+    console.error('Error fetching confirmed events:', error);
     return {
       success: false,
       error: error.message
@@ -66,65 +62,62 @@ export async function POST({ request }) {
     if (resourceState === 'exists') {
       console.log('Calendar event changed - checking for recent confirmations');
       
-      // Fetch the most recent confirmed event directly
-      const eventResult = await getConfirmedEventDirect();
+      // Fetch recent confirmed events
+      const eventResult = await getRecentConfirmedEvents();
       
       if (!eventResult.success || !eventResult.hasEvents) {
         console.log('No confirmed events found');
         return new Response('OK', { status: 200 });
       }
       
-      const event = eventResult.event;
-      const description = event.description || '';
-      console.log("event to change ----------------")
-      console.log(event)
-      
-      // Check if this event has already been processed
-      if (description.includes('@@Confirmed@@')) {
-        console.log('Event already confirmed and processed, skipping');
-        return new Response('OK', { status: 200 });
-      }
-      
-      // Only process events that have @@Added@@ but not @@Confirmed@@
-      if (!description.includes('@@Added@@')) {
-        console.log('Event does not have @@Added@@ marker, skipping');
-        return new Response('OK', { status: 200 });
-      }
-      
-      // Extract email from description
-      const emailMatch = description.match(/メールアドレス:\s*(.+)/);
-      if (!emailMatch) {
-        console.log('No email found in event description');
-        return new Response('OK', { status: 200 });
-      }
-      
-      const recipientEmail = emailMatch[1].trim();
-      console.log('Found event with email:', recipientEmail);
-      console.log('Event summary:', event.summary);
-      
-      // Determine service type from event summary
-      let serviceType = 'consultation';
-      if (event.summary && event.summary.includes('あとはねるだけ')) {
-        serviceType = 'childcare';
-      }
-      
-      console.log('Sending confirmation email to:', recipientEmail);
-      
-      // Send confirmation email
-      const emailResult = await sendConfirmationEmail(event, recipientEmail, serviceType);
-      
-      if (emailResult.success) {
-        console.log('Confirmation email sent successfully');
+      // Check all events for ones that need confirmation emails
+      for (const event of eventResult.events) {
+        const description = event.description || '';
         
-        // Mark the event as confirmed
-        const updateResult = await updateEventDescription(CONFIRMED_CALENDAR_ID, event.id, 'Confirmed');
-        if (updateResult.success) {
-          console.log('Event marked as confirmed');
-        } else {
-          console.error('Failed to mark event as confirmed:', updateResult.error);
+        // Skip if already processed
+        if (description.includes('@@Confirmed@@')) {
+          continue;
         }
-      } else {
-        console.error('Failed to send confirmation email:', emailResult.error);
+        
+        // Only process events that have @@Added@@ but not @@Confirmed@@
+        if (!description.includes('@@Added@@')) {
+          continue;
+        }
+        
+        // Extract email from description
+        const emailMatch = description.match(/メールアドレス:\s*(.+)/);
+        if (!emailMatch) {
+          console.log('No email found in event:', event.summary);
+          continue;
+        }
+        
+        const recipientEmail = emailMatch[1].trim();
+        console.log('Processing event:', event.summary, 'for email:', recipientEmail);
+        
+        // Determine service type from event summary
+        let serviceType = 'consultation';
+        if (event.summary && event.summary.includes('あとはねるだけ')) {
+          serviceType = 'childcare';
+        }
+        
+        console.log('Sending confirmation email to:', recipientEmail);
+        
+        // Send confirmation email
+        const emailResult = await sendConfirmationEmail(event, recipientEmail, serviceType);
+        
+        if (emailResult.success) {
+          console.log('Confirmation email sent successfully');
+          
+          // Mark the event as confirmed
+          const updateResult = await updateEventDescription(CONFIRMED_CALENDAR_ID, event.id, 'Confirmed');
+          if (updateResult.success) {
+            console.log('Event marked as confirmed');
+          } else {
+            console.error('Failed to mark event as confirmed:', updateResult.error);
+          }
+        } else {
+          console.error('Failed to send confirmation email:', emailResult.error);
+        }
       }
     }
     
