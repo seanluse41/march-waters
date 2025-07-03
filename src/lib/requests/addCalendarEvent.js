@@ -52,7 +52,8 @@ export function createChildCareEventData({ selectedDate, name, email, phone, chi
     `コース: ${selectedCourse}`,
     `子供の人数: ${childCount}名`,
     `お支払い方法: ${paymentJP}`,
-    'サービス: あとはねるだけプロジェクト (17:00-21:30)'
+    'サービス: あとはねるだけプロジェクト (17:00-21:30)',
+    '@@Added@@'
   ].join('\n');
 
   return {
@@ -97,7 +98,8 @@ export function createConsultEventData({ selectedDate, selectedTimeSlot, name, e
         `コース: ${serviceNameJP}`,
         `お支払い方法: ${paymentJP}`,
         'サービス: メール相談',
-        '受信日時: ' + now.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
+        '受信日時: ' + now.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' }),
+        '@@Added@@'
       ].join('\n'),
       start: {
         dateTime: now.toISOString(),
@@ -135,7 +137,8 @@ export function createConsultEventData({ selectedDate, selectedTimeSlot, name, e
     `コース: ${serviceNameJP}`,
     `時間: ${selectedTimeSlot}`,
     `お支払い方法: ${paymentJP}`,
-    `サービス: ${serviceNameJP}`
+    `サービス: ${serviceNameJP}`,
+    '@@Added@@'
   ].join('\n');
 
   return {

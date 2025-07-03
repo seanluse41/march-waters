@@ -1,6 +1,7 @@
 // src/routes/webhooks/calendar/+server.js
 import { google } from 'googleapis';
 import { sendConfirmationEmail } from '$lib/requests/sendEmail.js';
+import { updateEventDescription } from '$lib/requests/updateEventDescription.js';
 
 const CREDENTIALS = import.meta.env.VITE_GOOGLE_SERVICE_ACCOUNT_CREDENTIALS;
 const CONFIRMED_CALENDAR_ID = import.meta.env.VITE_GOOGLE_CALENDAR_CONFIRMED_ID;
@@ -27,8 +28,10 @@ async function getConfirmedEventDirect() {
       calendarId: CONFIRMED_CALENDAR_ID,
       singleEvents: true,
       orderBy: 'updated',
-      maxResults: 1,
+      maxResults: 250,
     });
+
+    console.log(response)
 
     const mostRecentEvent = response.data.items?.[0] || null;
 
@@ -72,22 +75,21 @@ export async function POST({ request }) {
       }
       
       const event = eventResult.event;
-      const updatedTime = new Date(event.updated);
-      const now = new Date();
-      const timeDifferenceMinutes = (now - updatedTime) / (1000 * 60);
+      const description = event.description || '';
       
-      console.log('Event updated:', updatedTime.toISOString());
-      console.log('Current time:', now.toISOString());
-      console.log('Time difference (minutes):', timeDifferenceMinutes);
+      // Check if this event has already been processed
+      if (description.includes('@@Confirmed@@')) {
+        console.log('Event already confirmed and processed, skipping');
+        return new Response('OK', { status: 200 });
+      }
       
-      // Only process if updated within last 1 minute
-      if (timeDifferenceMinutes > 1) {
-        console.log('Event not recently updated, skipping email');
+      // Only process events that have @@Added@@ but not @@Confirmed@@
+      if (!description.includes('@@Added@@')) {
+        console.log('Event does not have @@Added@@ marker, skipping');
         return new Response('OK', { status: 200 });
       }
       
       // Extract email from description
-      const description = event.description || '';
       const emailMatch = description.match(/メールアドレス:\s*(.+)/);
       if (!emailMatch) {
         console.log('No email found in event description');
@@ -95,7 +97,8 @@ export async function POST({ request }) {
       }
       
       const recipientEmail = emailMatch[1].trim();
-      console.log('Sending confirmation email to:', recipientEmail);
+      console.log('Found event with email:', recipientEmail);
+      console.log('Event summary:', event.summary);
       
       // Determine service type from event summary
       let serviceType = 'consultation';
@@ -103,11 +106,21 @@ export async function POST({ request }) {
         serviceType = 'childcare';
       }
       
+      console.log('Sending confirmation email to:', recipientEmail);
+      
       // Send confirmation email
       const emailResult = await sendConfirmationEmail(event, recipientEmail, serviceType);
       
       if (emailResult.success) {
         console.log('Confirmation email sent successfully');
+        
+        // Mark the event as confirmed
+        const updateResult = await updateEventDescription(CONFIRMED_CALENDAR_ID, event.id, 'Confirmed');
+        if (updateResult.success) {
+          console.log('Event marked as confirmed');
+        } else {
+          console.error('Failed to mark event as confirmed:', updateResult.error);
+        }
       } else {
         console.error('Failed to send confirmation email:', emailResult.error);
       }
