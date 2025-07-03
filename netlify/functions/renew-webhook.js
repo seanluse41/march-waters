@@ -124,5 +124,5 @@ export default async (req) => {
 }
 
 export const config = {
-  schedule: "*/10 * * * *"
+  schedule: "0 0 */7 * *" // Every 7 days at midnight
 }
