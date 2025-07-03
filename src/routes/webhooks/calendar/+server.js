@@ -45,7 +45,7 @@ async function sendConfirmationEmailDirect(eventData, recipientEmail, serviceTyp
       ? childCareEmailTemplate(eventData)
       : consultationEmailTemplate(eventData);
 
-    let transporter = nodemailer.createTransporter({
+    let transporter = nodemailer.createTransport({
       host: 'smtp.porkbun.com',
       port: 587,
       secure: false,
