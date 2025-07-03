@@ -13,11 +13,7 @@ export async function addCalendarEvent(eventDetails, email, serviceType = null) 
       throw new Error(errorData.error || 'Failed to create calendar event');
     }
     
-    const data = await response.json();
-    
-    // Email sending removed - will be handled by webhook when staff confirms
-    console.log('Calendar event created, waiting for staff confirmation');
-    
+    const data = await response.json();    
     return {
       success: true,
       event: data.event

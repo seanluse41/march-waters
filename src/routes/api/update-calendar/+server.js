@@ -2,7 +2,7 @@ import { google } from 'googleapis';
 import { json } from '@sveltejs/kit';
 
 const CREDENTIALS = JSON.parse(import.meta.env.VITE_GOOGLE_SERVICE_ACCOUNT_CREDENTIALS);
-const CALENDAR_ID = import.meta.env.VITE_GOOGLE_CALENDAR_ID;
+const CALENDAR_ID = import.meta.env.VITE_GOOGLE_CALENDAR_UNCONFIRMED_ID;
 
 async function getCalendarClient() {
   const auth = new google.auth.JWT(
@@ -35,6 +35,7 @@ export async function POST({ request }) {
     
     const calendar = await getCalendarClient();
 
+    // Create event in the unconfirmed calendar
     const response = await calendar.events.insert({
       calendarId: CALENDAR_ID,
       requestBody: eventData,
