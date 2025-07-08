@@ -70,8 +70,8 @@ export function createChildCareEventData({ selectedDate, name, email, phone, chi
  * Create event data for consultation bookings
  */
 export function createConsultEventData({ selectedDate, selectedTimeSlot, name, email, phone, selectedCourse, paymentMethod, courseDuration }) {
-  // Force Japanese text for calendar events
-  const paymentJP = paymentMethod === 'cash' ? '現金' : 'カード決済';
+  // Consultations are always credit card payments
+  const paymentJP = 'カード決済';
 
   // Determine event title based on course
   let eventTitle = 'じょさんしとはなそう';

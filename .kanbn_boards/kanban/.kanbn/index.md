@@ -16,7 +16,6 @@ completedColumns:
 - [update-language-about-reservation-system-being-application-not-confirmed](tasks/update-language-about-reservation-system-being-application-not-confirmed.md)
 - [update-email-templates-to-indicate-reservation-is-application-not-confirmed](tasks/update-email-templates-to-indicate-reservation-is-application-not-confirmed.md)
 - [send-application-received-email-on-application](tasks/send-application-received-email-on-application.md)
-- [remove-cash-option-from-consultation](tasks/remove-cash-option-from-consultation.md)
 - [add-or-block-appointments-from-3-months-out-or-more](tasks/add-or-block-appointments-from-3-months-out-or-more.md)
 - [email-validation](tasks/email-validation.md)
 
@@ -25,3 +24,5 @@ completedColumns:
 - [send-payment-link-in-email](tasks/send-payment-link-in-email.md)
 
 ## Done
+
+- [remove-cash-option-from-consultation](tasks/remove-cash-option-from-consultation.md)

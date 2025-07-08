@@ -211,7 +211,7 @@
       "paymentMethod": "Payment Method",
       "paymentInstructions": "Payment Instructions:",
       "cashInstructions": "Please bring exact cash payment to your appointment.",
-      "creditInstructions": "You will be redirected to our secure payment portal after confirming."
+      "creditInstructions": "After our staff has accepted your reservation request, a payment portal link will be sent via email."
     },
     "success": {
       "title": "Booking Confirmed!",
@@ -323,7 +323,7 @@
       "details": "Please confirm your booking details:",
       "paymentInstructions": "Payment Instructions:",
       "cashInstructions": "Please bring exact cash payment to your appointment.",
-      "creditInstructions": "You will be redirected to our secure payment portal after confirming."
+      "creditInstructions": "After our staff has accepted your reservation request, a payment portal link will be sent via email."
     },
     "success": {
       "title": "Consultation Booked!",

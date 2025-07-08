@@ -31,7 +31,7 @@
     let name = $state("");
     let email = $state("");
     let phone = $state("");
-    let paymentMethod = $state("cash");
+    let paymentMethod = $state("credit"); // Default to credit for consultations
     let selectedCourse = $state("");
     let isSubmitting = $state(false);
     let submissionError = $state("");
@@ -102,8 +102,6 @@
             // If email consultation is selected, skip the date selection step
             if (isEmailCourse) {
                 currentStep = 3; // Skip to info entry step
-                // Email consultations only accept credit card payments
-                paymentMethod = "credit";
             } else {
                 currentStep = 2; // Go to date selection for other consultation types
             }
@@ -136,7 +134,7 @@
                 email,
                 phone,
                 selectedCourse,
-                paymentMethod,
+                paymentMethod: "credit", // Always credit for consultations
                 courseDuration: activeCourse?.duration,
             });
 
@@ -265,7 +263,7 @@
                     bind:email
                     bind:phone
                     bind:paymentMethod
-                    disableCash={isEmailCourse}
+                    disablePayment={true}
                 />
             </div>
             <!-- confirm -->
@@ -277,7 +275,7 @@
                     {name}
                     {email}
                     {phone}
-                    paymentMethod={isEmailCourse ? "credit" : paymentMethod}
+                    paymentMethod="credit"
                     coursePrice={activeCourse?.price}
                     course={activeCourse?.title}
                     title={$_("midwife.confirmation.title")}
@@ -285,9 +283,7 @@
                     paymentInstructionsText={$_(
                         "midwife.confirmation.paymentInstructions",
                     )}
-                    cashInstructionsText={$_(
-                        "midwife.confirmation.cashInstructions",
-                    )}
+                    cashInstructionsText=""
                     creditInstructionsText={$_(
                         "midwife.confirmation.creditInstructions",
                     )}
@@ -301,7 +297,7 @@
                 {name}
                 {email}
                 {phone}
-                paymentMethod={isEmailCourse ? "credit" : paymentMethod}
+                paymentMethod="credit"
                 coursePrice={activeCourse?.price}
                 course={activeCourse?.title}
                 title={$_("midwife.success.title", {

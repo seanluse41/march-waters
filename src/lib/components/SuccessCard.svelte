@@ -10,7 +10,7 @@
         name,
         email,
         phone,
-        paymentMethod = "cash",
+        paymentMethod = "credit",
         course = "",
         coursePrice = "",
         childCount = null,

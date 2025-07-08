@@ -219,7 +219,7 @@
       "paymentMethod": "お支払い方法",
       "paymentInstructions": "お支払いについて：",
       "cashInstructions": "当日、現金にてお支払いください。",
-      "creditInstructions": "確定後、決済ページへ移動します。"
+      "creditInstructions": "予約の申請が承認されたら確認メールにて支払いリンクが送信されます。"
     },
     "project": {
       "title": "あとはねるだけプロジェクト",
@@ -331,7 +331,7 @@
       "details": "以下の予約内容をご確認ください：",
       "paymentInstructions": "お支払いについて：",
       "cashInstructions": "当日、現金にてお支払いください。",
-      "creditInstructions": "確定後、決済ページへ移動します。"
+      "creditInstructions": "予約の申請が承認されたら確認メールにて支払いリンクが送信されます。"
     },
     "success": {
       "title": "相談予約が完了しました！",
