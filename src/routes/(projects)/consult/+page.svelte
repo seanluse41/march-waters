@@ -19,6 +19,7 @@
         addCalendarEvent,
         createConsultEventData,
     } from "$lib/requests/addCalendarEvent.js";
+    import { sendReservationRequestEmail } from "$lib/requests/sendReservationRequestEmail.js";
 
     // Persistent state
     let selectedDate = $state(null);
@@ -143,7 +144,15 @@
                 email,
                 "consultation",
             );
+            
             if (result.success) {
+                // Send reservation request email
+                const emailResult = await sendReservationRequestEmail(eventData, email);
+                if (!emailResult.success) {
+                    console.warn('Reservation request email failed to send:', emailResult.error);
+                    // Don't fail the submission, just log the issue
+                }
+                
                 currentStep = 5;
             } else {
                 submissionError =
