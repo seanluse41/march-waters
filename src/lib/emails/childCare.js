@@ -1,10 +1,33 @@
 // src/lib/emails/childCare.js
 import { formatEventDateTime, parseEventDescription } from '$lib/helpers/emailHelpers.js';
+import { getProductLink } from '$lib/helpers/getProductLink.js';
 
 export function childCareEmailTemplate(eventData) {
     const { summary, description, start, end } = eventData;
     const details = parseEventDescription(description);
     const { dateStr, timeStr } = formatEventDateTime(start, end);
+
+    const paymentMethod = details['お支払い方法'] || '';
+    const course = details['コース'] || '';
+    const isCashPayment = paymentMethod.includes('現金');
+
+    let paymentSection = '';
+
+    if (!isCashPayment) {
+        const paymentLink = getProductLink(course);
+        if (paymentLink) {
+            paymentSection = `
+【お支払いについて】
+以下のリンクからオンライン決済をお願いします：
+${paymentLink}
+`;
+        }
+    } else {
+        paymentSection = `
+【お支払いについて】
+当日、現金にてお支払いください。
+`;
+    }
 
     return `
 予約確認のお知らせ
@@ -20,10 +43,10 @@ ${details['お名前'] || 'お客様'}　様
 お名前: ${details['お名前'] || ''}
 メールアドレス: ${details['メールアドレス'] || ''}
 電話番号: ${details['電話番号'] || ''}
-コース: ${details['コース'] || ''}
+コース: ${course}
 子供の人数: ${details['子供の人数'] || ''}
-お支払い方法: ${details['お支払い方法'] || ''}
-
+お支払い方法: ${paymentMethod}
+${paymentSection}
 当日は上記の日時にお待ちしております。
 お子様のお預かりの準備を整えてお迎えいたします。
 

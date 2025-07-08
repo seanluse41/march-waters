@@ -1,5 +1,6 @@
 // src/lib/emails/consult.js
 import { formatEventDateTime, parseEventDescription } from '$lib/helpers/emailHelpers.js';
+import { getProductLink } from '$lib/helpers/getProductLink.js';
 
 export function consultationEmailTemplate(eventData) {
     const { summary, description, start, end } = eventData;
@@ -9,6 +10,18 @@ export function consultationEmailTemplate(eventData) {
     // Handle email consultations (no specific time)
     const isEmailConsult = summary.includes('メール相談');
     const timeDisplay = isEmailConsult ? 'メールでのやりとり' : `${dateStr} ${timeStr}`;
+
+    const course = details['コース'] || summary;
+    const paymentLink = getProductLink(course);
+    
+    let paymentSection = '';
+    if (paymentLink) {
+        paymentSection = `
+【お支払いについて】
+以下のリンクからオンライン決済をお願いします：
+${paymentLink}
+`;
+    }
 
     return `
 相談予約確認のお知らせ
@@ -24,10 +37,9 @@ ${isEmailConsult ? '対応方法' : '日時'}: ${timeDisplay}
 お名前: ${details['お名前'] || ''}
 メールアドレス: ${details['メールアドレス'] || ''}
 電話番号: ${details['電話番号'] || ''}
-コース: ${details['コース'] || ''}
+コース: ${course}
 お支払い方法: ${details['お支払い方法'] || ''}
-
-${!isEmailConsult ? `
+${paymentSection}${!isEmailConsult ? `
 【Google Meetリンク】
 https://meet.google.com/cqj-jtmg-gau
 
