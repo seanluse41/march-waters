@@ -1,5 +1,5 @@
 <script>
-    import { Label, Input, Textarea, Button, Radio, P } from "flowbite-svelte";
+    import { Label, Input, Textarea, Button, Radio, P, Helper } from "flowbite-svelte";
     import {
         EnvelopeSolid,
         PhoneSolid,
@@ -16,6 +16,28 @@
         disablePayment,
         dinner = $bindable(false), // honeypot checkbox
     } = $props();
+
+    // Email validation using derived.by
+    let emailError = $derived.by(() => {
+        if (!email) return ""; // Allow empty for now, required validation handled elsewhere
+        
+        // More strict email validation
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        
+        // Additional checks for edge cases
+        if (!emailRegex.test(email) || 
+            email.includes('..') || 
+            email.includes('@.') || 
+            email.includes('.@') ||
+            email.includes('{}') ||
+            email.includes('*') ||
+            email.includes('`') ||
+            email.includes('+{') ||
+            email.includes('}')) {
+            return $_("contact.form.emailError", { default: "Please enter a valid email address" });
+        }
+        return "";
+    });
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -50,9 +72,13 @@
 
     <!-- Email Field -->
     <div class="mb-6">
-        <Label for="email" class="mb-2 block text-slate-700"
-            >{$_("contact.form.email")}</Label
+        <Label 
+            for="email" 
+            color={emailError ? "red" : undefined}
+            class="mb-2 block"
         >
+            {$_("contact.form.email")}
+        </Label>
         <Input
             id="email"
             bind:value={email}
@@ -60,11 +86,18 @@
             placeholder={$_("contact.form.emailPlaceholder")}
             required
             class="pl-10"
+            color={emailError ? "red" : undefined}
         >
             {#snippet left()}
                 <EnvelopeSolid class="h-5 w-5 text-slate-700" />
             {/snippet}
         </Input>
+        {#if emailError}
+            <Helper class="mt-2" color="red">
+                <span class="font-medium">Oh, snap!</span>
+                {emailError}
+            </Helper>
+        {/if}
     </div>
 
     <!-- Phone Field -->
