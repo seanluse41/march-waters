@@ -184,7 +184,8 @@
       "otherPlaceholder": "詳細をご記入ください",
       "message": "メッセージ",
       "messagePlaceholder": "ご質問やご要望など",
-      "submit": "送信"
+      "submit": "送信",
+      "emailError": "有効なメールアドレスを入力してください"
     }
   },
   "datePicker": {

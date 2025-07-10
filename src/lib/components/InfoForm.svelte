@@ -94,7 +94,6 @@
         </Input>
         {#if emailError}
             <Helper class="mt-2" color="red">
-                <span class="font-medium">Oh, snap!</span>
                 {emailError}
             </Helper>
         {/if}

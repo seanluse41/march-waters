@@ -176,7 +176,8 @@
       "otherPlaceholder": "Please specify",
       "message": "Your Message",
       "messagePlaceholder": "Your message or additional notes",
-      "submit": "Submit"
+      "submit": "Submit",
+      "emailError": "Please enter a valid email address"
     }
   },
   "datePicker": {
