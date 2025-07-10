@@ -4,6 +4,8 @@
 
   let disclosureItems = $derived([
     { item: $_('disclosure.legal_name'), value: $_('disclosure.legal_name_value') },
+    { item: $_('disclosure.address'), value: $_('disclosure.address_value') },
+    { item: $_('disclosure.phone_number'), value: $_('disclosure.phone_number_value') },
     { item: $_('disclosure.email_address'), value: $_('disclosure.email_address_value') },
     { item: $_('disclosure.head_of_operations'), value: $_('disclosure.head_of_operations_value') },
     { item: $_('disclosure.additional_fees'), value: $_('disclosure.additional_fees_value') },
