@@ -22,11 +22,11 @@ async function getCalendarClient() {
   return google.calendar({ version: 'v3', auth });
 }
 
-async function sendConfirmationEmailDirect(eventData, recipientEmail, serviceType) {
+async function sendConfirmationEmailDirect(eventData, recipientEmail, serviceType, eventId) {
   try {
     const emailUser = import.meta.env.VITE_EMAIL_USER;
     const emailPass = import.meta.env.VITE_EMAIL_PASS;
-    
+
     if (!emailUser || !emailPass) {
       throw new Error('Email configuration missing');
     }
@@ -41,9 +41,9 @@ async function sendConfirmationEmailDirect(eventData, recipientEmail, serviceTyp
       }
     }
 
-    const emailContent = serviceType === 'childcare' 
-      ? childCareEmailTemplate(eventData)
-      : consultationEmailTemplate(eventData);
+const emailContent = serviceType === 'childcare' 
+      ? childCareEmailTemplate(eventData, eventId)
+      : consultationEmailTemplate(eventData, eventId);
 
     let transporter = nodemailer.createTransport({
       host: 'smtp.porkbun.com',
@@ -62,7 +62,7 @@ async function sendConfirmationEmailDirect(eventData, recipientEmail, serviceTyp
       text: emailContent,
     });
 
-    return { 
+    return {
       success: true,
       messageId: info.messageId
     };
@@ -103,66 +103,66 @@ async function getRecentConfirmedEvents() {
 export async function POST({ request }) {
   try {
     const headers = Object.fromEntries(request.headers.entries());
-    
+
     console.log('=== Calendar Webhook Received ===');
     console.log('Timestamp:', new Date().toISOString());
-    
+
     const resourceState = headers['x-goog-resource-state'];
-    
+
     if (resourceState === 'sync') {
       console.log('Sync message - webhook setup confirmation');
       return new Response('OK', { status: 200 });
     }
-    
+
     if (resourceState === 'exists') {
       console.log('Calendar event changed - checking for recent confirmations');
-      
+
       // Fetch recent confirmed events
       const eventResult = await getRecentConfirmedEvents();
-      
+
       if (!eventResult.success || !eventResult.hasEvents) {
         console.log('No confirmed events found');
         return new Response('OK', { status: 200 });
       }
-      
+
       // Check all events for ones that need confirmation emails
       for (const event of eventResult.events) {
         const description = event.description || '';
-        
+
         // Skip if already processed
         if (description.includes('@@Confirmed@@')) {
           continue;
         }
-        
+
         // Only process events that have @@Added@@ but not @@Confirmed@@
         if (!description.includes('@@Added@@')) {
           continue;
         }
-        
+
         // Extract email from description
         const emailMatch = description.match(/メールアドレス:\s*(.+)/);
         if (!emailMatch) {
           console.log('No email found in event:', event.summary);
           continue;
         }
-        
+
         const recipientEmail = emailMatch[1].trim();
         console.log('Processing event:', event.summary, 'for email:', recipientEmail);
-        
+
         // Determine service type from event summary
         let serviceType = 'consultation';
         if (event.summary && event.summary.includes('あとはねるだけ')) {
           serviceType = 'childcare';
         }
-        
+
         console.log('Sending confirmation email to:', recipientEmail);
-        
+
         // Send confirmation email
-        const emailResult = await sendConfirmationEmailDirect(event, recipientEmail, serviceType);
-        
+        const emailResult = await sendConfirmationEmailDirect(event, recipientEmail, serviceType, event.id);
+
         if (emailResult.success) {
           console.log('Confirmation email sent successfully');
-          
+
           // Mark the event as confirmed
           const updateResult = await updateEventDescription(CONFIRMED_CALENDAR_ID, event.id, 'Confirmed');
           if (updateResult.success) {
@@ -175,9 +175,9 @@ export async function POST({ request }) {
         }
       }
     }
-    
+
     return new Response('OK', { status: 200 });
-    
+
   } catch (error) {
     console.error('Webhook error:', error);
     return new Response('Error', { status: 500 });

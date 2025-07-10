@@ -2,7 +2,7 @@
 import { formatEventDateTime, parseEventDescription } from '$lib/helpers/emailHelpers.js';
 import { getProductLink } from '$lib/helpers/getProductLink.js';
 
-export function consultationEmailTemplate(eventData) {
+export function consultationEmailTemplate(eventData, eventId = null) {
     const { summary, description, start, end } = eventData;
     const details = parseEventDescription(description);
     const { dateStr, timeStr } = formatEventDateTime(start, end);
@@ -12,7 +12,7 @@ export function consultationEmailTemplate(eventData) {
     const timeDisplay = isEmailConsult ? 'メールでのやりとり' : `${dateStr} ${timeStr}`;
 
     const course = details['コース'] || summary;
-    const paymentLink = getProductLink(course);
+    const paymentLink = getProductLink(course, eventId);
     
     let paymentSection = '';
     if (paymentLink) {

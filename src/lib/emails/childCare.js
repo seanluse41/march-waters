@@ -2,7 +2,7 @@
 import { formatEventDateTime, parseEventDescription } from '$lib/helpers/emailHelpers.js';
 import { getProductLink } from '$lib/helpers/getProductLink.js';
 
-export function childCareEmailTemplate(eventData) {
+export function childCareEmailTemplate(eventData, eventId = null) {
     const { summary, description, start, end } = eventData;
     const details = parseEventDescription(description);
     const { dateStr, timeStr } = formatEventDateTime(start, end);
@@ -14,7 +14,7 @@ export function childCareEmailTemplate(eventData) {
     let paymentSection = '';
 
     if (!isCashPayment) {
-        const paymentLink = getProductLink(course);
+        const paymentLink = getProductLink(course, eventId);
         if (paymentLink) {
             paymentSection = `
 【お支払いについて】
