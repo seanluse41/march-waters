@@ -19,8 +19,8 @@ async function getCalendarClient() {
 
 export async function updateEventDescription(calendarId, eventId, status) {
   try {
-    if (!['Edited', 'Confirmed'].includes(status)) {
-      throw new Error('Status must be either "Edited" or "Confirmed"');
+    if (!['Edited', 'Confirmed', 'Paid'].includes(status)) {
+      throw new Error('Status must be "Edited", "Confirmed", or "Paid"');
     }
 
     const calendar = await getCalendarClient();
@@ -35,7 +35,7 @@ export async function updateEventDescription(calendarId, eventId, status) {
     let description = event.description || '';
 
     // Remove any existing status markers
-    description = description.replace(/@@(Added|Edited|Confirmed)@@\s*$/g, '').trim();
+    description = description.replace(/@@(Added|Edited|Confirmed|Paid)@@\s*$/g, '').trim();
 
     // Add the new status marker
     description = description + `\n@@${status}@@`;

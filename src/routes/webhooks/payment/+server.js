@@ -1,9 +1,11 @@
 // src/routes/webhooks/payment/+server.js
 import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
+import { updateEventDescription } from '$lib/requests/updateEventDescription.js';
 
 const stripeSecretKey = import.meta.env.VITE_STRIPE_TEST_SECRET_KEY;
 const endpointSecret = import.meta.env.VITE_STRIPE_WEBHOOK_SECRET;
+const CONFIRMED_CALENDAR_ID = import.meta.env.VITE_GOOGLE_CALENDAR_CONFIRMED_ID;
 const stripe = new Stripe(stripeSecretKey);
 
 export async function POST({ request }) {
@@ -34,10 +36,23 @@ export async function POST({ request }) {
         console.log('Client reference ID:', session.client_reference_id);
         console.log('Full session object:', JSON.stringify(session, null, 2));
         
-        // TODO: Add logic here to:
-        // 1. Find the corresponding calendar event using client_reference_id
-        // 2. Update the event description with payment status
-        // 3. Send confirmation email if needed
+        // Update calendar event with payment status
+        if (session.client_reference_id) {
+            console.log('Updating calendar event with payment status...');
+            const updateResult = await updateEventDescription(
+                CONFIRMED_CALENDAR_ID, 
+                session.client_reference_id, 
+                'Paid'
+            );
+            
+            if (updateResult.success) {
+                console.log('✅ Calendar event updated with Paid status');
+            } else {
+                console.error('❌ Failed to update calendar event:', updateResult.error);
+            }
+        } else {
+            console.log('⚠️ No client_reference_id found - cannot update calendar event');
+        }
         
     } else {
         console.log(`Unhandled event type ${event.type}`);
