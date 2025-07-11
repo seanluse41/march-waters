@@ -10,10 +10,11 @@ completedColumns:
 ## Todo
 
 - [add-5th-or-6th-service-card](tasks/add-5th-or-6th-service-card.md)
-- [update-language-about-reservation-system-being-application-not-confirmed](tasks/update-language-about-reservation-system-being-application-not-confirmed.md)
 - [add-or-block-appointments-from-3-months-out-or-more](tasks/add-or-block-appointments-from-3-months-out-or-more.md)
 
 ## In Progress
+
+- [update-language-about-reservation-system-being-application-not-confirmed](tasks/update-language-about-reservation-system-being-application-not-confirmed.md)
 
 ## Done
 

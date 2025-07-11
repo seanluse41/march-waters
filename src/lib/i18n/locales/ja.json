@@ -153,7 +153,7 @@
     "step1": {
       "label": "ステップ 1",
       "title": "日程を選択",
-      "description": "日時をお選びください。"
+      "description": "希望日時をお選びください。"
     },
     "step2": {
       "label": "ステップ 2",
@@ -162,8 +162,8 @@
     },
     "step3": {
       "label": "ステップ 3",
-      "title": "お支払いの完了",
-      "description": "予約を確定します。"
+      "title": "予約の申請情報をご確認ください。",
+      "description": "予約が確定次第メールにてご連絡いたします。"
     }
   },
   "contact": {
@@ -202,7 +202,7 @@
     "steps": {
       "chooseCourse": "コースを選択",
       "chooseCourseDescription": "食事について選択してください",
-      "chooseDate": "日時を選択",
+      "chooseDate": "希望日時を選択",
       "enterInfo": "お客様情報の入力",
       "confirm": "予約内容の確認"
     },
@@ -215,8 +215,8 @@
       "complete": "申請する"
     },
     "confirmation": {
-      "title": "予約内容の確認",
-      "details": "以下の予約内容をご確認ください：",
+      "title": "予約申請内容の確認",
+      "details": "以下の申請内容をご確認ください：",
       "paymentMethod": "お支払い方法",
       "paymentInstructions": "お支払いについて：",
       "cashInstructions": "当日、現金にてお支払いください。",
@@ -300,7 +300,7 @@
   "midwife": {
     "pageTitle": "じょさんしとはなそう",
     "steps": {
-      "chooseDate": "日時を選択",
+      "chooseDate": "希望日時を選択",
       "enterInfo": "お客様情報の入力",
       "confirm": "予約内容の確認",
       "chooseCourse": "コースを選択",
