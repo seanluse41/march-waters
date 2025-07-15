@@ -10,7 +10,7 @@
   import { _ } from "svelte-i18n";
 </script>
 
-<div class="career-timeline">
+<div>
   <h2 class="text-2xl md:text-3xl font-bold text-slate-700 mb-8">{$_("about.timeline.heading")}</h2>
   
   <Timeline order="vertical">

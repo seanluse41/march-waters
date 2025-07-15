@@ -3,6 +3,7 @@
     import { CheckCircleSolid, HomeOutline } from "flowbite-svelte-icons";
     import { fly } from "svelte/transition";
     import { _ } from "svelte-i18n";
+    import NextStepsTimeline from "./NextStepsTimeline.svelte";
 
     let {
         selectedDate,
@@ -17,7 +18,6 @@
         // Text props
         title = "",
         successMessage = "",
-        nextStepsText = "",
     } = $props();
 </script>
 
@@ -39,58 +39,73 @@
         <div class="space-y-3 text-slate-700">
             {#if course}
                 <p>
-                    <span class="font-semibold">{$_("confirmationscreen.course")}:</span>
+                    <span class="font-semibold"
+                        >{$_("confirmationscreen.course")}:</span
+                    >
                     {course}
                 </p>
             {/if}
             {#if selectedDate}
                 <p>
-                    <span class="font-semibold">{$_("confirmationscreen.date")}:</span>
+                    <span class="font-semibold"
+                        >{$_("confirmationscreen.date")}:</span
+                    >
                     {selectedDate?.toLocaleDateString()}
                 </p>
             {/if}
             <p>
-                <span class="font-semibold">{$_("confirmationscreen.time")}:</span>
+                <span class="font-semibold"
+                    >{$_("confirmationscreen.time")}:</span
+                >
                 {selectedTimeSlot}
             </p>
             {#if childCount}
                 <p>
-                    <span class="font-semibold">{$_("confirmationscreen.childCount")}:</span>
+                    <span class="font-semibold"
+                        >{$_("confirmationscreen.childCount")}:</span
+                    >
                     {childCount}
                     {$_("helpers.personCounter")}
                 </p>
             {/if}
             <p>
-                <span class="font-semibold">{$_("confirmationscreen.name")}:</span>
+                <span class="font-semibold"
+                    >{$_("confirmationscreen.name")}:</span
+                >
                 {name}
             </p>
             <p>
-                <span class="font-semibold">{$_("confirmationscreen.email")}:</span>
+                <span class="font-semibold"
+                    >{$_("confirmationscreen.email")}:</span
+                >
                 {email}
             </p>
             <p>
-                <span class="font-semibold">{$_("confirmationscreen.phone")}:</span>
+                <span class="font-semibold"
+                    >{$_("confirmationscreen.phone")}:</span
+                >
                 {phone}
             </p>
             {#if paymentMethod}
                 <p>
-                    <span class="font-semibold">{$_("confirmationscreen.paymentMethod")}:</span>
+                    <span class="font-semibold"
+                        >{$_("confirmationscreen.paymentMethod")}:</span
+                    >
                     {$_(`payment.${paymentMethod}`)}
                 </p>
             {/if}
             {#if coursePrice}
                 <p>
-                    <span class="font-semibold">{$_("confirmationscreen.amountDue")}:</span>
+                    <span class="font-semibold"
+                        >{$_("confirmationscreen.amountDue")}:</span
+                    >
                     <span class="font-bold text-blue-600">{coursePrice}</span>
                 </p>
             {/if}
         </div>
     </div>
-
-    <div class="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-6">
-        <p class="font-medium text-blue-800 mb-2">
-            {nextStepsText}
-        </p>
+    <div class="hidden md:block">
+        <NextStepsTimeline {paymentMethod} />
     </div>
 
     <div class="text-center">

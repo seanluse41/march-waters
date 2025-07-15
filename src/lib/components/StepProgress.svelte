@@ -22,7 +22,6 @@
     {steps}
     {currentStep}
     {color}
-    size="h-3.5"
   />
   
   {#if currentDescription}

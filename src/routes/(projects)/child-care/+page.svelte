@@ -1,6 +1,15 @@
 <script>
     import { _ } from "svelte-i18n";
-    import { Button, Heading, Hr, List, Li, Radio, Spinner } from "flowbite-svelte";
+    import {
+        Button,
+        Heading,
+        Hr,
+        List,
+        Li,
+        Radio,
+        Spinner,
+        P,
+    } from "flowbite-svelte";
     import {
         ArrowRightOutline,
         ArrowLeftOutline,
@@ -134,12 +143,18 @@
 
             if (result.success) {
                 // Send reservation request email
-                const emailResult = await sendReservationRequestEmail(eventData, email);
+                const emailResult = await sendReservationRequestEmail(
+                    eventData,
+                    email,
+                );
                 if (!emailResult.success) {
-                    console.warn('Reservation request email failed to send:', emailResult.error);
+                    console.warn(
+                        "Reservation request email failed to send:",
+                        emailResult.error,
+                    );
                     // Don't fail the submission, just log the issue
                 }
-                
+
                 currentStep = 5;
             } else {
                 submissionError =
@@ -244,7 +259,6 @@
                 >
                     {$_("childcare.steps.chooseDate")}
                 </Heading>
-
                 <div class="mb-4 p-4 bg-blue-50 rounded-lg">
                     <p class="font-medium text-blue-800">
                         {$_("childcare.selectedCourse")}:
@@ -261,7 +275,6 @@
                     showTimePicker={false}
                     context="child-care"
                 />
-
                 <div class="mt-4 text-center">
                     <p class="font-medium text-slate-700">
                         {$_("childcare.fixedTime")}

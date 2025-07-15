@@ -2,7 +2,7 @@
     import { Tabs, TabItem } from "flowbite-svelte";
     import { UserCircleSolid, ClockSolid, StarSolid } from "flowbite-svelte-icons";
     import DirectorMessage from "./DirectorMessage.svelte";
-    import CareerTimelineTab from "./CareerTimelineTab.svelte";
+    import CareerTimeline from "./CareerTimeline.svelte";
     import CustomerReviewsTab from "./CustomerReviewsTab.svelte";
     import { _ } from "svelte-i18n";
 </script>
@@ -25,7 +25,7 @@
                 <span class="text-sm">Career</span>
             </div>
         {/snippet}
-        <CareerTimelineTab />
+        <CareerTimeline />
     </TabItem>
     
     <TabItem class="w-full">

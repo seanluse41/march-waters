@@ -11,6 +11,7 @@ completedColumns:
 
 - [add-5th-or-6th-service-card](tasks/add-5th-or-6th-service-card.md)
 - [add-or-block-appointments-from-3-months-out-or-more](tasks/add-or-block-appointments-from-3-months-out-or-more.md)
+- [add-tab-translations-to-about-page](tasks/add-tab-translations-to-about-page.md)
 
 ## In Progress
 

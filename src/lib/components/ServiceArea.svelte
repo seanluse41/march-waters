@@ -13,19 +13,19 @@
 </script>
 
 <!-- Desktop View -->
-<div class="hidden md:block">
+<div class="hidden lg:block">
     <div class="cursor-pointer" onclick={() => (showModal = true)}>
         <Img
             src={areaImage}
             alt={$_("top.serviceArea.altText")}
             caption={$_("top.serviceArea.caption")}
-            class="max-w-none md:max-w-sm rounded-lg hover:opacity-90 transition-opacity"
+            class="rounded-lg hover:opacity-90 transition-opacity"
         />
     </div>
 </div>
 
 <!-- Mobile View -->
-<div class="md:hidden">
+<div class="lg:hidden">
     <Card class="cursor-pointer" onclick={() => (showModal = true)}>
         <div class="flex items-center justify-center p-4">
             <div class="text-center">
@@ -53,7 +53,7 @@
             <Img
                 src={areaImage}
                 alt={$_("top.serviceArea.altText")}
-                class="w-full rounded-lg hover:opacity-90 transition-opacity"
+                class="rounded-lg hover:opacity-90 transition-opacity"
                 caption={$_("top.serviceArea.modalDescription")}
             />
         </div>

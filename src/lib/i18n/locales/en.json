@@ -212,7 +212,7 @@
     "buttons": {
       "previous": "Previous",
       "next": "Next",
-      "complete": "Request Booking"
+      "complete": "Request"
     },
     "confirmation": {
       "title": "Confirm Your Booking",
@@ -224,8 +224,7 @@
     },
     "success": {
       "title": "Booking Confirmed!",
-      "message": "Your childcare booking has been successfully created.",
-      "nextSteps": "We'll contact you soon to confirm the details and payment arrangements."
+      "message": "Your childcare booking has been successfully created."
     },
     "project": {
       "title": "About Our Childcare Service",
@@ -325,7 +324,7 @@
     "buttons": {
       "previous": "Previous",
       "next": "Next",
-      "complete": "Request Booking"
+      "complete": "Request"
     },
     "confirmation": {
       "title": "Confirm Your Booking",
@@ -336,8 +335,7 @@
     },
     "success": {
       "title": "Consultation Booked!",
-      "message": "Your consultation has been successfully scheduled.",
-      "nextSteps": "You'll receive a confirmation email shortly with meeting details and payment instructions."
+      "message": "Your consultation has been successfully scheduled."
     },
     "project": {
       "title": "Talk with a Midwife",
@@ -356,6 +354,21 @@
     "cash": "Cash",
     "credit": "Credit",
     "note": "Mail Consulation is Credit Only"
+  },
+  "nextSteps": {
+    "step1": {
+      "title": "Request Submitted",
+      "description": "Your service request has been successfully submitted."
+    },
+    "step2": {
+      "title": "Staff Review",
+      "description": "Our staff will review your request and check availability for your requested date and time."
+    },
+    "step3": {
+      "title": "Confirmation",
+      "descriptionCredit": "A confirmation email with payment portal link will be sent upon approval. Please complete payment before your appointment date.",
+      "descriptionCash": "A confirmation email will be sent upon approval. Please bring the exact cash amount on your appointment date."
+    }
   },
   "confirmationscreen": {
     "details": "Reservation Request Details:",

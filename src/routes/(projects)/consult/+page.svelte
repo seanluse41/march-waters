@@ -325,7 +325,7 @@
 
         {#if currentStep <= 4}
             <div
-                class="flex gap-8 w-full items-center justify-center px-2 md:px-32"
+                class="flex gap-8 w-full items-center justify-center px-0 md:px-32"
             >
                 <Button
                     color="primary"
