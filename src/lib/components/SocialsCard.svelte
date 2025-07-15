@@ -1,6 +1,6 @@
 <script>
   import { _ } from "svelte-i18n";
-
+  import ServiceArea from "$lib/components/ServiceArea.svelte";
   import {
     NewspaperOutline,
     EnvelopeOutline,
@@ -103,6 +103,7 @@
           </div>
         </a>
       {/each}
+      <ServiceArea />
     </div>
   </div>
 </Card>

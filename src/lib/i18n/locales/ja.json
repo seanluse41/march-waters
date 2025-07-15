@@ -78,6 +78,13 @@
         "handle": "talk@march-waters.com"
       }
     },
+    "serviceArea": {
+      "caption": "JR島本駅から30分圏内でサービス提供",
+      "tapToCheck": "タップして確認",
+      "modalTitle": "サービス提供エリア",
+      "modalDescription": "Googleマップで開く",
+      "altText": "JR島本駅から30分圏内のサービス提供エリアを示すマップ"
+    },
     "news": {
       "heading": "最新記事",
       "all": "Noteで見る",
