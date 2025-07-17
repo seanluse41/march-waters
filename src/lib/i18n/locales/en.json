@@ -18,7 +18,7 @@
     "note": "Note"
   },
   "top": {
-    "subtitle": "Child Care, Sexual Wellness and Pregnancy Consultation in the Osaka Area.",
+    "subtitle": "Child Care, Sexual Wellness and Pregnancy Consultation in the Osaka / Kyoto Area.",
     "cards": {
       "heading": "Our Services",
       "card1": {
@@ -71,9 +71,9 @@
       }
     },
     "serviceArea": {
-      "caption": "Services Available within 30 minutes of JR Shimamoto Station",
+      "caption": "Services Available within 30 minutes (via Train or Car) of JR Shimamoto Station",
       "tapToCheck": "Tap to check",
-      "modalTitle": "Service Area",
+      "modalTitle": "Service Area (Negotiable)",
       "modalDescription": "Open in Google Maps",
       "altText": "Service area map showing 30 minute radius from JR Shimamoto Station"
     },
@@ -227,8 +227,8 @@
       "message": "Your childcare booking has been successfully created."
     },
     "project": {
-      "title": "About Our Childcare Service",
-      "description": "We provide evening childcare for children aged 0 to preschool from 5:00PM to 9:30PM. In Japan, it can be difficult for parents to find time for themselves, to have uninterrupted conversations with partners or friends, or simply to relax without careful planning. While children are important, adults also deserve time for self-care. Let us help you incorporate self-care into your daily routine.",
+      "title": "About Our Childcare and Babysitting Service",
+      "description": "We provide evening childcare and babysitting for children aged 0 to preschool from 5:00PM to 9:30PM. In Japan, it can be difficult for parents to find time for themselves, to have uninterrupted conversations with partners or friends, or simply to relax without careful planning. While children are important, adults also deserve time for self-care. Let us help you incorporate self-care into your daily routine.",
       "services": {
         "title": "Our Services Include:",
         "item1": "Childcare from 5:00PM to 9:30PM",
@@ -431,7 +431,7 @@
     "use_of_info_items": [
       "Schedule and manage your appointments",
       "Process payments for services",
-      "Provide consultation and childcare services",
+      "Provide consultation and childcare and babysitting services",
       "Send appointment confirmations and updates"
     ],
     "info_storage": "Information Storage",
@@ -466,7 +466,7 @@
     "title": "Terms of Service",
     "purpose": {
       "title": "Purpose",
-      "content": "These terms of service define the basic conditions for using all services provided by March Waters, including midwife consultations, childcare services, and educational programs."
+      "content": "These terms of service define the basic conditions for using all services provided by March Waters, including midwife consultations, childcare / babysitting services, and educational programs."
     },
     "membership": {
       "title": "Service Eligibility",

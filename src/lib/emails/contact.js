@@ -5,7 +5,7 @@ export function contactEmailTemplate(contactData) {
     
     // Convert reasons to Japanese labels
     const reasonLabels = [];
-    if (reasons.childcare) reasonLabels.push('あとはねるだけプロジェクト');
+    if (reasons.childcare) reasonLabels.push('託児サービス');
     if (reasons.bodyChoice) reasonLabels.push('MyBodyMyChoiceプロジェクト');
     if (reasons.midwife) reasonLabels.push('じょさんしとはなそう');
     if (reasons.event) reasonLabels.push('イベント予約');

@@ -34,7 +34,7 @@ async function sendConfirmationEmailDirect(eventData, recipientEmail, serviceTyp
     // Determine service type from event summary if not provided
     if (!serviceType) {
       const { summary } = eventData;
-      if (summary.includes('あとはねるだけ')) {
+      if (summary.includes('託児')) {
         serviceType = 'childcare';
       } else {
         serviceType = 'consultation';
@@ -58,7 +58,7 @@ const emailContent = serviceType === 'childcare'
     let info = await transporter.sendMail({
       from: emailUser,
       to: recipientEmail,
-      subject: 'March Waters - 予約確認',
+      subject: 'March Waters - 予約確定',
       text: emailContent,
     });
 
@@ -151,7 +151,7 @@ export async function POST({ request }) {
 
         // Determine service type from event summary
         let serviceType = 'consultation';
-        if (event.summary && event.summary.includes('あとはねるだけ')) {
+        if (event.summary && event.summary.includes('託児')) {
           serviceType = 'childcare';
         }
 

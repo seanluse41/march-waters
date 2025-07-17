@@ -8,7 +8,7 @@ function constructEmailContent(eventData, serviceType) {
     // Determine service type from event summary if not provided
     if (!serviceType) {
         const { summary } = eventData;
-        if (summary.includes('あとはねるだけ')) {
+        if (summary.includes('託児')) {
             serviceType = 'childcare';
         } else if (summary.includes('じょさんし') || summary.includes('メール相談') || summary.includes('相談')) {
             serviceType = 'consultation';
@@ -48,7 +48,7 @@ export async function POST({ request }) {
         let info = await transporter.sendMail({
             from: emailUser,
             to: recipientEmail,
-            subject: 'March Waters - 予約確認',
+            subject: 'March Waters - 予約確定',
             text: emailContent,
         });
 

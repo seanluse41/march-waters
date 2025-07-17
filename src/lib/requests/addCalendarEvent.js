@@ -48,12 +48,12 @@ export function createChildCareEventData({ selectedDate, name, email, phone, chi
     `コース: ${selectedCourse}`,
     `子供の人数: ${childCount}名`,
     `お支払い方法: ${paymentJP}`,
-    'サービス: あとはねるだけプロジェクト (17:00-21:30)',
+    'サービス: 託児サービス (17:00-21:30)',
     '@@Added@@'
   ].join('\n');
 
   return {
-    summary: 'あとはねるだけプロジェクト',
+    summary: '託児サービス',
     description,
     start: {
       dateTime: startDate.toISOString(),
