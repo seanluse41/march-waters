@@ -6,6 +6,8 @@
         UserSolid,
     } from "flowbite-svelte-icons";
     import { _ } from "svelte-i18n";
+    import { validateEmail } from "$lib/helpers/emailHelpers.js";
+    
     let {
         name = $bindable(""),
         email = $bindable(""),
@@ -17,27 +19,8 @@
         dinner = $bindable(false), // honeypot checkbox
     } = $props();
 
-    // Email validation using derived.by
-    let emailError = $derived.by(() => {
-        if (!email) return ""; // Allow empty for now, required validation handled elsewhere
-        
-        // More strict email validation
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        
-        // Additional checks for edge cases
-        if (!emailRegex.test(email) || 
-            email.includes('..') || 
-            email.includes('@.') || 
-            email.includes('.@') ||
-            email.includes('{}') ||
-            email.includes('*') ||
-            email.includes('`') ||
-            email.includes('+{') ||
-            email.includes('}')) {
-            return $_("contact.form.emailError", { default: "Please enter a valid email address" });
-        }
-        return "";
-    });
+    // Email validation using helper function
+    let emailError = $derived(validateEmail(email));
 
     function handleSubmit(event) {
         event.preventDefault();

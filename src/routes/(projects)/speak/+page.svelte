@@ -15,6 +15,7 @@
     import StepProgress from "$lib/components/StepProgress.svelte";
     import InfoForm from "$lib/components/InfoForm.svelte";
     import ConfirmationScreen from "$lib/components/ConfirmationScreen.svelte";
+    import { validateEmail } from "$lib/helpers/emailHelpers.js";
 
     // Form validation states
     let name = $state("");
@@ -37,7 +38,10 @@
     ]);
 
     let isFormValid = $derived(
-        name.trim() !== "" && email.trim() !== "" && phone.trim() !== "",
+        name.trim() !== "" &&
+            email.trim() !== "" &&
+            !validateEmail(email) &&
+            phone.trim() !== "",
     );
 
     function nextStep() {

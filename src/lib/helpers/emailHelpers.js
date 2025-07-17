@@ -24,3 +24,24 @@ export function parseEventDescription(description) {
     });
     return details;
 }
+
+export function validateEmail(email) {
+    if (!email) return ""; // Allow empty for now, required validation handled elsewhere
+    
+    // More strict email validation
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    
+    // Additional checks for edge cases
+    if (!emailRegex.test(email) || 
+        email.includes('..') || 
+        email.includes('@.') || 
+        email.includes('.@') ||
+        email.includes('{}') ||
+        email.includes('*') ||
+        email.includes('`') ||
+        email.includes('+{') ||
+        email.includes('}')) {
+        return "Please enter a valid email address";
+    }
+    return "";
+}

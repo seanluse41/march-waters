@@ -20,6 +20,7 @@
         createConsultEventData,
     } from "$lib/requests/addCalendarEvent.js";
     import { sendReservationRequestEmail } from "$lib/requests/sendReservationRequestEmail.js";
+    import { validateEmail } from "$lib/helpers/emailHelpers.js";
 
     // Persistent state
     let selectedDate = $state(null);
@@ -72,7 +73,7 @@
 
     // Also make steps and descriptions reactive
     let steps = $derived([
-        $_("midwife.steps.chooseCourse", { default: "Choose Course" }),
+        $_("midwife.steps.chooseCourse"),
         $_("midwife.steps.chooseDate"),
         $_("midwife.steps.enterInfo"),
         $_("midwife.steps.confirm"),
@@ -93,7 +94,7 @@
     );
 
     let isFormValid = $derived(
-        name.trim() !== "" && email.trim() !== "",
+        name.trim() !== "" && email.trim() !== "" && !validateEmail(email),
     );
     let canProceedFromStep1 = $derived(selectedCourse !== "");
     let canProceedFromStep2 = $derived(dateSelected && selectedTimeSlot !== "");
@@ -144,15 +145,21 @@
                 email,
                 "consultation",
             );
-            
+
             if (result.success) {
                 // Send reservation request email
-                const emailResult = await sendReservationRequestEmail(eventData, email);
+                const emailResult = await sendReservationRequestEmail(
+                    eventData,
+                    email,
+                );
                 if (!emailResult.success) {
-                    console.warn('Reservation request email failed to send:', emailResult.error);
+                    console.warn(
+                        "Reservation request email failed to send:",
+                        emailResult.error,
+                    );
                     // Don't fail the submission, just log the issue
                 }
-                
+
                 currentStep = 5;
             } else {
                 submissionError =

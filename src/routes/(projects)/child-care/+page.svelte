@@ -29,15 +29,14 @@
     } from "$lib/requests/addCalendarEvent.js";
     import { sendReservationRequestEmail } from "$lib/requests/sendReservationRequestEmail.js";
     import SuccessCard from "$lib/components/SuccessCard.svelte";
+    import { validateEmail } from "$lib/helpers/emailHelpers.js";
 
     // Persistent state
     let selectedDate = $state(null);
     let dateSelected = $state(false);
 
     // Form validation states
-
     let dinner = $state(false);
-
     let name = $state("");
     let email = $state("");
     let phone = $state("");
@@ -53,23 +52,15 @@
     let childcareCourses = $derived([
         {
             id: "normal",
-            title: $_("childcare.courses.normal.title", {
-                default: "Standard Care",
-            }),
-            description: $_("childcare.courses.normal.description", {
-                default: "Evening childcare with dinner included",
-            }),
+            title: $_("childcare.courses.normal.title"),
+            description: $_("childcare.courses.normal.description"),
             price: "¥8,000",
             icon: BowlRiceOutline,
         },
         {
             id: "allergy",
-            title: $_("childcare.courses.allergy.title", {
-                default: "Allergy-Friendly Care",
-            }),
-            description: $_("childcare.courses.allergy.description", {
-                default: "Evening childcare (please bring your child's dinner)",
-            }),
+            title: $_("childcare.courses.allergy.title"),
+            description: $_("childcare.courses.allergy.description"),
             price: "¥7,500",
             icon: CloseCircleOutline,
         },
@@ -84,9 +75,7 @@
     ]);
 
     let descriptions = $derived([
-        $_("childcare.steps.chooseCourseDescription", {
-            default: "Select your childcare type",
-        }),
+        $_("childcare.steps.chooseCourseDescription"),
         $_("timeline.step1.description"),
         $_("timeline.step2.description"),
         $_("timeline.step3.description"),
@@ -98,7 +87,10 @@
     );
 
     let isFormValid = $derived(
-        name.trim() !== "" && email.trim() !== "" && phone.trim() !== "",
+        name.trim() !== "" && 
+        email.trim() !== "" && 
+        !validateEmail(email) && 
+        phone.trim() !== ""
     );
     let canProceedFromStep1 = $derived(selectedCourse !== "");
     let canProceedFromStep2 = $derived(dateSelected);
