@@ -1,12 +1,11 @@
 <script>
-    import { Label, Input, Textarea, Button, Radio, P, Helper } from "flowbite-svelte";
+    import { Label, Input, Radio, P, Helper } from "flowbite-svelte";
     import {
         EnvelopeSolid,
         PhoneSolid,
         UserSolid,
     } from "flowbite-svelte-icons";
     import { _ } from "svelte-i18n";
-
     let {
         name = $bindable(""),
         email = $bindable(""),
@@ -14,6 +13,7 @@
         paymentMethod = $bindable("cash"),
         disableCash,
         disablePayment,
+        requirePhone,
         dinner = $bindable(false), // honeypot checkbox
     } = $props();
 
@@ -109,7 +109,7 @@
             bind:value={phone}
             type="tel"
             placeholder={$_("contact.form.phonePlaceholder")}
-            required
+            required={requirePhone}
             class="pl-10"
         >
             {#snippet left()}

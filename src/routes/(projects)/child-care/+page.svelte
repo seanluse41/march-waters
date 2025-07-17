@@ -302,7 +302,13 @@
                     </p>
                 </div>
 
-                <InfoForm bind:name bind:email bind:phone bind:paymentMethod />
+                <InfoForm
+                    bind:name
+                    bind:email
+                    bind:phone
+                    bind:paymentMethod
+                    requirePhone={true}
+                />
 
                 <!-- Number of children selector -->
                 <div class="mb-6">

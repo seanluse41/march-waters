@@ -93,7 +93,7 @@
     );
 
     let isFormValid = $derived(
-        name.trim() !== "" && email.trim() !== "" && phone.trim() !== "",
+        name.trim() !== "" && email.trim() !== "",
     );
     let canProceedFromStep1 = $derived(selectedCourse !== "");
     let canProceedFromStep2 = $derived(dateSelected && selectedTimeSlot !== "");
@@ -273,6 +273,7 @@
                     bind:phone
                     bind:paymentMethod
                     disablePayment={true}
+                    requirePhone={false}
                 />
             </div>
             <!-- confirm -->

@@ -74,7 +74,7 @@ export function createConsultEventData({ selectedDate, selectedTimeSlot, name, e
   const paymentJP = 'カード決済';
 
   // Determine event title based on course
-  let eventTitle = 'じょさんしとはなそう';
+  let eventTitle = '妊娠相談・育児相談';
   let serviceNameJP = 'オンライン相談';
 
   if (selectedCourse === 'email') {

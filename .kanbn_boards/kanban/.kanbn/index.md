@@ -21,13 +21,9 @@ completedColumns:
 - [babysitter-up-to-3-kids-means-from-different-families](tasks/babysitter-up-to-3-kids-means-from-different-families.md)
 - [babysitter-訪問型-add-address-field](tasks/babysitter-訪問型-add-address-field.md)
 - [babystitter-aiko-san-house-add-定員-枠残り１me](tasks/babystitter-aiko-san-house-add-定員-枠残り１me.md)
-- [my-body-my-choice-プロジェクト-性教育講座開催](tasks/my-body-my-choice-プロジェクト-性教育講座開催.md)
 - [my-body-my-choice-プロジェクト：-success-card-remove-時間](tasks/my-body-my-choice-プロジェクト：-success-card-remove-時間.md)
 - [my-body-my-choice-プロジェクト-need-to-send-mail](tasks/my-body-my-choice-プロジェクト-need-to-send-mail.md)
 - [my-body-my-choice-プロジェクト](tasks/my-body-my-choice-プロジェクト.md)
-- [じょさんしとはなそう](tasks/じょさんしとはなそう.md)
-- [じょさんしとはなそう-ー＞-phone-not-necessary](tasks/じょさんしとはなそう-ー＞-phone-not-necessary.md)
-- [じょさんしとはなそう-お名前-匿名ニックね―めでも可](tasks/じょさんしとはなそう-お名前-匿名ニックね―めでも可.md)
 - [じょさんしとはなそう；申請](tasks/じょさんしとはなそう；申請.md)
 - [じょさんしとはなそう：オンライン](tasks/じょさんしとはなそう：オンライン.md)
 - [相談-申請メール：-サービスー＞-相談サービス](tasks/相談-申請メール：-サービスー＞-相談サービス.md)
@@ -40,6 +36,10 @@ completedColumns:
 
 ## Done
 
+- [じょさんしとはなそう](tasks/じょさんしとはなそう.md)
+- [じょさんしとはなそう-お名前-匿名ニックね―めでも可](tasks/じょさんしとはなそう-お名前-匿名ニックね―めでも可.md)
+- [じょさんしとはなそう-ー＞-phone-not-necessary](tasks/じょさんしとはなそう-ー＞-phone-not-necessary.md)
+- [my-body-my-choice-プロジェクト-性教育講座開催](tasks/my-body-my-choice-プロジェクト-性教育講座開催.md)
 - [mail-確認メール-ー＞-確定メール](tasks/mail-確認メール-ー＞-確定メール.md)
 - [あとはねるだけプロジェクト](tasks/あとはねるだけプロジェクト.md)
 - [mail-予約の申請を承りました。スタッフに承認されたら確定となります。](tasks/mail-予約の申請を承りました。スタッフに承認されたら確定となります。.md)

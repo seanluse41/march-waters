@@ -6,7 +6,7 @@
     "terms": "Terms of Service",
     "privacy": "Privacy Policy",
     "commerceDisclosure": "Commerce Disclosure",
-    "speak": "My Body My Choice Project",
+    "speak": "Sexual Education Seminar Service",
     "consult": "Midwife Consultation",
     "childcare": "Childcare Service",
     "stories": "Real Life Stories",
@@ -26,7 +26,7 @@
         "text": "We provide evening childcare for children ages 0-6 from 5:00PM to 9:30PM, including dinner, bath, play, and bedtime routines. This service allows parents to enjoy some personal time. Cost: ¥8,000 (includes dinner, ¥7,500 for allergies), capacity: 3 children."
       },
       "card2": {
-        "title": "My Body My Choice Project",
+        "title": "Sexual Education Seminar Service",
         "text": "Providing comprehensive sex education with the motto 'My body is my own.' We offer education for children, youth, and parents, empowering individuals to make informed choices about their bodies and lives. Pricing varies based on content and budget."
       },
       "card3": {
@@ -260,7 +260,7 @@
     "maxCapacity": "Maximum capacity is 3 children"
   },
   "bodychoice": {
-    "pageTitle": "My Body My Choice Project",
+    "pageTitle": "Sexual Education Seminar Service",
     "steps": {
       "enterInfo": "Enter Your Information",
       "confirm": "Confirm"
@@ -273,7 +273,7 @@
     "confirmation": {
       "title": "Confirm Your Request",
       "details": "Please confirm your request details:",
-      "thankYou": "Thank you for your interest in our My Body My Choice Project. We'll review your request and contact you shortly to discuss how we can help."
+      "thankYou": "Thank you for your interest in our Sexual Education Seminar Service. We'll review your request and contact you shortly to discuss how we can help."
     },
     "form": {
       "preferredDate": "Preferred Date (Optional)",
@@ -281,7 +281,7 @@
       "notesPlaceholder": "Please share any specific topics or questions you'd like to discuss"
     },
     "project": {
-      "title": "About My Body My Choice Project",
+      "title": "About Sexual Education Seminar Service",
       "description": "\"My body is my own.\" We want to create a society where this fundamental principle is understood by everyone. With knowledge, people can make choices that align with their authentic selves. Knowledge is an ally that can protect you and those around you in critical moments. With this mission in mind, we provide education about bodies and sexuality based on internationally standardized comprehensive sex education curriculum.",
       "services": {
         "title": "Our Services Include:",
