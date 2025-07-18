@@ -34,9 +34,9 @@
 
     let descriptions = $derived([
         $_("timeline.step2.description"),
-        $_("timeline.step3.description"),
+        $_("bodychoice.steps.description"),
     ]);
-
+    
     let isFormValid = $derived(
         name.trim() !== "" &&
             email.trim() !== "" &&
@@ -126,7 +126,6 @@
                     {$_("bodychoice.steps.enterInfo")}
                 </Heading>
 
-                <!-- Standard Info Form -->
                 <InfoForm
                     bind:name
                     bind:email
@@ -135,7 +134,6 @@
                     requirePhone={true}
                 />
 
-                <!-- Date Picker using Flowbite component -->
                 <div class="mb-6">
                     <label
                         for="preferredDate"

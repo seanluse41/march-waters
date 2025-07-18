@@ -21,9 +21,7 @@ completedColumns:
 - [babysitter-up-to-3-kids-means-from-different-families](tasks/babysitter-up-to-3-kids-means-from-different-families.md)
 - [babysitter-訪問型-add-address-field](tasks/babysitter-訪問型-add-address-field.md)
 - [babystitter-aiko-san-house-add-定員-枠残り１me](tasks/babystitter-aiko-san-house-add-定員-枠残り１me.md)
-- [my-body-my-choice-プロジェクト：-success-card-remove-時間](tasks/my-body-my-choice-プロジェクト：-success-card-remove-時間.md)
 - [my-body-my-choice-プロジェクト-need-to-send-mail](tasks/my-body-my-choice-プロジェクト-need-to-send-mail.md)
-- [my-body-my-choice-プロジェクト](tasks/my-body-my-choice-プロジェクト.md)
 - [じょさんしとはなそう；申請](tasks/じょさんしとはなそう；申請.md)
 - [じょさんしとはなそう：オンライン](tasks/じょさんしとはなそう：オンライン.md)
 - [相談-申請メール：-サービスー＞-相談サービス](tasks/相談-申請メール：-サービスー＞-相談サービス.md)
@@ -33,9 +31,11 @@ completedColumns:
 ## In Progress
 
 - [update-language-about-reservation-system-being-application-not-confirmed](tasks/update-language-about-reservation-system-being-application-not-confirmed.md)
+- [my-body-my-choice-プロジェクト](tasks/my-body-my-choice-プロジェクト.md)
 
 ## Done
 
+- [my-body-my-choice-プロジェクト：-success-card-remove-時間](tasks/my-body-my-choice-プロジェクト：-success-card-remove-時間.md)
 - [じょさんしとはなそう](tasks/じょさんしとはなそう.md)
 - [じょさんしとはなそう-お名前-匿名ニックね―めでも可](tasks/じょさんしとはなそう-お名前-匿名ニックね―めでも可.md)
 - [じょさんしとはなそう-ー＞-phone-not-necessary](tasks/じょさんしとはなそう-ー＞-phone-not-necessary.md)

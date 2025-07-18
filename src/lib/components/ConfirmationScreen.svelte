@@ -43,10 +43,12 @@
                     {selectedDate?.toLocaleDateString()}
                 </p>
             {/if}
-            <p>
-                <span class="font-semibold">{$_("confirmationscreen.time")}:</span>
-                {selectedTimeSlot}
-            </p>
+            {#if selectedTimeSlot && selectedTimeSlot !== "TBD" && selectedTimeSlot !== "N/A"}
+                <p>
+                    <span class="font-semibold">{$_("confirmationscreen.time")}:</span>
+                    {selectedTimeSlot}
+                </p>
+            {/if}
             {#if childCount}
                 <p>
                     <span class="font-semibold">{$_("confirmationscreen.childCount")}:</span>

@@ -263,7 +263,8 @@
     "pageTitle": "Sexual Education Seminar Service",
     "steps": {
       "enterInfo": "Enter Your Information",
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "description": "Your inquiry has been sent. We will contact you by email within 2-3 business days."
     },
     "buttons": {
       "previous": "Previous",

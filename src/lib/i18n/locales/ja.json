@@ -286,7 +286,8 @@
     "pageTitle": "性教育講座開催",
     "steps": {
       "enterInfo": "お客様情報の入力",
-      "confirm": "確認"
+      "confirm": "確認",
+      "description": "問い合わせは送信されました。２〜３営業日以内にメールにてご連絡いたします。"
     },
     "buttons": {
       "previous": "戻る",
