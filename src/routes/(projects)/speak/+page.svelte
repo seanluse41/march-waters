@@ -139,9 +139,7 @@
                         for="preferredDate"
                         class="mb-2 block text-slate-700"
                     >
-                        {$_("bodychoice.form.preferredDate", {
-                            default: "Preferred Date (Optional)",
-                        })}
+                        {$_("bodychoice.form.preferredDate")}
                     </label>
                     <div class="w-full">
                         <Datepicker bind:value={preferredDate} color="blue" />
@@ -184,9 +182,6 @@
 
                 {#if preferredDate || notes?.trim()}
                     <div class="bg-gray-50 p-4 rounded-lg mt-4">
-                        <p class="font-medium text-gray-800 mb-2">
-                            Additional Information:
-                        </p>
                         <div class="text-gray-700 space-y-1">
                             {#if preferredDate}
                                 <p>
