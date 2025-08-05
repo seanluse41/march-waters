@@ -8,15 +8,18 @@ export function formatEventDateTime(start, end) {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
-        weekday: 'long'
+        weekday: 'long',
+        timeZone: 'Asia/Tokyo'
     });
     
     const timeStr = `${startDate.toLocaleTimeString('ja-JP', { 
         hour: '2-digit', 
-        minute: '2-digit'
+        minute: '2-digit',
+        timeZone: 'Asia/Tokyo'
     })} - ${endDate.toLocaleTimeString('ja-JP', { 
         hour: '2-digit', 
-        minute: '2-digit'
+        minute: '2-digit',
+        timeZone: 'Asia/Tokyo'
     })}`;
     
     return { dateStr, timeStr };

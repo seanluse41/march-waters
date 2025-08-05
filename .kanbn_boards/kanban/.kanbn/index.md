@@ -29,11 +29,11 @@ completedColumns:
 ## In Progress
 
 - [my-body-my-choice-プロジェクト](tasks/my-body-my-choice-プロジェクト.md)
-- [じょさんしとはなそう：メール：時間がおかしい](tasks/じょさんしとはなそう：メール：時間がおかしい.md)
-- [mail-babysitter-mail-time-is-8-00-to-12-30-for-some-reason](tasks/mail-babysitter-mail-time-is-8-00-to-12-30-for-some-reason.md)
 
 ## Done
 
+- [じょさんしとはなそう：メール：時間がおかしい](tasks/じょさんしとはなそう：メール：時間がおかしい.md)
+- [mail-babysitter-mail-time-is-8-00-to-12-30-for-some-reason](tasks/mail-babysitter-mail-time-is-8-00-to-12-30-for-some-reason.md)
 - [update-language-about-reservation-system-being-application-not-confirmed](tasks/update-language-about-reservation-system-being-application-not-confirmed.md)
 - [consultation-booked-your-consultation-has-been-successfully-scheduled-change-to-reservation-requested](tasks/consultation-booked-your-consultation-has-been-successfully-scheduled-change-to-reservation-requested.md)
 - [my-body-my-choice-プロジェクト：-success-card-remove-時間](tasks/my-body-my-choice-プロジェクト：-success-card-remove-時間.md)
