@@ -335,8 +335,9 @@
       "creditInstructions": "After our staff has accepted your reservation request, a payment portal link will be sent via email."
     },
     "success": {
-      "title": "Consultation Booked!",
-      "message": "Your consultation has been successfully scheduled."
+      "title": "Reservation Request Sent!",
+      "message": "Your reservation has been successfully requested. Note that it is not finalized.",
+      "nextSteps": "March Waters staff will double check availability, and finalize your request within one business day."
     },
     "project": {
       "title": "Talk with a Midwife",

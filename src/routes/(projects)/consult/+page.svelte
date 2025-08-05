@@ -317,17 +317,9 @@
                 paymentMethod="credit"
                 coursePrice={activeCourse?.price}
                 course={activeCourse?.title}
-                title={$_("midwife.success.title", {
-                    default: "Consultation Booked!",
-                })}
-                successMessage={$_("midwife.success.message", {
-                    default:
-                        "Your consultation has been successfully scheduled.",
-                })}
-                nextStepsText={$_("midwife.success.nextSteps", {
-                    default:
-                        "You'll receive a confirmation email shortly with meeting details and payment instructions.",
-                })}
+                title={$_("midwife.success.title")}
+                successMessage={$_("midwife.success.message")}
+                nextStepsText={$_("midwife.success.nextSteps")}
             />
         {/if}
 

@@ -17,7 +17,6 @@ completedColumns:
 - [0歳～未就学児のお子様を夕方～21：30までお預かりします。](tasks/0歳～未就学児のお子様を夕方～21：30までお預かりします。.md)
 - [あとはねるだけプロジェクト-月1回](tasks/あとはねるだけプロジェクト-月1回.md)
 - [add-application-date-to-google-calendar-event](tasks/add-application-date-to-google-calendar-event.md)
-- [mail-babysitter-mail-time-is-8-00-to-12-30-for-some-reason](tasks/mail-babysitter-mail-time-is-8-00-to-12-30-for-some-reason.md)
 - [babysitter-up-to-3-kids-means-from-different-families](tasks/babysitter-up-to-3-kids-means-from-different-families.md)
 - [babysitter-訪問型-add-address-field](tasks/babysitter-訪問型-add-address-field.md)
 - [babystitter-aiko-san-house-add-定員-枠残り１me](tasks/babystitter-aiko-san-house-add-定員-枠残り１me.md)
@@ -25,16 +24,18 @@ completedColumns:
 - [じょさんしとはなそう；申請](tasks/じょさんしとはなそう；申請.md)
 - [じょさんしとはなそう：オンライン](tasks/じょさんしとはなそう：オンライン.md)
 - [相談-申請メール：-サービスー＞-相談サービス](tasks/相談-申請メール：-サービスー＞-相談サービス.md)
-- [じょさんしとはなそう：メール：時間がおかしい](tasks/じょさんしとはなそう：メール：時間がおかしい.md)
 - [じょさんしとはなそう：-メール相談だと相談内容の項目をいれる](tasks/じょさんしとはなそう：-メール相談だと相談内容の項目をいれる.md)
 
 ## In Progress
 
-- [update-language-about-reservation-system-being-application-not-confirmed](tasks/update-language-about-reservation-system-being-application-not-confirmed.md)
 - [my-body-my-choice-プロジェクト](tasks/my-body-my-choice-プロジェクト.md)
+- [じょさんしとはなそう：メール：時間がおかしい](tasks/じょさんしとはなそう：メール：時間がおかしい.md)
+- [mail-babysitter-mail-time-is-8-00-to-12-30-for-some-reason](tasks/mail-babysitter-mail-time-is-8-00-to-12-30-for-some-reason.md)
 
 ## Done
 
+- [update-language-about-reservation-system-being-application-not-confirmed](tasks/update-language-about-reservation-system-being-application-not-confirmed.md)
+- [consultation-booked-your-consultation-has-been-successfully-scheduled-change-to-reservation-requested](tasks/consultation-booked-your-consultation-has-been-successfully-scheduled-change-to-reservation-requested.md)
 - [my-body-my-choice-プロジェクト：-success-card-remove-時間](tasks/my-body-my-choice-プロジェクト：-success-card-remove-時間.md)
 - [じょさんしとはなそう](tasks/じょさんしとはなそう.md)
 - [じょさんしとはなそう-お名前-匿名ニックね―めでも可](tasks/じょさんしとはなそう-お名前-匿名ニックね―めでも可.md)

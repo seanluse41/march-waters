@@ -3,13 +3,22 @@
 export function formatEventDateTime(start, end) {
     const startDate = new Date(start.dateTime);
     const endDate = new Date(end.dateTime);
+    
     const dateStr = startDate.toLocaleDateString('ja-JP', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
         weekday: 'long'
     });
-    const timeStr = `${startDate.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })} - ${endDate.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}`;
+    
+    const timeStr = `${startDate.toLocaleTimeString('ja-JP', { 
+        hour: '2-digit', 
+        minute: '2-digit'
+    })} - ${endDate.toLocaleTimeString('ja-JP', { 
+        hour: '2-digit', 
+        minute: '2-digit'
+    })}`;
+    
     return { dateStr, timeStr };
 }
 
