@@ -8,6 +8,7 @@
         Li,
         Textarea,
         Datepicker,
+        Spinner,
     } from "flowbite-svelte";
     import { ArrowRightOutline, ArrowLeftOutline } from "flowbite-svelte-icons";
     import { fly } from "svelte/transition";
@@ -15,7 +16,9 @@
     import StepProgress from "$lib/components/StepProgress.svelte";
     import InfoForm from "$lib/components/InfoForm.svelte";
     import ConfirmationScreen from "$lib/components/ConfirmationScreen.svelte";
+    import SpeakSuccessCard from "$lib/components/SpeakSuccessCard.svelte";
     import { validateEmail } from "$lib/helpers/emailHelpers.js";
+    import { sendSpeakingRequestEmails } from "$lib/requests/sendSpeakingRequestEmails.js";
 
     // Form validation states
     let name = $state("");
@@ -23,6 +26,8 @@
     let phone = $state("");
     let notes = $state("");
     let preferredDate = $state(null);
+    let isSubmitting = $state(false);
+    let submissionError = $state("");
 
     let currentStep = $state(1);
 
@@ -48,14 +53,35 @@
         if (currentStep === 1 && isFormValid) {
             currentStep = 2;
         } else if (currentStep === 2) {
-            // Handle submission and confirmation logic
-            console.log("Inquiry submitted!", {
+            handleSubmission();
+        }
+    }
+
+    async function handleSubmission() {
+        isSubmitting = true;
+        submissionError = "";
+
+        try {
+            const requestData = {
                 name,
                 email,
                 phone,
                 preferredDate,
-                notes,
-            });
+                notes
+            };
+
+            const result = await sendSpeakingRequestEmails(requestData);
+
+            if (result.success) {
+                currentStep = 3; // Success state
+            } else {
+                submissionError = result.error || "Failed to send request. Please try again.";
+            }
+        } catch (error) {
+            console.error("Submission error:", error);
+            submissionError = "An unexpected error occurred. Please try again.";
+        } finally {
+            isSubmitting = false;
         }
     }
 
@@ -205,6 +231,14 @@
                     </div>
                 {/if}
             </div>
+        {:else if currentStep === 3}
+            <SpeakSuccessCard
+                {name}
+                {email}
+                {phone}
+                {preferredDate}
+                {notes}
+            />
         {/if}
 
         {#if currentStep <= 2}
@@ -223,15 +257,28 @@
                 <Button
                     color="primary"
                     onclick={nextStep}
-                    disabled={currentStep === 1 ? !isFormValid : false}
+                    disabled={currentStep === 1 ? !isFormValid : isSubmitting}
                     class="mt-8 w-1/2 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white"
                 >
-                    {currentStep === 2
-                        ? $_("bodychoice.buttons.complete")
-                        : $_("bodychoice.buttons.next")}
+                    {#if currentStep === 2 && isSubmitting}
+                        <Spinner class="me-3" size="4" color="white" />
+                        送信中...
+                    {:else}
+                        {currentStep === 2
+                            ? $_("bodychoice.buttons.complete")
+                            : $_("bodychoice.buttons.next")}
+                    {/if}
                     <ArrowRightOutline class="ms-2 h-5 w-5" />
                 </Button>
             </div>
+
+            {#if submissionError}
+                <div
+                    class="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg"
+                >
+                    <p class="text-red-800 text-sm">{submissionError}</p>
+                </div>
+            {/if}
         {/if}
     </div>
 </div>

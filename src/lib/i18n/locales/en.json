@@ -276,6 +276,11 @@
       "details": "Please confirm your request details:",
       "thankYou": "Thank you for your interest in our Sexual Education Seminar Service. We'll review your request and contact you shortly to discuss how we can help."
     },
+    "success": {
+      "title": "Request Sent!",
+      "message": "Your request has been successfully submitted. We will contact you by email within 2-3 business days.",
+      "details": "Request details:"
+    },
     "form": {
       "preferredDate": "Preferred Date (Optional)",
       "notes": "Additional Notes",

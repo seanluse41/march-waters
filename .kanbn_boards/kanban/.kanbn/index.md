@@ -27,10 +27,9 @@ completedColumns:
 
 ## In Progress
 
-- [my-body-my-choice-プロジェクト-need-to-send-mail](tasks/my-body-my-choice-プロジェクト-need-to-send-mail.md)
-
 ## Done
 
+- [my-body-my-choice-プロジェクト-need-to-send-mail](tasks/my-body-my-choice-プロジェクト-need-to-send-mail.md)
 - [my-body-my-choice-プロジェクト](tasks/my-body-my-choice-プロジェクト.md)
 - [じょさんしとはなそう：メール：時間がおかしい](tasks/じょさんしとはなそう：メール：時間がおかしい.md)
 - [mail-babysitter-mail-time-is-8-00-to-12-30-for-some-reason](tasks/mail-babysitter-mail-time-is-8-00-to-12-30-for-some-reason.md)
