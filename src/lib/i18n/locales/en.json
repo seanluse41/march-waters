@@ -112,7 +112,21 @@
     "subheading": "Creating inclusive spaces for learning and growth at every stage of life.",
     "director": {
       "heading": "A Message from the Director",
-      "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+      "message": {
+        "1": "Hello, I'm Midwife March. Thank you for visiting our website.",
+        "2": "I currently work as a midwife in clinical settings while conducting lectures and support activities for children, parents, and educators based on perspectives of sexual education and Sexual and Reproductive Health and Rights (SRHR).",
+        "3": "However, what I want to convey is not \"knowledge about sexuality\" itself. At the center of my interest is helping people reclaim their \"boundaries\" and regain the \"sense of being able to live as themselves,\" even when they feel they have no foundation to rely on.",
+        "4": "Sexual education is one tool for this purpose, and it's also an opportunity to rediscover one's own outline by realizing \"I have the right to be here\" and \"This is something I can decide for myself.\"",
+        "5": "People who have lived without having their boundaries respected at home. People who had no choice but to survive as \"good children.\" People who have lost track of where they end and others begin in relationships.",
+        "6": "I want to provide spaces and learning opportunities for such people to reclaim their own boundaries and rebuild relationships with safety and security.",
+        "7": "Also, I didn't become a midwife because I was attracted to the wonder of birth or the cuteness of babies. Rather, I was someone who couldn't find my place in those narratives.",
+        "8": "The family is a place where love and connection are born, but it's also a place where control and harm can easily occur. I have a deep sense of having grown up experiencing this reality.",
+        "9": "That's why I feel that everyone needs \"care that allows them to remain themselves\" in events related to \"family\" and \"giving birth and raising children.\"",
+        "10": "Events related to pregnancy, birth, and child-rearing are often portrayed as happy occasions. But behind the scenes, anxiety, confusion, loneliness, unexpected events, and friction with society and family are not uncommon.",
+        "11": "Even in pregnancy, birth, and postpartum consultations, I value not only providing professional knowledge but also engaging carefully while respecting each person's human rights and self-determination.",
+        "12": "No matter where you were born or what experiences you've had, SRHR is a right equally open to all people. With this conviction, I face my work as a midwife every day.",
+        "13": "This is still a small activity that has just begun, but I hope it can be a catalyst for everyone to feel that it's okay to be themselves. Thank you for your support. *Sexual and Reproductive Health and Rights (SRHR) refers to \"health and rights related to sexuality and reproduction.\" It is one of the fundamental human rights based on the idea that everyone has the right to make decisions about their own body, sexuality, and way of life."
+      }
     },
     "timeline": {
       "heading": "Career History & Professional Journey",
