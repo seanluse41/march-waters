@@ -284,9 +284,7 @@
                 </Heading>
                 <div class="mb-4 p-4 bg-blue-50 rounded-lg">
                     <p class="font-medium text-blue-800">
-                        {$_("childcare.appointment", {
-                            default: "Reservation details",
-                        })}:
+                        {$_("childcare.appointment")}:
                     </p>
                     <p class="text-sm text-blue-700">
                         {activeCourse?.title || "-"} - {selectedDate?.toLocaleDateString() ||

@@ -20,7 +20,6 @@ completedColumns:
 - [babysitter-up-to-3-kids-means-from-different-families](tasks/babysitter-up-to-3-kids-means-from-different-families.md)
 - [babysitter-訪問型-add-address-field](tasks/babysitter-訪問型-add-address-field.md)
 - [babystitter-aiko-san-house-add-定員-枠残り１me](tasks/babystitter-aiko-san-house-add-定員-枠残り１me.md)
-- [my-body-my-choice-プロジェクト-need-to-send-mail](tasks/my-body-my-choice-プロジェクト-need-to-send-mail.md)
 - [じょさんしとはなそう；申請](tasks/じょさんしとはなそう；申請.md)
 - [じょさんしとはなそう：オンライン](tasks/じょさんしとはなそう：オンライン.md)
 - [相談-申請メール：-サービスー＞-相談サービス](tasks/相談-申請メール：-サービスー＞-相談サービス.md)
@@ -28,10 +27,11 @@ completedColumns:
 
 ## In Progress
 
-- [my-body-my-choice-プロジェクト](tasks/my-body-my-choice-プロジェクト.md)
+- [my-body-my-choice-プロジェクト-need-to-send-mail](tasks/my-body-my-choice-プロジェクト-need-to-send-mail.md)
 
 ## Done
 
+- [my-body-my-choice-プロジェクト](tasks/my-body-my-choice-プロジェクト.md)
 - [じょさんしとはなそう：メール：時間がおかしい](tasks/じょさんしとはなそう：メール：時間がおかしい.md)
 - [mail-babysitter-mail-time-is-8-00-to-12-30-for-some-reason](tasks/mail-babysitter-mail-time-is-8-00-to-12-30-for-some-reason.md)
 - [update-language-about-reservation-system-being-application-not-confirmed](tasks/update-language-about-reservation-system-being-application-not-confirmed.md)

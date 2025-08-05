@@ -212,7 +212,7 @@
       "chooseCourseDescription": "食事について選択してください",
       "chooseDate": "希望日時を選択",
       "enterInfo": "お客様情報の入力",
-      "confirm": "予約内容の確認"
+      "confirm": "申請内容の確認"
     },
     "coursePicker": {
       "title": "コースを選択してください"
@@ -259,7 +259,7 @@
     },
     "selectedCourse": "選択したコース",
     "fixedTime": "夕方17時00分〜21時30分まで",
-    "appointment": "予約内容",
+    "appointment": "申請内容",
     "childCount": "預かる子供の人数",
     "maxCapacity": "定員は３名様まで",
     "success": {
@@ -310,7 +310,7 @@
     "steps": {
       "chooseDate": "希望日時を選択",
       "enterInfo": "お客様情報の入力",
-      "confirm": "予約内容の確認",
+      "confirm": "申請内容の確認",
       "chooseCourse": "コースを選択",
       "chooseCourseDescription": "相談タイプを選んでください"
     },
@@ -329,15 +329,15 @@
         "description": "文章でのやりとりを希望の方に"
       }
     },
-    "appointment": "予約内容",
+    "appointment": "申請内容",
     "buttons": {
       "previous": "戻る",
       "next": "次へ",
       "complete": "申請する"
     },
     "confirmation": {
-      "title": "予約内容の確認",
-      "details": "以下の予約内容をご確認ください：",
+      "title": "申請内容の確認",
+      "details": "以下の申請内容をご確認ください：",
       "paymentInstructions": "お支払いについて：",
       "cashInstructions": "当日、現金にてお支払いください。",
       "creditInstructions": "予約の申請が承認されたら確定メールにて支払いリンクが送信されます。"
@@ -365,7 +365,7 @@
     "note": "メール相談はオンライン決済のみ"
   },
   "confirmationscreen": {
-    "details": "以下の予約内容をご確認ください：",
+    "details": "以下の申請内容をご確認ください：",
     "course": "コース",
     "date": "日付",
     "time": "時間",
