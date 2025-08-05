@@ -373,7 +373,6 @@
                 {childCount}
                 title={$_("childcare.success.title")}
                 successMessage={$_("childcare.success.message")}
-                nextStepsText={$_("childcare.success.nextSteps")}
             />
         {/if}
 

@@ -319,7 +319,6 @@
                 course={activeCourse?.title}
                 title={$_("midwife.success.title")}
                 successMessage={$_("midwife.success.message")}
-                nextStepsText={$_("midwife.success.nextSteps")}
             />
         {/if}
 

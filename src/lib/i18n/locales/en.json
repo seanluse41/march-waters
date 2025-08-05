@@ -223,8 +223,8 @@
       "creditInstructions": "After our staff has accepted your reservation request, a payment portal link will be sent via email."
     },
     "success": {
-      "title": "Booking Confirmed!",
-      "message": "Your childcare booking has been successfully created."
+      "title": "Reservation Request Sent!",
+      "message": "Your reservation has been successfully requested. Note that it is not finalized."
     },
     "project": {
       "title": "About Our Childcare and Babysitting Service",
@@ -336,8 +336,7 @@
     },
     "success": {
       "title": "Reservation Request Sent!",
-      "message": "Your reservation has been successfully requested. Note that it is not finalized.",
-      "nextSteps": "March Waters staff will double check availability, and finalize your request within one business day."
+      "message": "Your reservation has been successfully requested. Note that it is not finalized."
     },
     "project": {
       "title": "Talk with a Midwife",
