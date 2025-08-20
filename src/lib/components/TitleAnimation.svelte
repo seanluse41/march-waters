@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { fly, fade } from "svelte/transition";
+  import { fly } from "svelte/transition";
   import { _ } from "svelte-i18n";
   import Vara from "vara";
 
@@ -9,7 +9,6 @@
   let showSubtitle = $state(false);
 
   let onAnimationFinished = () => {
-    console.log("done");
     showSubtitle = true;
   };
 

@@ -35,6 +35,8 @@
     let phone = $state("");
     let paymentMethod = $state("credit"); // Default to credit for consultations
     let selectedCourse = $state("");
+    let contactReasons = $state([]);
+    let otherReason = $state("");
     let isSubmitting = $state(false);
     let submissionError = $state("");
 
@@ -136,8 +138,10 @@
                 email,
                 phone,
                 selectedCourse,
-                paymentMethod: "credit", // Always credit for consultations
+                paymentMethod: "credit",
                 courseDuration: activeCourse?.duration,
+                contactReasons: isEmailCourse ? contactReasons : undefined,
+                otherReason: isEmailCourse ? otherReason : undefined,
             });
 
             const result = await addCalendarEvent(
@@ -279,8 +283,11 @@
                     bind:email
                     bind:phone
                     bind:paymentMethod
+                    bind:contactReasons
+                    bind:otherReason
                     disablePayment={true}
                     requirePhone={false}
+                    isEmail={isEmailCourse}
                 />
             </div>
             <!-- confirm -->

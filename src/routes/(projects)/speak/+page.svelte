@@ -41,7 +41,7 @@
         $_("timeline.step2.description"),
         $_("bodychoice.steps.description"),
     ]);
-    
+
     let isFormValid = $derived(
         name.trim() !== "" &&
             email.trim() !== "" &&
@@ -67,7 +67,7 @@
                 email,
                 phone,
                 preferredDate,
-                notes
+                notes,
             };
 
             const result = await sendSpeakingRequestEmails(requestData);
@@ -75,7 +75,8 @@
             if (result.success) {
                 currentStep = 3; // Success state
             } else {
-                submissionError = result.error || "Failed to send request. Please try again.";
+                submissionError =
+                    result.error || "Failed to send request. Please try again.";
             }
         } catch (error) {
             console.error("Submission error:", error);
@@ -158,6 +159,7 @@
                     bind:phone
                     disablePayment={true}
                     requirePhone={true}
+                    isEmail={false}
                 />
 
                 <div class="mb-6">
@@ -232,13 +234,7 @@
                 {/if}
             </div>
         {:else if currentStep === 3}
-            <SpeakSuccessCard
-                {name}
-                {email}
-                {phone}
-                {preferredDate}
-                {notes}
-            />
+            <SpeakSuccessCard {name} {email} {phone} {preferredDate} {notes} />
         {/if}
 
         {#if currentStep <= 2}

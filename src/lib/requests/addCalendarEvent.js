@@ -69,7 +69,18 @@ export function createChildCareEventData({ selectedDate, name, email, phone, chi
 /**
  * Create event data for consultation bookings
  */
-export function createConsultEventData({ selectedDate, selectedTimeSlot, name, email, phone, selectedCourse, paymentMethod, courseDuration }) {
+export function createConsultEventData({ 
+    selectedDate, 
+    selectedTimeSlot, 
+    name, 
+    email, 
+    phone, 
+    selectedCourse, 
+    paymentMethod, 
+    courseDuration,
+    contactReasons = {},
+    otherReason = ""
+}) {
   // Consultations are always credit card payments
   const paymentJP = 'カード決済';
 
@@ -85,6 +96,21 @@ export function createConsultEventData({ selectedDate, selectedTimeSlot, name, e
     const now = new Date();
     const taskEnd = new Date(now.getTime() + 60 * 60 * 1000); // 1 hour from now
 
+    // Build contact reasons text for email consultations
+    let reasonsText = '';
+    if (contactReasons && contactReasons.length > 0) {
+      const reasonLabels = [];
+      if (contactReasons.includes('childcare')) reasonLabels.push('託児サービス');
+      if (contactReasons.includes('bodyChoice')) reasonLabels.push('性教育講座開催');
+      if (contactReasons.includes('midwife')) reasonLabels.push('妊娠相談・育児相談');
+      if (contactReasons.includes('event')) reasonLabels.push('イベント予約');
+      if (contactReasons.includes('other') && otherReason) reasonLabels.push(`その他: ${otherReason}`);
+      
+      if (reasonLabels.length > 0) {
+        reasonsText = `相談内容: ${reasonLabels.join(', ')}\n`;
+      }
+    }
+
     return {
       summary: eventTitle,
       description: [
@@ -93,10 +119,11 @@ export function createConsultEventData({ selectedDate, selectedTimeSlot, name, e
         `電話番号: ${phone}`,
         `コース: ${serviceNameJP}`,
         `お支払い方法: ${paymentJP}`,
+        reasonsText,
         'サービス: メール相談',
         '受信日時: ' + now.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' }),
         '@@Added@@'
-      ].join('\n'),
+      ].filter(line => line.trim()).join('\n'),
       start: {
         dateTime: now.toISOString(),
         timeZone: 'Asia/Tokyo'

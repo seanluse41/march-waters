@@ -298,6 +298,7 @@
                     bind:phone
                     bind:paymentMethod
                     requirePhone={true}
+                    isEmail={false}
                 />
 
                 <!-- Number of children selector -->

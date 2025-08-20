@@ -26,7 +26,6 @@
   let isSubmitting = $state(false);
   let success = $state(false);
 
-  // Reason for contact checkboxes - just need this one for the UI toggle
   let reasons = $state({
     other: false,
   });

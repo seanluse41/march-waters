@@ -22,14 +22,13 @@ completedColumns:
 - [babystitter-aiko-san-house-add-定員-枠残り１me](tasks/babystitter-aiko-san-house-add-定員-枠残り１me.md)
 - [じょさんしとはなそう；申請](tasks/じょさんしとはなそう；申請.md)
 - [じょさんしとはなそう：オンライン](tasks/じょさんしとはなそう：オンライン.md)
-- [じょさんしとはなそう：-メール相談だと相談内容の項目をいれる](tasks/じょさんしとはなそう：-メール相談だと相談内容の項目をいれる.md)
 
 ## In Progress
 
-- [相談-申請メール：-サービスー＞-相談サービス](tasks/相談-申請メール：-サービスー＞-相談サービス.md)
-
 ## Done
 
+- [相談-申請メール：-サービスー＞-相談サービス](tasks/相談-申請メール：-サービスー＞-相談サービス.md)
+- [じょさんしとはなそう：-メール相談だと相談内容の項目をいれる](tasks/じょさんしとはなそう：-メール相談だと相談内容の項目をいれる.md)
 - [my-body-my-choice-プロジェクト-need-to-send-mail](tasks/my-body-my-choice-プロジェクト-need-to-send-mail.md)
 - [my-body-my-choice-プロジェクト](tasks/my-body-my-choice-プロジェクト.md)
 - [じょさんしとはなそう：メール：時間がおかしい](tasks/じょさんしとはなそう：メール：時間がおかしい.md)
