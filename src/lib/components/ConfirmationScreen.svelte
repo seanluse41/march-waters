@@ -13,6 +13,9 @@
         course = "",
         coursePrice = "",
         childCount = null,
+        // Address props
+        showAddress = false,
+        address = "",
         // Text props
         title = "",
         detailsText = "",
@@ -33,44 +36,68 @@
         <div class="space-y-3 text-slate-700">
             {#if course}
                 <p>
-                    <span class="font-semibold">{$_("confirmationscreen.course")}:</span>
+                    <span class="font-semibold"
+                        >{$_("confirmationscreen.course")}:</span
+                    >
                     {course}
                 </p>
             {/if}
             {#if selectedDate}
                 <p>
-                    <span class="font-semibold">{$_("confirmationscreen.date")}:</span>
+                    <span class="font-semibold"
+                        >{$_("confirmationscreen.date")}:</span
+                    >
                     {selectedDate?.toLocaleDateString()}
                 </p>
             {/if}
             {#if selectedTimeSlot && selectedTimeSlot !== "TBD" && selectedTimeSlot !== "N/A"}
                 <p>
-                    <span class="font-semibold">{$_("confirmationscreen.time")}:</span>
+                    <span class="font-semibold"
+                        >{$_("confirmationscreen.time")}:</span
+                    >
                     {selectedTimeSlot}
                 </p>
             {/if}
             {#if childCount}
                 <p>
-                    <span class="font-semibold">{$_("confirmationscreen.childCount")}:</span>
+                    <span class="font-semibold"
+                        >{$_("confirmationscreen.childCount")}:</span
+                    >
                     {childCount}
                     {$_("helpers.personCounter")}
                 </p>
             {/if}
             <p>
-                <span class="font-semibold">{$_("confirmationscreen.name")}:</span>
+                <span class="font-semibold"
+                    >{$_("confirmationscreen.name")}:</span
+                >
                 {name}
             </p>
             <p>
-                <span class="font-semibold">{$_("confirmationscreen.email")}:</span>
+                <span class="font-semibold"
+                    >{$_("confirmationscreen.email")}:</span
+                >
                 {email}
             </p>
             <p>
-                <span class="font-semibold">{$_("confirmationscreen.phone")}:</span>
+                <span class="font-semibold"
+                    >{$_("confirmationscreen.phone")}:</span
+                >
                 {phone}
             </p>
+            {#if showAddress && address}
+                <p>
+                    <span class="font-semibold"
+                        >{$_("confirmationscreen.address")}:</span
+                    >
+                    {address}
+                </p>
+            {/if}
             {#if paymentMethod}
                 <p>
-                    <span class="font-semibold">{$_("confirmationscreen.paymentMethod")}:</span>
+                    <span class="font-semibold"
+                        >{$_("confirmationscreen.paymentMethod")}:</span
+                    >
                     {$_(`payment.${paymentMethod}`)}
                 </p>
             {/if}

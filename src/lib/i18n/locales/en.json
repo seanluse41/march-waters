@@ -475,6 +475,7 @@
     "name": "Name",
     "email": "Email",
     "phone": "Phone",
+    "address": "Address",
     "paymentMethod": "Payment Method",
     "amountDue": "Amount due:",
     "amountCharged": "Amount to be charged:",

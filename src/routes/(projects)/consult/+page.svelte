@@ -144,9 +144,7 @@
                 otherReason: isEmailCourse ? otherReason : undefined,
             });
 
-            const result = await addCalendarEvent(
-                eventData
-            );
+            const result = await addCalendarEvent(eventData);
 
             if (result.success) {
                 // Send reservation request email
@@ -297,6 +295,7 @@
                     {name}
                     {email}
                     {phone}
+                    showAddress={false}
                     paymentMethod="credit"
                     coursePrice={activeCourse?.price}
                     course={activeCourse?.title}

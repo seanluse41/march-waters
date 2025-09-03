@@ -466,6 +466,7 @@
     "date": "日付",
     "time": "時間",
     "name": "お名前",
+    "address": "住所",
     "email": "メールアドレス",
     "phone": "電話番号",
     "paymentMethod": "お支払い方法",

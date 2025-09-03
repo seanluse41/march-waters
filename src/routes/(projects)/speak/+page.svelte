@@ -176,9 +176,7 @@
 
                 <div class="mb-6">
                     <label for="notes" class="mb-2 block text-slate-700">
-                        {$_("bodychoice.form.notes", {
-                            default: "Additional Notes",
-                        })}
+                        {$_("bodychoice.form.notes")}
                     </label>
                     <Textarea
                         id="notes"
@@ -196,6 +194,7 @@
                     {name}
                     {email}
                     {phone}
+                    showAddress={false}
                     paymentMethod=""
                     course=""
                     coursePrice=""

@@ -333,6 +333,7 @@
                     {email}
                     {phone}
                     {paymentMethod}
+                    showAddress={false}
                     coursePrice={activeCourse?.price}
                     course={activeCourse?.title}
                     {childCount}

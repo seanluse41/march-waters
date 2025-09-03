@@ -13,7 +13,7 @@
     import {
         ArrowRightOutline,
         ArrowLeftOutline,
-        BriefcaseOutline
+        BriefcaseOutline,
     } from "flowbite-svelte-icons";
     import { fly } from "svelte/transition";
     import PhotoCarousel from "$lib/components/PhotoCarousel.svelte";
@@ -39,6 +39,9 @@
     let name = $state("");
     let email = $state("");
     let phone = $state("");
+    let postCode = $state("");
+    let prefecture = $state("");
+    let city = $state("");
     let address = $state("");
     let paymentMethod = $state("cash");
     let selectedCourse = $state("normal");
@@ -48,6 +51,13 @@
 
     let currentStep = $state(1);
 
+    let fullAddress = $derived.by(() => {
+        const parts = [postCode, prefecture, city, address].filter((part) =>
+            part.trim(),
+        );
+        return parts.join(" ");
+    });
+
     // Define courses
     let childcareCourses = $derived([
         {
@@ -56,7 +66,7 @@
             description: $_("childcare.courses.normal.description"),
             price: "¥8,000",
             icon: BriefcaseOutline,
-        }
+        },
     ]);
 
     // Define steps and descriptions
@@ -80,10 +90,14 @@
     );
 
     let isFormValid = $derived(
-        name.trim() !== "" && 
-        email.trim() !== "" && 
-        !validateEmail(email) && 
-        phone.trim() !== ""
+        name.trim() !== "" &&
+            email.trim() !== "" &&
+            !validateEmail(email) &&
+            phone.trim() !== "" &&
+            postCode.trim() !== "" &&
+            prefecture.trim() !== "" &&
+            city.trim() !== "" &&
+            address.trim() !== "",
     );
     let canProceedFromStep1 = $derived(selectedCourse !== "");
     let canProceedFromStep2 = $derived(dateSelected);
@@ -118,11 +132,13 @@
                 childCount,
                 selectedCourse: activeCourse?.title,
                 paymentMethod,
-                address
+                address: fullAddress, // Pass the combined full address
             });
 
             const result = await addCalendarEvent(
-                eventData
+                eventData,
+                email,
+                "childcare",
             );
 
             if (result.success) {
@@ -288,6 +304,9 @@
                     bind:email
                     bind:phone
                     bind:paymentMethod
+                    bind:postCode
+                    bind:prefecture
+                    bind:city
                     bind:address
                     requirePhone={true}
                     isEmail={false}
@@ -339,6 +358,8 @@
                     coursePrice={activeCourse?.price}
                     course={activeCourse?.title}
                     {childCount}
+                    showAddress={true}
+                    address={fullAddress}
                     title={$_("childcare.confirmation.title")}
                     detailsText={$_("childcare.confirmation.details")}
                     paymentInstructionsText={$_(
