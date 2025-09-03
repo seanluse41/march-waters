@@ -100,7 +100,7 @@ async function getRecentConfirmedEvents() {
       singleEvents: true,
       orderBy: 'updated',
       maxResults: 10,
-      timeMin: timeMin, // Only get events from today onwards
+      timeMin: timeMin,
     });
 
     return {
@@ -135,14 +135,14 @@ export async function POST({ request }) {
 
       // Fetch recent confirmed events
       const eventResult = await getRecentConfirmedEvents();
-
+      console.log("EVENTS")
+      console.log(eventResult.events)
       if (!eventResult.success || !eventResult.hasEvents) {
         console.log('No confirmed events found');
         return new Response('OK', { status: 200 });
       }
 
-      console.log("EVENTS")
-      console.log(eventResult.events)
+
 
       // Check all events for ones that need confirmation emails
       for (const event of eventResult.events) {
