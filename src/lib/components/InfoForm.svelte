@@ -5,14 +5,12 @@
         Radio,
         P,
         Helper,
-        Checkbox,
-        Textarea,
+        Checkbox
     } from "flowbite-svelte";
     import {
         EnvelopeSolid,
         PhoneSolid,
         UserSolid,
-        HomeSolid,
     } from "flowbite-svelte-icons";
     import { _ } from "svelte-i18n";
     import { validateEmail } from "$lib/helpers/emailHelpers.js";
@@ -26,8 +24,7 @@
         disablePayment,
         requirePhone,
         isEmail = $bindable(false),
-        dinner = $bindable(false), // honeypot checkbox
-        // New bindable props for contact reasons
+        dinner = $bindable(false), // honeypot
         contactReasons = $bindable([]),
         otherReason = $bindable(""),
         // Address fields
@@ -38,7 +35,7 @@
         address = $bindable(""),
     } = $props();
 
-    // Email validation using helper function
+    // Email validation
     let emailError = $derived(validateEmail(email));
     
     // Post code validation (format: 111-2222)
@@ -69,7 +66,7 @@
 </script>
 
 <form onsubmit={handleSubmit} class="w-full">
-    <!-- Honeypot field - hidden checkbox -->
+    <!-- Honeypot -->
     <div
         style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;"
         aria-hidden="true"

@@ -145,9 +145,7 @@
             });
 
             const result = await addCalendarEvent(
-                eventData,
-                email,
-                "consultation",
+                eventData
             );
 
             if (result.success) {

@@ -1,4 +1,4 @@
-export async function addCalendarEvent(eventDetails, email, serviceType = null) {
+export async function addCalendarEvent(eventDetails) {
   try {
     const response = await fetch('/api/update-calendar', {
       method: 'POST',
@@ -49,7 +49,7 @@ export function createChildCareEventData({ selectedDate, name, email, phone, chi
     `子供の人数: ${childCount}名`,
     `お支払い方法: ${paymentJP}`,
     `住所: ${address}`,
-    'サービス: 託児サービス (17:00-21:30)',
+    'サービス: 訪問型託児サービス (17:00-21:30)',
     '@@Added@@'
   ].filter(Boolean).join('\n');
 

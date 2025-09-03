@@ -51,14 +51,14 @@
     // Define courses
     let dropoffCourses = $derived([
         {
-            id: "normal",
+            id: "dropoff-dinnner",
             title: $_("dropoff.courses.normal.title"),
             description: $_("dropoff.courses.normal.description"),
             price: "¥8,000",
             icon: BowlRiceOutline,
         },
         {
-            id: "allergy",
+            id: "dropoff-nodinner",
             title: $_("dropoff.courses.allergy.title"),
             description: $_("dropoff.courses.allergy.description"),
             price: "¥7,500",
@@ -128,9 +128,7 @@
             });
 
             const result = await addCalendarEvent(
-                eventData,
-                email,
-                "dropoff",
+                eventData
             );
 
             if (result.success) {

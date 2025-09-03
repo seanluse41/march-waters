@@ -13,8 +13,7 @@
     import {
         ArrowRightOutline,
         ArrowLeftOutline,
-        BowlRiceOutline,
-        CloseCircleOutline,
+        BriefcaseOutline
     } from "flowbite-svelte-icons";
     import { fly } from "svelte/transition";
     import PhotoCarousel from "$lib/components/PhotoCarousel.svelte";
@@ -40,6 +39,7 @@
     let name = $state("");
     let email = $state("");
     let phone = $state("");
+    let address = $state("");
     let paymentMethod = $state("cash");
     let selectedCourse = $state("normal");
     let childCount = $state(1);
@@ -51,24 +51,17 @@
     // Define courses
     let childcareCourses = $derived([
         {
-            id: "normal",
+            id: "babysitter",
             title: $_("childcare.courses.normal.title"),
             description: $_("childcare.courses.normal.description"),
             price: "¥8,000",
-            icon: BowlRiceOutline,
-        },
-        {
-            id: "allergy",
-            title: $_("childcare.courses.allergy.title"),
-            description: $_("childcare.courses.allergy.description"),
-            price: "¥7,500",
-            icon: CloseCircleOutline,
-        },
+            icon: BriefcaseOutline,
+        }
     ]);
 
     // Define steps and descriptions
     let steps = $derived([
-        $_("childcare.steps.chooseCourse", { default: "Choose Course" }),
+        $_("childcare.steps.chooseCourse"),
         $_("childcare.steps.chooseDate"),
         $_("childcare.steps.enterInfo"),
         $_("childcare.steps.confirm"),
@@ -125,12 +118,11 @@
                 childCount,
                 selectedCourse: activeCourse?.title,
                 paymentMethod,
+                address
             });
 
             const result = await addCalendarEvent(
-                eventData,
-                email,
-                "childcare",
+                eventData
             );
 
             if (result.success) {
@@ -296,6 +288,7 @@
                     bind:email
                     bind:phone
                     bind:paymentMethod
+                    bind:address
                     requirePhone={true}
                     isEmail={false}
                     requireAddress={true}

@@ -4,6 +4,7 @@ import nodemailer from 'nodemailer';
 import { updateEventDescription } from '$lib/requests/updateEventDescription.js';
 import { childCareEmailTemplate } from '$lib/emails/childCare.js';
 import { consultationEmailTemplate } from '$lib/emails/consult.js';
+import { dropoffEmailTemplate } from '$lib/emails/dropoff.js';
 
 const CREDENTIALS = import.meta.env.VITE_GOOGLE_SERVICE_ACCOUNT_CREDENTIALS;
 const CONFIRMED_CALENDAR_ID = import.meta.env.VITE_GOOGLE_CALENDAR_CONFIRMED_ID;
@@ -34,14 +35,17 @@ async function sendConfirmationEmailDirect(eventData, recipientEmail, serviceTyp
     // Determine service type from event summary if not provided
     if (!serviceType) {
       const { summary } = eventData;
-      if (summary.includes('託児')) {
-        serviceType = 'childcare';
+      if (summary.includes('訪問型')) {
+        serviceType = 'babysitter';
+      }
+      else if (summary.includes('お預かり')) {
+        serviceType = 'dropoff'
       } else {
         serviceType = 'consultation';
       }
     }
 
-const emailContent = serviceType === 'childcare' 
+    const emailContent = serviceType === 'childcare'
       ? childCareEmailTemplate(eventData, eventId)
       : consultationEmailTemplate(eventData, eventId);
 
@@ -83,7 +87,7 @@ async function getRecentConfirmedEvents() {
       calendarId: CONFIRMED_CALENDAR_ID,
       singleEvents: true,
       orderBy: 'updated',
-      maxResults: 10, // Get more events to check
+      maxResults: 10,
     });
 
     return {
@@ -150,11 +154,14 @@ export async function POST({ request }) {
         console.log('Processing event:', event.summary, 'for email:', recipientEmail);
 
         // Determine service type from event summary
-        let serviceType = 'consultation';
-        if (event.summary && event.summary.includes('託児')) {
-          serviceType = 'childcare';
+        let serviceType;
+        if (event.summary && event.summary.includes('訪問型')) {
+          serviceType = 'babysitter';
+        } else if (event.summary && event.summary.includes('お預かり')) {
+          serviceType = 'dropoff';
+        } else {
+          serviceType = 'consultation'
         }
-
         console.log('Sending confirmation email to:', recipientEmail);
 
         // Send confirmation email
