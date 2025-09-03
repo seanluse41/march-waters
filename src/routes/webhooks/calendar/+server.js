@@ -45,9 +45,15 @@ async function sendConfirmationEmailDirect(eventData, recipientEmail, serviceTyp
       }
     }
 
-    const emailContent = serviceType === 'childcare'
-      ? childCareEmailTemplate(eventData, eventId)
-      : consultationEmailTemplate(eventData, eventId);
+    // Replace ternary with if-else statement
+    let emailContent;
+    if (serviceType === 'babysitter') {
+      emailContent = childCareEmailTemplate(eventData, eventId);
+    } else if (serviceType === 'dropoff') {
+      emailContent = dropoffEmailTemplate(eventData, eventId);
+    } else {
+      emailContent = consultationEmailTemplate(eventData, eventId);
+    }
 
     let transporter = nodemailer.createTransport({
       host: 'smtp.porkbun.com',
@@ -79,6 +85,7 @@ async function sendConfirmationEmailDirect(eventData, recipientEmail, serviceTyp
     };
   }
 }
+
 async function getRecentConfirmedEvents() {
   try {
     const calendar = await getCalendarClient();
