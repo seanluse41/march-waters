@@ -67,6 +67,42 @@ export function createChildCareEventData({ selectedDate, name, email, phone, chi
   };
 }
 
+export function createDropoffEventData({ selectedDate, name, email, phone, childCount, selectedCourse, paymentMethod }) {
+  const startDate = new Date(selectedDate);
+  startDate.setHours(17, 0, 0, 0); // 5:00 PM
+
+  const endDate = new Date(selectedDate);
+  endDate.setHours(21, 30, 0, 0); // 9:30 PM
+
+  // Force Japanese text for calendar events
+  const paymentJP = paymentMethod === 'cash' ? '現金' : 'カード決済';
+
+  const description = [
+    `お名前: ${name}`,
+    `メールアドレス: ${email}`,
+    `電話番号: ${phone}`,
+    `コース: ${selectedCourse}`,
+    `子供の人数: ${childCount}名`,
+    `お支払い方法: ${paymentJP}`,
+    `住所: ${address}`,
+    'サービス: お預かり型託児サービス (17:00-21:30)',
+    '@@Added@@'
+  ].filter(Boolean).join('\n');
+
+  return {
+    summary: '託児サービス',
+    description,
+    start: {
+      dateTime: startDate.toISOString(),
+      timeZone: 'Asia/Tokyo'
+    },
+    end: {
+      dateTime: endDate.toISOString(),
+      timeZone: 'Asia/Tokyo'
+    }
+  };
+}
+
 /**
  * Create event data for consultation bookings
  */

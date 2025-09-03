@@ -25,7 +25,7 @@
     import CoursePicker from "$lib/components/CoursePicker.svelte";
     import {
         addCalendarEvent,
-        createChildCareEventData,
+        createDropoffEventData,
     } from "$lib/requests/addCalendarEvent.js";
     import { sendReservationRequestEmail } from "$lib/requests/sendReservationRequestEmail.js";
     import SuccessCard from "$lib/components/SuccessCard.svelte";
@@ -49,18 +49,18 @@
     let currentStep = $state(1);
 
     // Define courses
-    let childcareCourses = $derived([
+    let dropoffCourses = $derived([
         {
             id: "normal",
-            title: $_("childcare.courses.normal.title"),
-            description: $_("childcare.courses.normal.description"),
+            title: $_("dropoff.courses.normal.title"),
+            description: $_("dropoff.courses.normal.description"),
             price: "¥8,000",
             icon: BowlRiceOutline,
         },
         {
             id: "allergy",
-            title: $_("childcare.courses.allergy.title"),
-            description: $_("childcare.courses.allergy.description"),
+            title: $_("dropoff.courses.allergy.title"),
+            description: $_("dropoff.courses.allergy.description"),
             price: "¥7,500",
             icon: CloseCircleOutline,
         },
@@ -68,14 +68,14 @@
 
     // Define steps and descriptions
     let steps = $derived([
-        $_("childcare.steps.chooseCourse", { default: "Choose Course" }),
-        $_("childcare.steps.chooseDate"),
-        $_("childcare.steps.enterInfo"),
-        $_("childcare.steps.confirm"),
+        $_("dropoff.steps.chooseCourse", { default: "Choose Course" }),
+        $_("dropoff.steps.chooseDate"),
+        $_("dropoff.steps.enterInfo"),
+        $_("dropoff.steps.confirm"),
     ]);
 
     let descriptions = $derived([
-        $_("childcare.steps.chooseCourseDescription"),
+        $_("dropoff.steps.chooseCourseDescription"),
         $_("timeline.step1.description"),
         $_("timeline.step2.description"),
         $_("timeline.step3.description"),
@@ -83,7 +83,7 @@
 
     // Reactive derived state for the active course
     let activeCourse = $derived(
-        childcareCourses.find((c) => c.id === selectedCourse),
+        dropoffCourses.find((c) => c.id === selectedCourse),
     );
 
     let isFormValid = $derived(
@@ -117,7 +117,7 @@
         submissionError = "";
 
         try {
-            const eventData = createChildCareEventData({
+            const eventData = createDropoffEventData({
                 selectedDate,
                 name,
                 email,
@@ -130,7 +130,7 @@
             const result = await addCalendarEvent(
                 eventData,
                 email,
-                "childcare",
+                "dropoff",
             );
 
             if (result.success) {
@@ -235,17 +235,13 @@
                 <Heading
                     class="text-4xl font-bold my-8 text-center text-slate-700"
                 >
-                    {$_("dropoff.steps.chooseCourse", {
-                        default: "Choose Course",
-                    })}
+                    {$_("dropoff.steps.chooseCourse")}
                 </Heading>
 
                 <CoursePicker
                     bind:selectedCourse
-                    title={$_("dropoff.coursePicker.title", {
-                        default: "Select Childcare Type",
-                    })}
-                    courses={childcareCourses}
+                    title={$_("dropoff.coursePicker.title")}
+                    courses={dropoffCourses}
                 />
             </div>
 
