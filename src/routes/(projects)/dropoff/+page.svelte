@@ -191,6 +191,7 @@
             </Heading>
             <List class="space-y-1 mb-4">
                 <Li>{$_("childcare.project.services.item1")}</Li>
+                <Li>{$_("childcare.project.services.item2")}</Li>
                 <Li>{$_("childcare.project.services.item3")}</Li>
             </List>
 
@@ -298,7 +299,6 @@
                     bind:paymentMethod
                     requirePhone={true}
                     isEmail={false}
-                    requireAddress={true}
                 />
 
                 <!-- Number of children selector -->

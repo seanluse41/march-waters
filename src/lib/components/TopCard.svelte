@@ -6,7 +6,8 @@
     UserGraduateOutline,
     HeadphonesOutline,
     BookOpenOutline,
-    GlobeOutline
+    GlobeOutline,
+    BriefcaseOutline,
   } from "flowbite-svelte-icons";
 
   import { Card } from "flowbite-svelte";
@@ -17,6 +18,8 @@
     <h3 class="text-xl font-bold text-slate-700">{title}</h3>
     {#if iconName === "MoonPlusOutline"}
       <MoonPlusOutline class="h-8 w-8 text-slate-700" />
+    {:else if iconName === "BriefcaseOutline"}
+      <BriefcaseOutline class="h-8 w-8 text-slate-700" />
     {:else if iconName === "UserGraduateOutline"}
       <UserGraduateOutline class="h-8 w-8 text-slate-700" />
     {:else if iconName === "HeadphonesOutline"}

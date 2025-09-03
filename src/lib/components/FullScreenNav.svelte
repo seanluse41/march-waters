@@ -77,7 +77,7 @@
   >
     <li class="relative z-10 nav-link">
       <a
-        class="no-underline text-slate-200  text-lg uppercase font-bold inline-block w-64 p-4"
+        class="no-underline text-slate-200 text-lg uppercase font-bold inline-block w-64 p-4"
         href="/"
         onclick={handleLinkClick}>{$_("nav.home")}</a
       >
@@ -94,6 +94,13 @@
         class="no-underline text-slate-200 text-lg uppercase font-bold inline-block w-64 p-4"
         href="/child-care"
         onclick={handleLinkClick}>{$_("nav.childcare")}</a
+      >
+    </li>
+    <li class="relative z-10 nav-link">
+      <a
+        class="no-underline text-slate-200 text-lg uppercase font-bold inline-block w-64 p-4"
+        href="/dropoff"
+        onclick={handleLinkClick}>{$_("nav.dropoff")}</a
       >
     </li>
     <li class="relative z-10 nav-link">

@@ -8,7 +8,8 @@
     "commerceDisclosure": "Commerce Disclosure",
     "speak": "Sexual Education Seminar Service",
     "consult": "Midwife Consultation",
-    "childcare": "Childcare Service",
+    "childcare": "Babysitter Service",
+    "dropoff": "Saturday Dropoff-Style Babysitter Service",
     "stories": "Real Life Stories",
     "contact": "Contact Us"
   },
@@ -23,7 +24,7 @@
       "heading": "Our Services",
       "card1": {
         "title": "Childcare Service",
-        "text": "We provide evening childcare for children ages 0-6 from 5:00PM to 9:30PM, including dinner, bath, play, and bedtime routines. This service allows parents to enjoy some personal time. Cost: ¥8,000 (includes dinner, ¥7,500 for allergies), capacity: 3 children."
+        "text": "We provide evening childcare for children ages 0-6 from 5:00PM to 9:30PM, including dinner, bath, play, and bedtime routines. This service allows parents to enjoy some personal time. Cost: ¥8,000, capacity: Max. 3 children."
       },
       "card2": {
         "title": "Sexual Education Seminar Service",
@@ -40,6 +41,10 @@
       "card5": {
         "title": "English Support Available",
         "text": "We offer pregnancy and childcare consultation services in English for foreign residents in Japan. We also support Japanese residents living abroad with their concerns."
+      },
+      "card6": {
+        "title": "Dropoff Style Childcare Service",
+        "text": "We provide evening childcare for children ages 0-6 from 5:00PM to 9:30PM, including dinner, bath, play, and bedtime routines. This service allows parents to enjoy some personal time. Cost: ¥8,000 (includes dinner, ¥7,500 for allergies), capacity: 3 children."
       }
     },
     "socials": {
@@ -199,7 +204,16 @@
       "message": "Your Message",
       "messagePlaceholder": "Your message or additional notes",
       "submit": "Submit",
-      "emailError": "Please enter a valid email address"
+      "emailError": "Please enter a valid email address",
+      "address": "Service Address",
+      "postCode": "Post Code",
+      "postCodeError": "Format: 123-4567",
+      "prefecture": "Prefecture",
+      "prefecturePlaceholder": "e.g., 大阪府",
+      "city": "City/Town/Village",
+      "cityPlaceholder": "e.g., 三島郡島本町",
+      "restAddress": "Street Address",
+      "restAddressPlaceholder": "e.g., 水無瀬2丁目22-10"
     }
   },
   "datePicker": {
@@ -212,16 +226,77 @@
     "error": "Retry"
   },
   "childcare": {
-    "pageTitle": "Childcare Service",
+    "pageTitle": "Dispatch Style Babysitter Service",
     "steps": {
       "chooseCourse": "Choose Course",
-      "chooseCourseDescription": "Select your childcare type",
+      "chooseCourseDescription": "Select Course Type",
       "chooseDate": "Choose an Open Date",
       "enterInfo": "Enter Your Information",
       "confirm": "Confirm"
     },
     "coursePicker": {
-      "title": "Select Childcare Type"
+      "title": "Select Course Type"
+    },
+    "buttons": {
+      "previous": "Previous",
+      "next": "Next",
+      "complete": "Request"
+    },
+    "confirmation": {
+      "title": "Confirm Your Booking",
+      "details": "Please confirm your booking details:",
+      "paymentMethod": "Payment Method",
+      "paymentInstructions": "Payment Instructions:",
+      "cashInstructions": "Please bring exact cash payment to your appointment.",
+      "creditInstructions": "After our staff has accepted your reservation request, a payment portal link will be sent via email."
+    },
+    "success": {
+      "title": "Reservation Request Sent!",
+      "message": "Your reservation has been successfully requested. Note that it is not finalized."
+    },
+    "project": {
+      "title": "About Our Childcare and Babysitting Service",
+      "description": "We provide evening childcare and babysitting for children aged 0 to preschool from 5:00PM to 9:30PM. In Japan, it can be difficult for parents to find time for themselves, to have uninterrupted conversations with partners or friends, or simply to relax without careful planning. While children are important, adults also deserve time for self-care. Let us help you incorporate self-care into your daily routine.",
+      "services": {
+        "title": "Our Services Include:",
+        "item1": "Childcare from 5:00PM to 9:30PM",
+        "item3": "Bathing, play activities, and bedtime routine"
+      },
+      "details": {
+        "title": "Service Details",
+        "cost": "Cost",
+        "costValue": "¥8,000",
+        "capacity": "Capacity",
+        "capacityValue": "3 children"
+      }
+    },
+    "courses": {
+      "normal": {
+        "title": "Standard Care",
+        "description": "Evening childcare with dinner included"
+      },
+      "allergy": {
+        "title": "Allergy-Friendly Care",
+        "description": "Evening childcare (please bring your child's dinner)"
+      }
+    },
+    "selectedCourse": "Selected option",
+    "fixedTime": "Fixed time slot: 5:00 PM to 9:30 PM",
+    "appointment": "Reservation details",
+    "childCount": "Number of children",
+    "maxCapacity": "Maximum capacity is 3 children"
+  },
+  "dropoff": {
+    "pageTitle": "Saturday Dropoff-Style Babysitter Service",
+    "steps": {
+      "chooseCourse": "Choose Course",
+      "chooseCourseDescription": "Select a Course",
+      "chooseDate": "Choose an Open Date",
+      "enterInfo": "Enter Your Information",
+      "confirm": "Confirm"
+    },
+    "coursePicker": {
+      "title": "Select Course"
     },
     "buttons": {
       "previous": "Previous",

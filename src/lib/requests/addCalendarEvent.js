@@ -7,18 +7,18 @@ export async function addCalendarEvent(eventDetails, email, serviceType = null) 
       },
       body: JSON.stringify(eventDetails)
     });
-    
+
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.error || 'Failed to create calendar event');
     }
-    
-    const data = await response.json();    
+
+    const data = await response.json();
     return {
       success: true,
       event: data.event
     };
-    
+
   } catch (error) {
     console.error('Error adding calendar event:', error);
     return {
@@ -31,7 +31,7 @@ export async function addCalendarEvent(eventDetails, email, serviceType = null) 
 /**
  * Create event data for child-care bookings
  */
-export function createChildCareEventData({ selectedDate, name, email, phone, childCount, selectedCourse, paymentMethod }) {
+export function createChildCareEventData({ selectedDate, name, email, phone, childCount, selectedCourse, paymentMethod, address }) {
   const startDate = new Date(selectedDate);
   startDate.setHours(17, 0, 0, 0); // 5:00 PM
 
@@ -48,9 +48,10 @@ export function createChildCareEventData({ selectedDate, name, email, phone, chi
     `コース: ${selectedCourse}`,
     `子供の人数: ${childCount}名`,
     `お支払い方法: ${paymentJP}`,
+    `住所: ${address}`,
     'サービス: 託児サービス (17:00-21:30)',
     '@@Added@@'
-  ].join('\n');
+  ].filter(Boolean).join('\n');
 
   return {
     summary: '託児サービス',
@@ -69,17 +70,17 @@ export function createChildCareEventData({ selectedDate, name, email, phone, chi
 /**
  * Create event data for consultation bookings
  */
-export function createConsultEventData({ 
-    selectedDate, 
-    selectedTimeSlot, 
-    name, 
-    email, 
-    phone, 
-    selectedCourse, 
-    paymentMethod, 
-    courseDuration,
-    contactReasons = {},
-    otherReason = ""
+export function createConsultEventData({
+  selectedDate,
+  selectedTimeSlot,
+  name,
+  email,
+  phone,
+  selectedCourse,
+  paymentMethod,
+  courseDuration,
+  contactReasons = {},
+  otherReason = ""
 }) {
   // Consultations are always credit card payments
   const paymentJP = 'カード決済';
@@ -105,7 +106,7 @@ export function createConsultEventData({
       if (contactReasons.includes('midwife')) reasonLabels.push('妊娠相談・育児相談');
       if (contactReasons.includes('event')) reasonLabels.push('イベント予約');
       if (contactReasons.includes('other') && otherReason) reasonLabels.push(`その他: ${otherReason}`);
-      
+
       if (reasonLabels.length > 0) {
         reasonsText = `相談内容: ${reasonLabels.join(', ')}\n`;
       }
