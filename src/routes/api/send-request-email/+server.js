@@ -3,6 +3,16 @@ import nodemailer from 'nodemailer';
 import { json } from '@sveltejs/kit';
 import { reservationRequestEmailTemplate } from '$lib/emails/reservationRequest.js';
 
+function getServiceType(summary) {
+  if (summary.includes('訪問型')) {
+    return 'babysitter';
+  } else if (summary.includes('お預かり')) {
+    return 'dropoff';
+  } else {
+    return 'consultation';
+  }
+}
+
 export async function POST({ request }) {
     try {
         const { eventData, recipientEmail } = await request.json();
@@ -14,7 +24,8 @@ export async function POST({ request }) {
             return json({ error: 'Email configuration missing' }, { status: 500 });
         }
 
-        const emailContent = reservationRequestEmailTemplate(eventData);
+        const serviceType = getServiceType(eventData.summary);
+        const emailContent = reservationRequestEmailTemplate(eventData, serviceType);
 
         let transporter = nodemailer.createTransport({
             host: 'smtp.porkbun.com',

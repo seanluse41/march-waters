@@ -130,7 +130,6 @@
                 email,
                 phone,
                 childCount,
-                selectedCourse: activeCourse?.title,
                 paymentMethod,
                 address: fullAddress, // Pass the combined full address
             });

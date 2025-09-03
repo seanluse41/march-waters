@@ -32,7 +32,7 @@ async function sendConfirmationEmailDirect(eventData, recipientEmail, serviceTyp
       throw new Error('Email configuration missing');
     }
 
-    // Determine service type from event summary if not provided
+    // Determine service type from event summary
     if (!serviceType) {
       const { summary } = eventData;
       if (summary.includes('訪問型')) {
@@ -128,6 +128,9 @@ export async function POST({ request }) {
         console.log('No confirmed events found');
         return new Response('OK', { status: 200 });
       }
+
+      console.log("EVENTS")
+      console.log(eventResult.events)
 
       // Check all events for ones that need confirmation emails
       for (const event of eventResult.events) {

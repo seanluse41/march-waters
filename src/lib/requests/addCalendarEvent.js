@@ -31,7 +31,7 @@ export async function addCalendarEvent(eventDetails) {
 /**
  * Create event data for child-care bookings
  */
-export function createChildCareEventData({ selectedDate, name, email, phone, childCount, selectedCourse, paymentMethod, address }) {
+export function createChildCareEventData({ selectedDate, name, email, phone, childCount, paymentMethod, address }) {
   const startDate = new Date(selectedDate);
   startDate.setHours(17, 0, 0, 0); // 5:00 PM
 
@@ -45,7 +45,7 @@ export function createChildCareEventData({ selectedDate, name, email, phone, chi
     `お名前: ${name}`,
     `メールアドレス: ${email}`,
     `電話番号: ${phone}`,
-    `コース: ${selectedCourse}`,
+    `コース: 訪問型託児サービス`,
     `子供の人数: ${childCount}名`,
     `お支払い方法: ${paymentJP}`,
     `住所: ${address}`,
@@ -54,7 +54,7 @@ export function createChildCareEventData({ selectedDate, name, email, phone, chi
   ].filter(Boolean).join('\n');
 
   return {
-    summary: '託児サービス',
+    summary: '訪問型託児サービス',
     description,
     start: {
       dateTime: startDate.toISOString(),
