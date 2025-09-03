@@ -329,7 +329,9 @@
         "cost": "Cost",
         "costValue": "¥8,000 (includes dinner; ¥7,500 for children with allergies)",
         "capacity": "Capacity",
-        "capacityValue": "3 children"
+        "capacityValue": "3 children",
+        "place": "Address (Full Address provided on Reservation Request)",
+        "placeValue": "〒618-0014 大阪府 三島郡島本町 水無瀬"
       }
     },
     "courses": {

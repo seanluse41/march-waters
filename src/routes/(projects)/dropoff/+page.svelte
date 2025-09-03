@@ -87,10 +87,10 @@
     );
 
     let isFormValid = $derived(
-        name.trim() !== "" && 
-        email.trim() !== "" && 
-        !validateEmail(email) && 
-        phone.trim() !== ""
+        name.trim() !== "" &&
+            email.trim() !== "" &&
+            !validateEmail(email) &&
+            phone.trim() !== "",
     );
     let canProceedFromStep1 = $derived(selectedCourse !== "");
     let canProceedFromStep2 = $derived(dateSelected);
@@ -171,28 +171,28 @@
 <div class="flex flex-col md:flex-row w-full md:overflow-hidden">
     <div class="w-full md:w-1/2 p-4 md:overflow-y-auto md:h-screen">
         <Heading class="text-5xl font-bold my-8 text-slate-700">
-            {$_("childcare.pageTitle")}
+            {$_("dropoff.pageTitle")}
         </Heading>
         <PhotoCarousel />
 
         <div class="my-8">
             <Heading tag="h2" class="text-2xl font-bold mb-4 text-slate-700">
-                {$_("childcare.project.title")}
+                {$_("dropoff.project.title")}
             </Heading>
             <p class="text-slate-700 mb-6">
-                {$_("childcare.project.description")}
+                {$_("dropoff.project.description")}
             </p>
 
             <Heading
                 tag="h3"
                 class="text-lg font-semibold mt-6 mb-2 text-slate-700"
             >
-                {$_("childcare.project.services.title")}
+                {$_("dropoff.project.services.title")}
             </Heading>
             <List class="space-y-1 mb-4">
-                <Li>{$_("childcare.project.services.item1")}</Li>
-                <Li>{$_("childcare.project.services.item2")}</Li>
-                <Li>{$_("childcare.project.services.item3")}</Li>
+                <Li>{$_("dropoff.project.services.item1")}</Li>
+                <Li>{$_("dropoff.project.services.item2")}</Li>
+                <Li>{$_("dropoff.project.services.item3")}</Li>
             </List>
 
             <div class="mt-6 bg-blue-50 p-4 rounded-lg">
@@ -200,19 +200,25 @@
                     tag="h3"
                     class="text-lg font-semibold mb-2 text-slate-700"
                 >
-                    {$_("childcare.project.details.title")}
+                    {$_("dropoff.project.details.title")}
                 </Heading>
+                <p class="font-medium">
+                    {$_("dropoff.project.details.place")}:
+                </p>
+                <p class="text-slate-700 mb-2">
+                    {$_("dropoff.project.details.placeValue")}
+                </p>
                 <p class="text-slate-700 mb-2">
                     <span class="font-medium"
-                        >{$_("childcare.project.details.cost")}:</span
+                        >{$_("dropoff.project.details.cost")}:</span
                     >
-                    {$_("childcare.project.details.costValue")}
+                    {$_("dropoff.project.details.costValue")}
                 </p>
                 <p class="text-slate-700">
                     <span class="font-medium"
-                        >{$_("childcare.project.details.capacity")}:</span
+                        >{$_("dropoff.project.details.capacity")}:</span
                     >
-                    {$_("childcare.project.details.capacityValue")}
+                    {$_("dropoff.project.details.capacityValue")}
                 </p>
             </div>
         </div>
@@ -229,14 +235,14 @@
                 <Heading
                     class="text-4xl font-bold my-8 text-center text-slate-700"
                 >
-                    {$_("childcare.steps.chooseCourse", {
+                    {$_("dropoff.steps.chooseCourse", {
                         default: "Choose Course",
                     })}
                 </Heading>
 
                 <CoursePicker
                     bind:selectedCourse
-                    title={$_("childcare.coursePicker.title", {
+                    title={$_("dropoff.coursePicker.title", {
                         default: "Select Childcare Type",
                     })}
                     courses={childcareCourses}
@@ -249,11 +255,11 @@
                 <Heading
                     class="text-4xl font-bold my-8 text-center text-slate-700"
                 >
-                    {$_("childcare.steps.chooseDate")}
+                    {$_("dropoff.steps.chooseDate")}
                 </Heading>
                 <div class="mb-4 p-4 bg-blue-50 rounded-lg">
                     <p class="font-medium text-blue-800">
-                        {$_("childcare.selectedCourse")}:
+                        {$_("dropoff.selectedCourse")}:
                     </p>
                     <p class="text-sm text-blue-700">
                         {activeCourse?.title || "-"} ({activeCourse?.price ||
@@ -269,7 +275,7 @@
                 />
                 <div class="mt-4 text-center">
                     <p class="font-medium text-slate-700">
-                        {$_("childcare.fixedTime")}
+                        {$_("dropoff.fixedTime")}
                     </p>
                 </div>
             </div>
@@ -280,11 +286,11 @@
                 <Heading
                     class="text-4xl font-bold my-8 text-center text-slate-700 w-full"
                 >
-                    {$_("childcare.steps.enterInfo")}
+                    {$_("dropoff.steps.enterInfo")}
                 </Heading>
                 <div class="mb-4 p-4 bg-blue-50 rounded-lg">
                     <p class="font-medium text-blue-800">
-                        {$_("childcare.appointment")}:
+                        {$_("dropoff.appointment")}:
                     </p>
                     <p class="text-sm text-blue-700">
                         {activeCourse?.title || "-"} - {selectedDate?.toLocaleDateString() ||
@@ -304,38 +310,28 @@
                 <!-- Number of children selector -->
                 <div class="mb-6">
                     <label class="mb-2 block text-slate-700">
-                        {$_("childcare.childCount")}
+                        {$_("dropoff.childCount")}
                     </label>
-                    <div
-                        class="flex items-center gap-4 flex-wrap flex-col md:flex-row"
-                    >
+                    <div class="flex gap-4">
                         {#each [1, 2, 3] as count}
-                            <div
-                                class="rounded-sm border border-gray-200 px-8 py-4 w-full md:w-auto"
+                            <Radio
+                                name="childCount"
+                                value={count}
+                                bind:group={childCount}
                             >
-                                <Radio
-                                    id={`child-count-${count}`}
-                                    name="childCount"
-                                    value={count}
-                                    color="blue"
-                                    bind:group={childCount}
-                                    class="scale-125"
-                                >
-                                    {count}
-                                    {$_("helpers.personCounter")}
-                                </Radio>
-                            </div>
+                                {count}
+                                {count === 1
+                                    ? $_("dropoff.child")
+                                    : $_("dropoff.children")}
+                            </Radio>
                         {/each}
                     </div>
-                    <p class="text-sm text-gray-500 mt-2">
-                        {$_("childcare.maxCapacity")}
-                    </p>
                 </div>
             </div>
 
             <!-- confirm -->
         {:else if currentStep === 4}
-            <div in:fly={{ y: 50, duration: 300 }} class="flex flex-col w-full">
+            <div in:fly={{ y: 50, duration: 300 }} class="w-full">
                 <ConfirmationScreen
                     {selectedDate}
                     selectedTimeSlot="17:00 - 21:30"
@@ -346,16 +342,16 @@
                     coursePrice={activeCourse?.price}
                     course={activeCourse?.title}
                     {childCount}
-                    title={$_("childcare.confirmation.title")}
-                    detailsText={$_("childcare.confirmation.details")}
+                    confirmationText={$_("dropoff.confirmation.title")}
+                    detailsText={$_("dropoff.confirmation.details")}
                     paymentInstructionsText={$_(
-                        "childcare.confirmation.paymentInstructions",
+                        "dropoff.confirmation.paymentInstructions",
                     )}
                     cashInstructionsText={$_(
-                        "childcare.confirmation.cashInstructions",
+                        "dropoff.confirmation.cashInstructions",
                     )}
                     creditInstructionsText={$_(
-                        "childcare.confirmation.creditInstructions",
+                        "dropoff.confirmation.creditInstructions",
                     )}
                 />
             </div>
@@ -370,8 +366,8 @@
                 coursePrice={activeCourse?.price}
                 course={activeCourse?.title}
                 {childCount}
-                title={$_("childcare.success.title")}
-                successMessage={$_("childcare.success.message")}
+                title={$_("dropoff.success.title")}
+                successMessage={$_("dropoff.success.message")}
             />
         {/if}
 
@@ -386,7 +382,7 @@
                     class="mt-8 w-1/2 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white"
                 >
                     <ArrowLeftOutline class="me-2 h-5 w-5" />
-                    {$_("childcare.buttons.previous")}
+                    {$_("dropoff.buttons.previous")}
                 </Button>
                 <Button
                     color="primary"
@@ -405,8 +401,8 @@
                         送信中...
                     {:else}
                         {currentStep === 4
-                            ? $_("childcare.buttons.complete")
-                            : $_("childcare.buttons.next")}
+                            ? $_("dropoff.buttons.complete")
+                            : $_("dropoff.buttons.next")}
                     {/if}
                     <ArrowRightOutline class="ms-2 h-5 w-5" />
                 </Button>
