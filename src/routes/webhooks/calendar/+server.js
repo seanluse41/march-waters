@@ -90,11 +90,17 @@ async function getRecentConfirmedEvents() {
   try {
     const calendar = await getCalendarClient();
 
+    // Get today's date at 00:00:00 in ISO format
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const timeMin = today.toISOString();
+
     const response = await calendar.events.list({
       calendarId: CONFIRMED_CALENDAR_ID,
       singleEvents: true,
       orderBy: 'updated',
       maxResults: 10,
+      timeMin: timeMin, // Only get events from today onwards
     });
 
     return {
@@ -110,7 +116,6 @@ async function getRecentConfirmedEvents() {
     };
   }
 }
-
 export async function POST({ request }) {
   try {
     const headers = Object.fromEntries(request.headers.entries());
