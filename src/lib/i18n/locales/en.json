@@ -284,6 +284,8 @@
     "fixedTime": "Fixed time slot: 5:00 PM to 9:30 PM",
     "appointment": "Reservation details",
     "childCount": "Number of children",
+    "child": "Child",
+    "children": "Children",
     "maxCapacity": "Maximum capacity is 3 children"
   },
   "dropoff": {
@@ -348,6 +350,8 @@
     "fixedTime": "Fixed time slot: 5:00 PM to 9:30 PM",
     "appointment": "Reservation details",
     "childCount": "Number of children",
+    "child": "Child",
+    "children": "Children",
     "maxCapacity": "Maximum capacity is 3 children"
   },
   "bodychoice": {

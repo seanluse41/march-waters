@@ -288,6 +288,8 @@
     "fixedTime": "夕方17時00分〜21時30分まで",
     "appointment": "申請内容",
     "childCount": "預かる子供の人数",
+    "child": "名様",
+    "children": "名様",
     "maxCapacity": "定員は３名様まで",
     "success": {
       "title": "予約の申請を送信しました。",
@@ -352,6 +354,8 @@
     "fixedTime": "夕方17時00分〜21時30分まで",
     "appointment": "申請内容",
     "childCount": "預かる子供の人数",
+    "child": "名様",
+    "children": "名様",
     "maxCapacity": "定員は３名様まで",
     "success": {
       "title": "予約の申請を送信しました。",
